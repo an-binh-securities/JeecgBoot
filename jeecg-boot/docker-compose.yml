@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
-      TZ: Asia/Shanghai
+      TZ: Asia/Ho_Chi_Minh
     restart: always
     container_name: jeecg-boot-mysql
     image: jeecg-boot-mysql
@@ -43,7 +43,7 @@ services:
     image: jeecg-boot-system
     hostname: jeecg-boot-system
     ports:
-      - 8080:8080
+      - 8088:8080
     networks:
       - jeecg-boot
 
