@@ -26,12 +26,12 @@ import java.util.*;
 public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler {
 
     /**
-     * key-表名
-     * value-字段名，多个逗号隔开
-     * 两种配置方式-- 全部配置成小写
-     * whiteTablesRuleMap.put("sys_user", "*")  sys_user所有的字段都支持查询
-     * whiteTablesRuleMap.put("sys_user", "username,password")  sys_user中的username和password支持查询
-     */
+    * key-bảng tên
+    * value-tên trường, nhiều trường cách nhau bằng dấu phẩy
+    * Hai cách cấu hình -- Tất cả đều được cấu hình thành ch�� thường
+    * whiteTablesRuleMap.put("sys_user", "*")  sys_user tất cả các trường đều hỗ trợ truy vấn
+    * whiteTablesRuleMap.put("sys_user", "username,password")  sys_user trong username và password hỗ trợ truy vấn
+    */
     private static final Map<String, String> whiteTablesRuleMap = new HashMap<>();
     /**
      * LowCode 是否为 dev 模式
@@ -44,7 +44,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
     @Autowired
     private JeecgBaseConfig jeecgBaseConfig;
 
-    
+
     /**
      * 初始化 whiteTablesRuleMap 方法
      */
@@ -235,7 +235,7 @@ public class DictTableWhiteListHandlerImpl implements IDictTableWhiteListHandler
         return true;
     }
 
-    
+
     /**
      * 取where前面的为：table name
      *

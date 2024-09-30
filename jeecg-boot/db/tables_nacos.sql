@@ -29,18 +29,18 @@ CREATE TABLE `config_info`  (
   `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
   `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
-  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
-  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
-  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian tạo',
+  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian sửa đổi',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'Người dùng nguồn',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'IP nguồn',
   `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'Trường người thuê',
   `c_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `c_use` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `effect` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
-  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '加密key',
+  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'Khóa mã hóa',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = DYNAMIC;
@@ -76,13 +76,13 @@ CREATE TABLE `config_info_aggr`  (
   `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
   `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
   `datum_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'datum_id',
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '内容',
-  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'Nội dung',
+  `gmt_modified` datetime NOT NULL COMMENT 'Thời gian sửa đổi',
   `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'Trường người thuê',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'Thêm trường người thuê' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of config_info_aggr
@@ -100,12 +100,12 @@ CREATE TABLE `config_info_beta`  (
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
   `beta_ips` varchar(1024) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'betaIps',
   `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
-  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
-  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
-  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
-  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
-  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '加密key',
+  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian tạo',
+  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian sửa đổi',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'Người dùng nguồn',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'IP nguồn',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'Trường người thuê',
+  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'Khóa mã hóa',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = DYNAMIC;
@@ -127,11 +127,11 @@ CREATE TABLE `config_info_tag`  (
   `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
   `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
-  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
-  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
-  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
-  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '加密key',
+  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian tạo',
+  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian sửa đổi',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'Người dùng nguồn',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'IP nguồn',
+  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'Khóa mã hóa',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = DYNAMIC;
@@ -166,19 +166,19 @@ CREATE TABLE `config_tags_relation`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `group_capacity`;
 CREATE TABLE `group_capacity`  (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Group ID，空字符表示整个集群',
-  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '配额，0表示使用默认值',
-  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '使用量',
-  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
-  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '聚合子配置最大个数，，0表示使用默认值',
-  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
-  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最大变更历史数量',
-  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID chính',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Group ID, ký tự trống biểu thị toàn bộ cụm',
+  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Hạn ngạch, 0 biểu thị sử dụng giá trị mặc định',
+  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Lượng sử dụng',
+  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Giới hạn kích thước cấu hình đơn lẻ, đơn vị là byte, 0 biểu thị sử dụng giá trị mặc định',
+  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Số lượng cấu hình con tối đa trong một dữ liệu tổng hợp, 0 biểu thị sử dụng giá trị mặc định',
+  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Giới hạn kích thước cấu hình con trong một dữ liệu tổng hợp, đơn vị là byte, 0 biểu thị sử dụng giá trị mặc định',
+  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Số lượng lịch sử thay đổi tối đa',
+  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian tạo',
+  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian sửa đổi',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'Thông tin dung lượng của cụm và từng Group' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of group_capacity
@@ -201,13 +201,13 @@ CREATE TABLE `his_config_info`  (
   `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `op_type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
-  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '加密key',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'Trường người thuê',
+  `encrypted_data_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'Khóa mã hóa',
   PRIMARY KEY (`nid`) USING BTREE,
   INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
   INDEX `idx_did`(`data_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'Cải tạo đa người thuê' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of his_config_info
@@ -260,19 +260,19 @@ INSERT INTO `roles` VALUES ('nacos', 'ROLE_ADMIN');
 -- ----------------------------
 DROP TABLE IF EXISTS `tenant_capacity`;
 CREATE TABLE `tenant_capacity`  (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID chính',
   `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Tenant ID',
-  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '配额，0表示使用默认值',
-  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '使用量',
-  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
-  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '聚合子配置最大个数',
-  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
-  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最大变更历史数量',
-  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
+  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Hạn ngạch, 0 biểu thị sử dụng giá trị mặc định',
+  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Lượng sử dụng',
+  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Giới hạn kích thước cấu hình đơn lẻ, đơn vị là byte, 0 biểu thị sử dụng giá trị mặc định',
+  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Số lượng cấu hình con tối đa trong một dữ liệu tổng hợp',
+  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Giới hạn kích thước cấu hình con trong một dữ liệu tổng hợp, đơn vị là byte, 0 biểu thị sử dụng giá trị mặc định',
+  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Số lượng lịch sử thay đổi tối đa',
+  `gmt_create` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian tạo',
+  `gmt_modified` datetime NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT 'Thời gian sửa đổi',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'Bảng thông tin dung lượng người thuê' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tenant_capacity
@@ -289,8 +289,8 @@ CREATE TABLE `tenant_info`  (
   `tenant_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_name',
   `tenant_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'tenant_desc',
   `create_source` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'create_source',
-  `gmt_create` bigint(20) NOT NULL COMMENT '创建时间',
-  `gmt_modified` bigint(20) NOT NULL COMMENT '修改时间',
+  `gmt_create` bigint(20) NOT NULL COMMENT 'Thời gian tạo',
+  `gmt_modified` bigint(20) NOT NULL COMMENT 'Thời gian sửa đổi',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
@@ -299,7 +299,7 @@ CREATE TABLE `tenant_info`  (
 -- ----------------------------
 -- Records of tenant_info
 -- ----------------------------
-INSERT INTO `tenant_info` VALUES (2, '1', 'efc4e412-b1a1-498f-ba01-b31807649a9a', 'springboot3', 'springboot3版本的配置文件，与springboot2有很大区别', 'nacos', 1709197797576, 1709197797576);
+INSERT INTO `tenant_info` VALUES (2, '1', 'efc4e412-b1a1-498f-ba01-b31807649a9a', 'springboot3', 'Tệp cấu hình phiên bản springboot3, khác biệt rất lớn so với springboot2', 'nacos', 1709197797576, 1709197797576);
 
 -- ----------------------------
 -- Table structure for users
