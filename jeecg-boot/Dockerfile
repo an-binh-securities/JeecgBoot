@@ -1,7 +1,6 @@
 FROM maven:3.9-eclipse-temurin-8 AS build
 WORKDIR /app
 COPY . ./
-RUN mvn dependency:resolve
 RUN mvn install -Dmaven.test.skip=true
 
 
