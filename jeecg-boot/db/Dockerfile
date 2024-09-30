@@ -1,8 +1,8 @@
-FROM registry.cn-hangzhou.aliyuncs.com/jeecgdocker/mysql:8.0.19
+FROM mysql:8.0.19
 
-MAINTAINER jeecgos@163.com
+MAINTAINER thanh.nguyenduy@abs.vn
 
-ENV TZ=Asia/Shanghai
+ENV TZ=Asia/Ho_Chi_Minh
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 

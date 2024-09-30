@@ -87,8 +87,8 @@ CREATE TABLE `xxl_job_registry` (
 
 CREATE TABLE `xxl_job_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_name` varchar(64) NOT NULL COMMENT 'Tên App của bộ thực thi',
-  `title` varchar(12) NOT NULL COMMENT 'Tên bộ thực thi',
+  `app_name` varchar(255) NOT NULL COMMENT 'Tên App của bộ thực thi',
+  `title` varchar(255) NOT NULL COMMENT 'Tên bộ thực thi',
   `address_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Loại địa chỉ bộ thực thi: 0=đăng ký tự động, 1=nhập thủ công',
   `address_list` varchar(512) DEFAULT NULL COMMENT 'Danh sách địa chỉ bộ thực thi, nhiều địa chỉ cách nhau bằng dấu phẩy',
   PRIMARY KEY (`id`)
