@@ -1,28 +1,28 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="用户回收站" :showOkBtn="false" width="1000px" destroyOnClose @fullScreen="handleFullScreen">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Thùng rác người dùng" :showOkBtn="false" width="1000px" destroyOnClose @fullScreen="handleFullScreen">
     <BasicTable @register="registerTable" :rowSelection="rowSelection" :scroll="scroll">
-      <!--插槽:table标题-->
+      <!--Khe cắm: tiêu đề bảng-->
       <template #tableTitle>
         <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                批量删除
+                Xóa hàng loạt
               </a-menu-item>
               <a-menu-item key="1" @click="batchHandleRevert">
                 <Icon icon="ant-design:redo-outlined"></Icon>
-                批量还原
+                Khôi phục hàng loạt
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Thao tác hàng loạt
             <Icon icon="ant-design:down-outlined"></Icon>
           </a-button>
         </a-dropdown>
       </template>
-      <!--操作栏-->
+      <!--Cột thao tác-->
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction :actions="getTableAction(record)" />
@@ -63,7 +63,7 @@
     canResize: false,
     actionColumn: {
       width: 150,
-      title: '操作',
+      title: 'Thao tác',
       dataIndex: 'action',
       // slots: { customRender: 'action' },
       fixed: undefined,
@@ -131,33 +131,33 @@
     await deleteRecycleBin({ userIds: record.id }, reload);
   }
   /**
-   * 批量删除事件
+   * Sự kiện xóa hàng loạt
    */
   function batchHandleDelete() {
     createConfirm({
       iconType: 'warning',
-      title: '删除',
-      content: '确定要永久删除吗？删除后将不可恢复！',
+      title: 'Xóa',
+      content: 'Bạn có chắc chắn muốn xóa vĩnh viễn không? Sau khi xóa sẽ không thể khôi phục!',
       onOk: () => handleDelete({ id: toRaw(unref(checkedKeys)).join(',') }),
       onCancel() {},
     });
   }
-  //获取操作栏事件
+  // Lấy sự kiện cột thao tác
   function getTableAction(record) {
     return [
       {
-        label: '取回',
+        label: 'Khôi phục',
         icon: 'ant-design:redo-outlined',
         popConfirm: {
-          title: '是否确认还原',
+          title: 'Bạn có chắc chắn muốn khôi phục',
           confirm: handleRevert.bind(null, record),
         },
       },
       {
-        label: '彻底删除',
+        label: 'Xóa hoàn toàn',
         icon: 'ant-design:scissor-outlined',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa',
           confirm: handleDelete.bind(null, record),
         },
       },

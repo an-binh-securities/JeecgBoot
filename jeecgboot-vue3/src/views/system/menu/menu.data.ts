@@ -18,13 +18,13 @@ export enum ComponentTypes {
 
 export const columns: BasicColumn[] = [
   {
-    title: '菜单名称',
+    title: 'Tên menu',
     dataIndex: 'name',
     width: 200,
     align: 'left',
   },
   {
-    title: '菜单类型',
+    title: 'Loại menu',
     dataIndex: 'menuType',
     width: 150,
     customRender: ({ text }) => {
@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '图标',
+    title: 'Biểu tượng',
     dataIndex: 'icon',
     width: 50,
     customRender: ({ record }) => {
@@ -40,19 +40,19 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '组件',
+    title: 'Thành phần',
     dataIndex: 'component',
     align: 'left',
     width: 150,
   },
   {
-    title: '路径',
+    title: 'Đường dẫn',
     dataIndex: 'url',
     align: 'left',
     width: 150,
   },
   {
-    title: '排序',
+    title: 'Sắp xếp',
     dataIndex: 'sortNo',
     width: 50,
   },
@@ -61,7 +61,7 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'name',
-    label: '菜单名称',
+    label: 'Tên menu',
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -76,20 +76,20 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'menuType',
-    label: '菜单类型',
+    label: 'Loại menu',
     component: 'RadioButtonGroup',
     defaultValue: 0,
     componentProps: ({ formActionType, formModel }) => {
       return {
         options: [
-          { label: '一级菜单', value: 0 },
-          { label: '子菜单', value: 1 },
-          { label: '按钮/权限', value: 2 },
+          { label: 'Menu cấp 1', value: 0 },
+          { label: 'Menu con', value: 1 },
+          { label: 'Nút/Quyền', value: 2 },
         ],
         onChange: (e) => {
           const { updateSchema, clearValidate } = formActionType;
-          const label = isButton(e) ? '按钮/权限' : '菜单名称';
-          //清除校验
+          const label = isButton(e) ? 'Nút/Quyền' : 'Tên menu';
+          // Xóa xác minh
           clearValidate();
           updateSchema([
             {
@@ -101,34 +101,34 @@ export const formSchema: FormSchema[] = [
               required: !isButton(e),
             },
           ]);
-          //update-begin---author:wangshuai ---date:20220729  for：[VUEN-1834]只有一级菜单，才默认值，子菜单的时候，清空------------
+          // update-begin---author:wangshuai ---date:20220729  for：[VUEN-1834] Chỉ có menu cấp 1 mới có giá trị mặc định, khi là menu con thì xóa------------
           if (isMenu(e) && !formModel.id && (formModel.component=='layouts/default/index' || formModel.component=='layouts/RouteView')) {
             formModel.component = '';
           }
-          //update-end---author:wangshuai ---date:20220729  for：[VUEN-1834]只有一级菜单，才默认值，子菜单的时候，清空------------
+          // update-end---author:wangshuai ---date:20220729  for：[VUEN-1834] Chỉ có menu cấp 1 mới có giá trị mặc định, khi là menu con thì xóa------------
         },
       };
     },
   },
   {
     field: 'name',
-    label: '菜单名称',
+    label: 'Tên menu',
     component: 'Input',
     required: true,
   },
   {
     field: 'parentId',
-    label: '上级菜单',
+    label: 'Menu cha',
     component: 'TreeSelect',
     required: true,
     componentProps: {
-      //update-begin---author:wangshuai ---date:20230829  for：replaceFields已过期，使用fieldNames代替------------
+      // update-begin---author:wangshuai ---date:20230829  for: replaceFields đã lỗi thời, sử dụng fieldNames thay thế------------
       fieldNames: {
         label: 'name',
         key: 'id',
         value: 'id',
       },
-      //update-end---author:wangshuai ---date:20230829  for：replaceFields已过期，使用fieldNames代替------------
+      // update-end---author:wangshuai ---date:20230829  for: replaceFields đã lỗi thời, sử dụng fieldNames thay thế------------
       dropdownStyle: {
         maxHeight: '50vh',
       },
@@ -138,24 +138,24 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'url',
-    label: '访问路径',
+    label: 'Đường dẫn truy cập',
     component: 'Input',
     required: true,
-    //update-begin-author:liusq date:2023-06-06 for: [issues/5008]子表数据权限设置不生效
+    // update-begin-author:liusq date:2023-06-06 for: [issues/5008] Thiết lập quyền dữ liệu bảng con không có hiệu lực
     ifShow: ({ values }) => !(values.component === ComponentTypes.IFrame && values.internalOrExternal),
-    //update-begin-author:zyf date:2022-11-02 for: 聚合路由允许路径重复
-     dynamicRules: ({ model, schema,values }) => {
+    // update-begin-author:zyf date:2022-11-02 for: Cho phép đường dẫn trùng lặp trong router hợp nhất
+    dynamicRules: ({ model, schema,values }) => {
        return checkPermDuplication(model, schema,  values.menuType !== 2?true:false);
     },
-    //update-end-author:zyf date:2022-11-02 for: 聚合路由允许路径重复
-    //update-end-author:liusq date:2022-06-06 for:  [issues/5008]子表数据权限设置不生效
+    // update-end-author:zyf date:2022-11-02 for: Cho phép đường dẫn trùng lặp trong router hợp nhất
+    // update-end-author:liusq date:2022-06-06 for: [issues/5008] Thiết lập quyền dữ liệu bảng con không có hiệu lực
   },
   {
     field: 'component',
-    label: '前端组件',
+    label: 'Thành phần frontend',
     component: 'Input',
     componentProps: {
-      placeholder: '请输入前端组件',
+      placeholder: 'Vui lòng nhập thành phần frontend',
     },
     defaultValue:'layouts/default/index',
     required: true,
@@ -163,39 +163,39 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'componentName',
-    label: '组件名称',
+    label: 'Tên thành phần',
     component: 'Input',
     componentProps: {
-      placeholder: '请输入组件名称',
+      placeholder: 'Vui lòng nhập tên thành phần',
     },
     helpMessage: [
-      '此处名称应和vue组件的name属性保持一致。',
-      '组件名称不能重复，主要用于路由缓存功能。',
-      '如果组件名称和vue组件的name属性不一致，则会导致路由缓存失效。',
-      '非必填，留空则会根据访问路径自动生成。',
+      'Tên này nên giống với thuộc tính name của thành phần vue.',
+      'Tên thành phần không được trùng lặp, chủ yếu dùng cho chức năng cache router.',
+      'Nếu tên thành phần không giống với thuộc tính name của thành phần vue, sẽ dẫn đến cache router không hoạt động.',
+      'Không bắt buộc, để trống sẽ tự động tạo dựa trên đường dẫn truy cập.',
     ],
     defaultValue: '',
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'frameSrc',
-    label: 'Iframe地址',
+    label: 'Địa chỉ Iframe',
     component: 'Input',
     rules: [
-      { required: true, message: '请输入Iframe地址' },
-      { type: 'url', message: '请输入正确的url地址' },
+      { required: true, message: 'Vui lòng nhập địa chỉ Iframe' },
+      { type: 'url', message: 'Vui lòng nhập địa chỉ url hợp lệ' },
     ],
     ifShow: ({ values }) => !isButton(values.menuType) && values.component === ComponentTypes.IFrame,
   },
   {
     field: 'redirect',
-    label: '默认跳转地址',
+    label: 'Địa chỉ chuyển hướng mặc định',
     component: 'Input',
     ifShow: ({ values }) => isDir(values.menuType),
   },
   {
     field: 'perms',
-    label: '授权标识',
+    label: 'Dấu hiệu ủy quyền',
     component: 'Input',
     ifShow: ({ values }) => isButton(values.menuType),
     // dynamicRules: ({ model }) => {
@@ -212,10 +212,10 @@ export const formSchema: FormSchema[] = [
     //           };
     //           duplicateCheck(params)
     //             .then((res) => {
-    //               res.success ? resolve() : reject(res.message || '校验失败');
+    //               res.success ? resolve() : reject(res.message || 'Xác minh thất bại');
     //             })
     //             .catch((err) => {
-    //               reject(err.message || '校验失败');
+    //               reject(err.message || 'Xác minh thất bại');
     //             });
     //         });
     //       },
@@ -225,107 +225,107 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'permsType',
-    label: '授权策略',
+    label: 'Chính sách ủy quyền',
     component: 'RadioGroup',
     defaultValue: '1',
-    helpMessage: ['可见/可访问(授权后可见/可访问)', '可编辑(未授权时禁用)'],
+    helpMessage: ['Có thể xem/truy cập (ủy quyền sau khi có thể xem/truy cập)', 'Có thể chỉnh sửa (bị vô hiệu hóa khi không được ủy quyền)'],
     componentProps: {
       options: [
-        { label: '可见/可访问', value: '1' },
-        { label: '可编辑', value: '2' },
+        { label: 'Có thể xem/truy cập', value: '1' },
+        { label: 'Có thể chỉnh sửa', value: '2' },
       ],
     },
     ifShow: ({ values }) => isButton(values.menuType),
   },
   {
     field: 'status',
-    label: '状态',
+    label: 'Trạng thái',
     component: 'RadioGroup',
     defaultValue: '1',
     componentProps: {
       options: [
-        { label: '有效', value: '1' },
-        { label: '无效', value: '0' },
+        { label: 'Hiệu lực', value: '1' },
+        { label: 'Vô hiệu', value: '0' },
       ],
     },
     ifShow: ({ values }) => isButton(values.menuType),
   },
   {
     field: 'icon',
-    label: '菜单图标',
+    label: 'Biểu tượng menu',
     component: 'IconPicker',
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'sortNo',
-    label: '排序',
+    label: 'Sắp xếp',
     component: 'InputNumber',
     defaultValue: 1,
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'route',
-    label: '是否路由菜单',
+    label: 'Có phải menu router',
     component: 'Switch',
     defaultValue: true,
     componentProps: {
-      checkedChildren: '是',
-      unCheckedChildren: '否',
+      checkedChildren: 'Có',
+      unCheckedChildren: 'Không',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'hidden',
-    label: '隐藏路由',
+    label: 'Ẩn router',
     component: 'Switch',
     defaultValue: 0,
     componentProps: {
-      checkedChildren: '是',
-      unCheckedChildren: '否',
+      checkedChildren: 'Có',
+      unCheckedChildren: 'Không',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'hideTab',
-    label: '隐藏Tab',
+    label: 'Ẩn Tab',
     component: 'Switch',
     defaultValue: 0,
     componentProps: {
-      checkedChildren: '是',
-      unCheckedChildren: '否',
+      checkedChildren: 'Có',
+      unCheckedChildren: 'Không',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'keepAlive',
-    label: '是否缓存路由',
+    label: 'Có cache router',
     component: 'Switch',
     defaultValue: false,
     componentProps: {
-      checkedChildren: '是',
-      unCheckedChildren: '否',
+      checkedChildren: 'Có',
+      unCheckedChildren: 'Không',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'alwaysShow',
-    label: '聚合路由',
+    label: 'Router hợp nhất',
     component: 'Switch',
     defaultValue: false,
     componentProps: {
-      checkedChildren: '是',
-      unCheckedChildren: '否',
+      checkedChildren: 'Có',
+      unCheckedChildren: 'Không',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
   {
     field: 'internalOrExternal',
-    label: '打开方式',
+    label: 'Cách mở',
     component: 'Switch',
     defaultValue: false,
     componentProps: {
-      checkedChildren: '外部',
-      unCheckedChildren: '内部',
+      checkedChildren: 'Bên ngoài',
+      unCheckedChildren: 'Bên trong',
     },
     ifShow: ({ values }) => !isButton(values.menuType),
   },
@@ -333,17 +333,17 @@ export const formSchema: FormSchema[] = [
 
 export const dataRuleColumns: BasicColumn[] = [
   {
-    title: '规则名称',
+    title: 'Tên quy tắc',
     dataIndex: 'ruleName',
     width: 150,
   },
   {
-    title: '规则字段',
+    title: 'Trường quy tắc',
     dataIndex: 'ruleColumn',
     width: 100,
   },
   {
-    title: '规则值',
+    title: 'Giá trị quy tắc',
     dataIndex: 'ruleValue',
     width: 100,
   },
@@ -352,13 +352,13 @@ export const dataRuleColumns: BasicColumn[] = [
 export const dataRuleSearchFormSchema: FormSchema[] = [
   {
     field: 'ruleName',
-    label: '规则名称',
+    label: 'Tên quy tắc',
     component: 'Input',
     // colProps: { span: 6 },
   },
   {
     field: 'ruleValue',
-    label: '规则值',
+    label: 'Giá trị quy tắc',
     component: 'Input',
     // colProps: { span: 6 },
   },
@@ -373,13 +373,13 @@ export const dataRuleFormSchema: FormSchema[] = [
   },
   {
     field: 'ruleName',
-    label: '规则名称',
+    label: 'Tên quy tắc',
     component: 'Input',
     required: true,
   },
   {
     field: 'ruleColumn',
-    label: '规则字段',
+    label: 'Trường quy tắc',
     component: 'Input',
     ifShow: ({ values }) => {
       const ruleConditions = Array.isArray(values.ruleConditions) ? values.ruleConditions[0] : values.ruleConditions;
@@ -388,7 +388,7 @@ export const dataRuleFormSchema: FormSchema[] = [
   },
   {
     field: 'ruleConditions',
-    label: '条件规则',
+    label: 'Điều kiện quy tắc',
     required: true,
     component: 'ApiSelect',
     componentProps: {
@@ -399,59 +399,59 @@ export const dataRuleFormSchema: FormSchema[] = [
       getPopupContainer: (node) => document.body,
     },
   },
-  // update-begin--author:liaozhiyang---date:20240724---for：【TV360X-1864】添加系统变量
+  // update-begin--author:liaozhiyang---date:20240724---for：【TV360X-1864】Thêm biến hệ thống
   {
     field: 'ruleValue',
     component: 'JInputSelect',
-    label: '规则值',
+    label: 'Giá trị quy tắc',
     required: true,
     componentProps: {
-      selectPlaceholder: '可选择系统变量',
-      inputPlaceholder: '请输入',
+      selectPlaceholder: 'Có thể chọn biến hệ thống',
+      inputPlaceholder: 'Vui lòng nhập',
       getPopupContainer: () => document.body,
       selectWidth: '200px',
       options: [
         {
-          label: '登录用户账号',
+          label: 'Tài khoản người dùng đăng nhập',
           value: '#{sys_user_code}',
         },
         {
-          label: '登录用户名称',
+          label: 'Tên người dùng đăng nhập',
           value: '#{sys_user_name}',
         },
         {
-          label: '当前日期',
+          label: 'Ngày hiện tại',
           value: '#{sys_date}',
         },
         {
-          label: '当前时间',
+          label: 'Thời gian hiện tại',
           value: '#{sys_time}',
         },
         {
-          label: '登录用户部门',
+          label: 'Phòng ban người dùng đăng nhập',
           value: '#{sys_org_code}',
         },
         {
-          label: '用户拥有部门',
+          label: 'Phòng ban người dùng sở hữu',
           value: '#{sys_multi_org_code}',
         },
         {
-          label: '登录用户租户',
+          label: 'Người dùng đăng nhập thuê',
           value: '#{tenant_id}',
         },
       ],
     },
   },
-  // update-end--author:liaozhiyang---date:20240724---for：【TV360X-1864】添加系统变量
+  // update-end--author:liaozhiyang---date:20240724---for：【TV360X-1864】Thêm biến hệ thống
   {
     field: 'status',
-    label: '状态',
+    label: 'Trạng thái',
     component: 'RadioButtonGroup',
     defaultValue: '1',
     componentProps: {
       options: [
-        { label: '无效', value: '0' },
-        { label: '有效', value: '1' },
+        { label: 'Vô hiệu', value: '0' },
+        { label: 'Hiệu lực', value: '1' },
       ],
     },
   },

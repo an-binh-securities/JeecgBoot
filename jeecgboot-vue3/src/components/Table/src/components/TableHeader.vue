@@ -22,28 +22,28 @@
         </a-popover>
       </div>
     </div>
-    <!--添加tableTop插槽-->
+    <!--Thêm slot tableTop-->
     <div style="margin: -4px 0 -2px; padding-top: 5px">
       <slot name="tableTop">
         <a-alert type="info" show-icon class="alert" v-if="openRowSelection != null">
           <template #message>
             <template v-if="selectRowKeys.length > 0">
               <span>
-                <span>已选中 {{ selectRowKeys.length }} 条记录</span>
-                <span v-if="isAcrossPage">(可跨页)</span>
+                <span>Đã chọn {{ selectRowKeys.length }} bản ghi</span>
+                <span v-if="isAcrossPage"> (Có thể qua trang)</span>
               </span>
               <a-divider type="vertical" />
-              <a @click="setSelectedRowKeys([])">清空</a>
+              <a @click="setSelectedRowKeys([])">Bỏ chọn</a>
               <slot name="alertAfter" />
             </template>
             <template v-else>
-              <span>未选中任何数据</span>
+              <span>Chưa chọn dữ liệu nào</span>
             </template>
           </template>
         </a-alert>
       </slot>
     </div>
-    <!--添加tableTop插槽-->
+    <!--Thêm slot tableTop-->
   </div>
 </template>
 <script lang="ts">

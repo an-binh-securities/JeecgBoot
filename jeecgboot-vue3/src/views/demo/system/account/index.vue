@@ -11,20 +11,20 @@
             :actions="[
               {
                 icon: 'clarity:info-standard-line',
-                tooltip: '查看用户详情',
+                tooltip: 'Xem chi tiết người dùng',
                 onClick: handleView.bind(null, record),
               },
               {
                 icon: 'clarity:note-edit-line',
-                tooltip: '编辑用户资料',
+                tooltip: 'Chỉnh sửa thông tin người dùng',
                 onClick: handleEdit.bind(null, record),
               },
               {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
-                tooltip: '删除此账号',
+                tooltip: 'Xóa tài khoản này',
                 popConfirm: {
-                  title: '是否确认删除',
+                  title: 'Bạn có chắc chắn muốn xóa',
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
@@ -59,7 +59,7 @@
       const [registerModal, { openModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
       const [registerTable, { reload, updateTableDataRecord }] = useTable({
-        title: '账号列表',
+        title: 'Danh sách tài khoản',
         api: getAccountList,
         rowKey: 'id',
         columns,
@@ -77,7 +77,7 @@
         },
         actionColumn: {
           width: 120,
-          title: '操作',
+          title: 'Thao tác',
           dataIndex: 'action',
           // slots: { customRender: 'action' },
         },
@@ -103,8 +103,8 @@
 
       function handleSuccess({ isUpdate, values }) {
         if (isUpdate) {
-          // 演示不刷新表格直接更新内部数据。
-          // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中
+          // Trình diễn cập nhật dữ liệu bên trong mà không làm mới bảng.
+          // Lưu ý: updateTableDataRecord yêu cầu thuộc tính rowKey của bảng là chuỗi và tồn tại trong các khóa của mỗi hàng record
           const result = updateTableDataRecord(values.id, values);
           console.log(result);
         } else {

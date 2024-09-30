@@ -1,5 +1,5 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :width="800" title="用户代理" @ok="handleSubmit" destroyOnClose>
+  <BasicModal v-bind="$attrs" @register="registerModal" :width="800" title="Đại lý người dùng" @ok="handleSubmit" destroyOnClose>
     <BasicForm @register="registerForm" />
   </BasicModal>
 </template>
@@ -9,34 +9,35 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formAgentSchema } from './user.data';
   import { getUserAgent, saveOrUpdateAgent } from './user.api';
-  // 声明Emits
+  // Khai báo Emits
   const emit = defineEmits(['success', 'register']);
-  //表单配置
+  // Cấu hình biểu mẫu
   const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+    labelWidth: 180,
     schemas: formAgentSchema,
     showActionButtonGroup: false,
   });
-  //表单赋值
+  // Gán giá trị biểu mẫu
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-    //重置表单
+    // Đặt lại biểu mẫu
     await resetFields();
     setModalProps({ confirmLoading: false });
-    //查询获取表单数据
+    // Truy vấn lấy dữ liệu biểu mẫu
     const res = await getUserAgent({ userName: data.userName });
     data = res.result ? res.result : data;
-    //表单赋值
+    // Gán giá trị biểu mẫu
     await setFieldsValue({ ...data });
   });
-  //表单提交事件
+  // Sự kiện gửi biểu mẫu
   async function handleSubmit() {
     try {
       const values = await validate();
       setModalProps({ confirmLoading: true });
-      //提交表单
+      // Gửi biểu mẫu
       await saveOrUpdateAgent(values);
-      //关闭弹窗
+      // Đóng cửa sổ bật lên
       closeModal();
-      //刷新列表
+      // Làm mới danh sách
       emit('success');
     } finally {
       setModalProps({ confirmLoading: false });

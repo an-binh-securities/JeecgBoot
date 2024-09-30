@@ -5,7 +5,7 @@
             <div class="app-loading-dots">
                 <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
             </div>
-            <div class="app-loading-title">JeecgBoot 企业级低代码平台</div>
+            <div class="app-loading-title">JeecgBoot Nền tảng low-code doanh nghiệp</div>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@
 
 <script lang="ts">
   /**
-   * 地址中携带token，跳转至此页面进行登录操作
+   * Địa chỉ mang theo token, chuyển hướng đến trang này để thực hiện đăng nhập
    */
   import { useRoute, useRouter } from 'vue-router';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -29,12 +29,12 @@
       const {t} = useI18n();
       const routeQuery:any = route.query;
       if(!routeQuery){
-        createMessage.warning('参数无效')
+        createMessage.warning('Tham số không hợp lệ')
       }
      
       const token = routeQuery['loginToken'];
       if(!token){
-        createMessage.warning('token无效')
+        createMessage.warning('Token không hợp lệ')
       }
       const userStore = useUserStore();
       userStore.ThirdLogin({ token, thirdType:'email', goHome: false }).then(res => {
@@ -48,8 +48,8 @@
 
       function requestFailed (err) {
         notification.error({
-          message: '登录失败',
-          description: ((err.response || {}).data || {}).message || err.message || "请求出现错误，请稍后再试",
+          message: 'Đăng nhập thất bại',
+          description: ((err.response || {}).data || {}).message || err.message || "Yêu cầu gặp lỗi, vui lòng thử lại sau",
           duration: 4,
         });
       }
@@ -59,7 +59,7 @@
         if(info){
           let query = JSON.parse(info);
           
-          //update-begin-author:taoyan date:2023-4-27 for: QQYUN-4882【简流】节点消息通知 邮箱 点击办理跳到了应用首页
+          //update-begin-author:taoyan date:2023-4-27 for: QQYUN-4882 【Dòng đơn giản】Thông báo nút, email, nhấp vào để xử lý đã chuyển đến ứng dụng trang chủ
           let path = '';
           if(query.isLowApp === 1){
             path = '/myapps/personalOffice/myTodo'
@@ -67,7 +67,7 @@
             let taskId = query.taskId;
             path = '/task/handle/' + taskId
           }
-          //update-end-author:taoyan date:2023-4-27 for: QQYUN-4882【简流】节点消息通知 邮箱 点击办理跳到了应用首页
+          //update-end-author:taoyan date:2023-4-27 for: QQYUN-4882 【Dòng đơn giản】Thông báo nút, email, nhấp vào để xử lý đã chuyển đến ứng dụng trang chủ
           
           router.replace({ path, query });
           notification.success({
@@ -77,8 +77,8 @@
           });
         }else{
           notification.error({
-            message: '参数失效',
-            description: "页面跳转参数丢失，请查看日志",
+            message: 'Tham số không hợp lệ',
+            description: "Tham số chuyển hướng trang bị mất, vui lòng kiểm tra nhật ký",
             duration: 4,
           });
         }

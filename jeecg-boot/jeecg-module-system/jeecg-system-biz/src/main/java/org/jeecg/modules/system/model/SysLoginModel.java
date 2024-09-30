@@ -4,20 +4,20 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 登录表单
+ * Biểu mẫu đăng nhập
  *
  * @Author scott
  * @since  2019-01-18
  */
-@ApiModel(value="登录对象", description="登录对象")
+@ApiModel(value="Đối tượng đăng nhập", description="Đối tượng đăng nhập")
 public class SysLoginModel {
-	@ApiModelProperty(value = "账号")
+    @ApiModelProperty(value = "Tài khoản")
     private String username;
-	@ApiModelProperty(value = "密码")
+    @ApiModelProperty(value = "Mật khẩu")
     private String password;
-	@ApiModelProperty(value = "验证码")
+    @ApiModelProperty(value = "Mã xác nhận")
     private String captcha;
-	@ApiModelProperty(value = "验证码key")
+    @ApiModelProperty(value = "Key mã xác nhận")
     private String checkKey;
 
     public String getUsername() {

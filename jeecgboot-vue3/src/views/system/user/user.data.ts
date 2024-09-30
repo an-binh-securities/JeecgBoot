@@ -5,23 +5,23 @@ import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 export const columns: BasicColumn[] = [
   {
-    title: '用户账号',
+    title: 'Tài khoản người dùng',
     dataIndex: 'username',
     width: 120,
   },
   {
-    title: '用户姓名',
+    title: 'Tên người dùng',
     dataIndex: 'realname',
     width: 100,
   },
   {
-    title: '头像',
+    title: 'Ảnh đại diện',
     dataIndex: 'avatar',
     width: 120,
     customRender: render.renderAvatar,
   },
   {
-    title: '性别',
+    title: 'Giới tính',
     dataIndex: 'sex',
     width: 80,
     sorter: true,
@@ -30,27 +30,27 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '生日',
+    title: 'Ngày sinh',
     dataIndex: 'birthday',
     width: 100,
   },
   {
-    title: '手机号',
+    title: 'Số điện thoại',
     dataIndex: 'phone',
     width: 100,
   },
   {
-    title: '部门',
+    title: 'Phòng ban',
     width: 150,
     dataIndex: 'orgCodeTxt',
   },
   {
-    title: '负责部门',
+    title: 'Phòng ban phụ trách',
     width: 150,
     dataIndex: 'departIds_dictText',
   },
   {
-    title: '状态',
+    title: 'Trạng thái',
     dataIndex: 'status_dictText',
     width: 80,
   },
@@ -58,23 +58,23 @@ export const columns: BasicColumn[] = [
 
 export const recycleColumns: BasicColumn[] = [
   {
-    title: '用户账号',
+    title: 'Tài khoản người dùng',
     dataIndex: 'username',
     width: 100,
   },
   {
-    title: '用户姓名',
+    title: 'Tên người dùng',
     dataIndex: 'realname',
     width: 100,
   },
   {
-    title: '头像',
+    title: 'Ảnh đại diện',
     dataIndex: 'avatar',
     width: 80,
     customRender: render.renderAvatar,
   },
   {
-    title: '性别',
+    title: 'Giới tính',
     dataIndex: 'sex',
     width: 80,
     sorter: true,
@@ -86,41 +86,41 @@ export const recycleColumns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '账号',
+    label: 'Tài khoản',
     field: 'username',
     component: 'JInput',
     //colProps: { span: 6 },
   },
   {
-    label: '名字',
+    label: 'Tên',
     field: 'realname',
     component: 'JInput',
    //colProps: { span: 6 },
   },
   {
-    label: '性别',
+    label: 'Giới tính',
     field: 'sex',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'sex',
-      placeholder: '请选择性别',
+      placeholder: 'Vui lòng chọn giới tính',
       stringToNumber: true,
     },
     //colProps: { span: 6 },
   },
   {
-    label: '手机号码',
+    label: 'Số điện thoại',
     field: 'phone',
     component: 'Input',
     //colProps: { span: 6 },
   },
   {
-    label: '用户状态',
+    label: 'Trạng thái người dùng',
     field: 'status',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'user_status',
-      placeholder: '请选择状态',
+      placeholder: 'Vui lòng chọn trạng thái',
       stringToNumber: true,
     },
    //colProps: { span: 6 },
@@ -135,7 +135,7 @@ export const formSchema: FormSchema[] = [
     show: false,
   },
   {
-    label: '用户账号',
+    label: 'Tài khoản người dùng',
     field: 'username',
     component: 'Input',
     required: true,
@@ -145,7 +145,7 @@ export const formSchema: FormSchema[] = [
     dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'username', model, schema, true),
   },
   {
-    label: '登录密码',
+    label: 'Mật khẩu đăng nhập',
     field: 'password',
     component: 'StrengthMeter',
     componentProps:{
@@ -154,35 +154,35 @@ export const formSchema: FormSchema[] = [
     rules: [
       {
         required: true,
-        message: '请输入登录密码',
+        message: 'Vui lòng nhập mật khẩu đăng nhập',
       },
       {
         pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
-        message: '密码由8位数字、大小写字母和特殊符号组成!',
+        message: 'Mật khẩu phải bao gồm 8 ký tự, chữ hoa, chữ thường và ký tự đặc biệt!',
       },
     ],
   },
   {
-    label: '确认密码',
+    label: 'Xác nhận mật khẩu',
     field: 'confirmPassword',
     component: 'InputPassword',
     dynamicRules: ({ values }) => rules.confirmPassword(values, true),
   },
   {
-    label: '用户姓名',
+    label: 'Tên người dùng',
     field: 'realname',
     required: true,
     component: 'Input',
   },
   {
-    label: '工号',
+    label: 'Mã công việc',
     field: 'workNo',
     required: true,
     component: 'Input',
     dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'work_no', model, schema, true),
   },
   {
-    label: '职务',
+    label: 'Chức vụ',
     field: 'post',
     required: false,
     component: 'JSelectPosition',
@@ -191,7 +191,7 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '角色',
+    label: 'Vai trò',
     field: 'selectedroles',
     component: 'ApiSelect',
     componentProps: {
@@ -203,7 +203,7 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '所属部门',
+    label: 'Phòng ban',
     field: 'selecteddeparts',
     component: 'JSelectDept',
     componentProps: ({ formActionType, formModel }) => {
@@ -214,27 +214,27 @@ export const formSchema: FormSchema[] = [
 
         onSelect: (options, values) => {
           const { updateSchema } = formActionType;
-          //所属部门修改后更新负责部门下拉框数据
+          // Cập nhật dữ liệu phòng ban phụ trách sau khi thay đổi phòng ban
           updateSchema([
             {
               field: 'departIds',
               componentProps: { options },
             },
           ]);
-          //update-begin---author:wangshuai---date:2024-05-11---for:【issues/1222】用户编辑界面“所属部门”与“负责部门”联动出错整---
+          //update-begin---author:wangshuai---date:2024-05-11---for:【issues/1222】Liên kết giữa "Phòng ban" và "Phòng ban phụ trách" trong giao diện chỉnh sửa người dùng---
           if(!values){
             formModel.departIds = [];
             return;
           }
-          //update-end---author:wangshuai---date:2024-05-11---for:【issues/1222】用户编辑界面“所属部门”与“负责部门”联动出错整---
-          //所属部门修改后更新负责部门数据
+          //update-end---author:wangshuai---date:2024-05-11---for:【issues/1222】Liên kết giữa "Phòng ban" và "Phòng ban phụ trách" trong giao diện chỉnh sửa người dùng---
+          // Cập nhật dữ liệu phòng ban phụ trách sau khi thay đổi phòng ban
           formModel.departIds && (formModel.departIds = formModel.departIds.filter((item) => values.value.indexOf(item) > -1));
         },
       };
     },
   },
   {
-    label: '租户',
+    label: 'Thuê bao',
     field: 'relTenantIds',
     component: 'ApiSelect',
     componentProps: {
@@ -247,15 +247,15 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '身份',
+    label: 'Danh tính',
     field: 'userIdentity',
     component: 'RadioGroup',
     defaultValue: 1,
     componentProps: ({ formModel }) => {
       return {
         options: [
-          { label: '普通用户', value: 1, key: '1' },
-          { label: '上级', value: 2, key: '2' },
+          { label: 'Người dùng bình thường', value: 1, key: '1' },
+          { label: 'Cấp trên', value: 2, key: '2' },
         ],
         onChange: () => {
           formModel.userIdentity == 1 && (formModel.departIds = []);
@@ -264,7 +264,7 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '负责部门',
+    label: 'Phòng ban phụ trách',
     field: 'departIds',
     component: 'Select',
     componentProps: {
@@ -273,7 +273,7 @@ export const formSchema: FormSchema[] = [
     ifShow: ({ values }) => values.userIdentity == 2,
   },
   {
-    label: '头像',
+    label: 'Ảnh đại diện',
     field: 'avatar',
     component: 'JImageUpload',
     componentProps: {
@@ -281,22 +281,22 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '生日',
+    label: 'Ngày sinh',
     field: 'birthday',
     component: 'DatePicker',
   },
   {
-    label: '性别',
+    label: 'Giới tính',
     field: 'sex',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'sex',
-      placeholder: '请选择性别',
+      placeholder: 'Vui lòng chọn giới tính',
       stringToNumber: true,
     },
   },
   {
-    label: '邮箱',
+    label: 'Email',
     field: 'email',
     component: 'Input',
     required: true,
@@ -308,25 +308,25 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '手机号码',
+    label: 'Số điện thoại',
     field: 'phone',
     component: 'Input',
     required: true,
     dynamicRules: ({ model, schema }) => {
       return [
         { ...rules.duplicateCheckRule('sys_user', 'phone', model, schema, true)[0], trigger: 'blur' },
-        { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误', trigger: 'blur' },
+        { pattern: /^1[3456789]\d{9}$/, message: 'Định dạng số điện thoại không đúng', trigger: 'blur' },
       ];
     },
   },
   {
-    label: '座机',
+    label: 'Điện thoại bàn',
     field: 'telephone',
     component: 'Input',
-    rules: [{ pattern: /^0\d{2,3}-[1-9]\d{6,7}$/, message: '请输入正确的座机号码' }],
+    rules: [{ pattern: /^0\d{2,3}-[1-9]\d{6,7}$/, message: 'Vui lòng nhập số điện thoại bàn đúng' }],
   },
   {
-    label: '工作流引擎',
+    label: 'Động cơ làm việc',
     field: 'activitiSync',
     defaultValue: 1,
     component: 'JDictSelectTag',
@@ -340,31 +340,31 @@ export const formSchema: FormSchema[] = [
 
 export const formPasswordSchema: FormSchema[] = [
   {
-    label: '用户账号',
+    label: 'Tài khoản người dùng',
     field: 'username',
     component: 'Input',
     componentProps: { readOnly: true },
   },
   {
-    label: '登录密码',
+    label: 'Mật khẩu đăng nhập',
     field: 'password',
     component: 'StrengthMeter',
     componentProps: {
-      placeholder: '请输入登录密码',
+      placeholder: 'Vui lòng nhập mật khẩu đăng nhập',
     },
     rules: [
       {
         required: true,
-        message: '请输入登录密码',
+        message: 'Vui lòng nhập mật khẩu đăng nhập',
       },
       {
         pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
-        message: '密码由8位数字、大小写字母和特殊符号组成!',
+        message: 'Mật khẩu phải bao gồm 8 ký tự, chữ hoa, chữ thường và ký tự đặc biệt!',
       },
     ],
   },
   {
-    label: '确认密码',
+    label: 'Xác nhận mật khẩu',
     field: 'confirmPassword',
     component: 'InputPassword',
     dynamicRules: ({ values }) => rules.confirmPassword(values, true),
@@ -380,7 +380,7 @@ export const formAgentSchema: FormSchema[] = [
   },
   {
     field: 'userName',
-    label: '用户名',
+    label: 'Tên người dùng',
     component: 'Input',
     componentProps: {
       readOnly: true,
@@ -389,7 +389,7 @@ export const formAgentSchema: FormSchema[] = [
   },
   {
     field: 'agentUserName',
-    label: '代理人用户名',
+    label: 'Tên người dùng đại lý',
     required: true,
     component: 'JSelectUser',
     componentProps: {
@@ -400,31 +400,31 @@ export const formAgentSchema: FormSchema[] = [
   },
   {
     field: 'startTime',
-    label: '代理开始时间',
+    label: 'Thời gian bắt đầu đại lý',
     component: 'DatePicker',
     required: true,
     componentProps: {
       showTime: true,
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
-      placeholder: '请选择代理开始时间',
+      placeholder: 'Vui lòng chọn thời gian bắt đầu đại lý',
       getPopupContainer: () => document.body,
     },
   },
   {
     field: 'endTime',
-    label: '代理结束时间',
+    label: 'Thời gian kết thúc đại lý',
     component: 'DatePicker',
     required: true,
     componentProps: {
       showTime: true,
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
-      placeholder: '请选择代理结束时间',
+      placeholder: 'Vui lòng chọn thời gian kết thúc đại lý',
       getPopupContainer: () => document.body,
     },
   },
   {
     field: 'status',
-    label: '状态',
+    label: 'Trạng thái',
     component: 'JDictSelectTag',
     defaultValue: '1',
     componentProps: {
@@ -443,7 +443,7 @@ export const formQuitAgentSchema: FormSchema[] = [
   },
   {
     field: 'userName',
-    label: '用户名',
+    label: 'Tên người dùng',
     component: 'Input',
     componentProps: {
       readOnly: true,
@@ -452,7 +452,7 @@ export const formQuitAgentSchema: FormSchema[] = [
   },
   {
     field: 'agentUserName',
-    label: '交接人员',
+    label: 'Người giao nhận',
     //required: true,
     component: 'JSelectUser',
     componentProps: {
@@ -463,31 +463,31 @@ export const formQuitAgentSchema: FormSchema[] = [
   },
   {
     field: 'startTime',
-    label: '交接开始时间',
+    label: 'Thời gian bắt đầu giao nhận',
     component: 'DatePicker',
     //required: true,
     componentProps: {
       showTime: true,
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
-      placeholder: '请选择交接开始时间',
+      placeholder: 'Vui lòng chọn thời gian bắt đầu giao nhận',
       getPopupContainer: () => document.body,
     },
   },
   {
     field: 'endTime',
-    label: '交接结束时间',
+    label: 'Thời gian kết thúc giao nhận',
     component: 'DatePicker',
     //required: true,
     componentProps: {
       showTime: true,
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
-      placeholder: '请选择交接结束时间',
+      placeholder: 'Vui lòng chọn thời gian kết thúc giao nhận',
       getPopupContainer: () => document.body,
     },
   },
   {
     field: 'status',
-    label: '状态',
+    label: 'Trạng thái',
     component: 'JDictSelectTag',
     defaultValue: '1',
     componentProps: {
@@ -497,71 +497,71 @@ export const formQuitAgentSchema: FormSchema[] = [
   },
 ];
 
-//租户用户列表
+//Danh sách người dùng thuê
 export const userTenantColumns: BasicColumn[] = [
   {
-    title: '用户账号',
+    title: 'Tài khoản người dùng',
     dataIndex: 'username',
     width: 120,
   },
   {
-    title: '用户姓名',
+    title: 'Tên người dùng',
     dataIndex: 'realname',
     width: 100,
   },
   {
-    title: '头像',
+    title: 'Ảnh đại diện',
     dataIndex: 'avatar',
     width: 120,
     customRender: render.renderAvatar,
   },
   {
-    title: '手机号',
+    title: 'Số điện thoại',
     dataIndex: 'phone',
     width: 100,
   },
   {
-    title: '部门',
+    title: 'Phòng ban',
     width: 150,
     dataIndex: 'orgCodeTxt',
   },
   {
-    title: '状态',
+    title: 'Trạng thái',
     dataIndex: 'status',
     width: 80,
     customRender: ({ text }) => {
       if (text === '1') {
-        return '正常';
+        return 'Bình thường';
       } else if (text === '3') {
-        return '审批中';
+        return 'Đang phê duyệt';
       } else {
-        return '已拒绝';
+        return 'Đã từ chối';
       }
     },
   },
 ];
 
-//用户租户搜索表单
+//Biểu mẫu tìm kiếm người dùng thuê
 export const userTenantFormSchema: FormSchema[] = [
   {
-    label: '账号',
+    label: 'Tài khoản',
     field: 'username',
     component: 'Input',
     colProps: { span: 6 },
   },
   {
-    label: '名字',
+    label: 'Tên',
     field: 'realname',
     component: 'Input',
     colProps: { span: 6 },
   },
   {
-    label: '性别',
+    label: 'Giới tính',
     field: 'sex',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'sex',
-      placeholder: '请选择性别',
+      placeholder: 'Vui lòng chọn giới tính',
       stringToNumber: true,
     },
     colProps: { span: 6 },

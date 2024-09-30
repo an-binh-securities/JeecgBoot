@@ -393,9 +393,10 @@
           //自动设置placeholder
           // update-begin--author:liaozhiyang---date:20240724---for：【issues/6908】多语言无刷新切换时，BasicColumn和FormSchema里面的值不能正常切换
           let label = isFunction(props.schema.label) ? props.schema.label() : props.schema.label;
-          if (localeStore.getLocale === 'en' && !(/^\s/.test(label))) {
+          // TODO: Thanhnd comment for fix bug placeholder
+          //if (localeStore.getLocale === 'en' && !(/^\s/.test(label))) {
             label = ' ' + label;
-          }
+          //}
           // update-end--author:liaozhiyang---date:20240724---for：【issues/6908】多语言无刷新切换时，BasicColumn和FormSchema里面的值不能正常切换
           propsData.placeholder = unref(getComponentsProps)?.placeholder || createPlaceholderMessage(component) + label;
         }

@@ -67,15 +67,15 @@ export const deleteUser = (params, handleSuccess) => {
   });
 };
 /**
- * 批量删除用户
+ * Xóa hàng loạt người dùng
  * @param params
  */
 export const batchDeleteUser = (params, handleSuccess) => {
   Modal.confirm({
-    title: '确认删除',
-    content: '是否删除选中数据',
-    okText: '确认',
-    cancelText: '取消',
+    title: 'Xác nhận xóa',
+    content: 'Bạn có muốn xóa dữ liệu đã chọn không',
+    okText: 'Xác nhận',
+    cancelText: 'Hủy',
     onOk: () => {
       return defHttp.delete({ url: Api.deleteBatch, data: params }, { joinParamsToUrl: true }).then(() => {
         handleSuccess();

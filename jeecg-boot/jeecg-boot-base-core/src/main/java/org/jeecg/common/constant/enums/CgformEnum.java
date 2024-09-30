@@ -6,76 +6,76 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * online表单枚举 代码生成器用到
+ * Enum biểu mẫu online được sử dụng trong trình tạo mã
  * @author: jeecg-boot
  */
 public enum CgformEnum {
 
     /**
-     * 单表
+     * Đơn bảng
      */
-    ONE(1, "one", "/jeecg/code-template-online", "default.one", "经典风格", new String[]{"vue3","vue","vue3Native"}),
+    ONE(1, "one", "/jeecg/code-template-online", "default.one", "Phong cách cổ điển", new String[]{"vue3","vue","vue3Native"}),
 
     /**
-     * 多表
+     * Đa bảng
      */
-    MANY(2, "many", "/jeecg/code-template-online", "default.onetomany", "经典风格" ,new String[]{"vue"}),
+    MANY(2, "many", "/jeecg/code-template-online", "default.onetomany", "Phong cách cổ điển" ,new String[]{"vue"}),
     /**
-     * 多表（jvxe风格）
-     *  */
-    JVXE_TABLE(2, "jvxe", "/jeecg/code-template-online", "jvxe.onetomany", "默认风格" ,new String[]{"vue3","vue","vue3Native"}),
+     * Đa bảng (phong cách jvxe)
+     */
+    JVXE_TABLE(2, "jvxe", "/jeecg/code-template-online", "jvxe.onetomany", "Phong cách mặc định" ,new String[]{"vue3","vue","vue3Native"}),
 
     /**
-     * 多表 (erp风格)
+     * Đa bảng (phong cách erp)
      */
-    ERP(2, "erp", "/jeecg/code-template-online", "erp.onetomany", "ERP风格" ,new String[]{"vue3","vue","vue3Native"}),
+    ERP(2, "erp", "/jeecg/code-template-online", "erp.onetomany", "Phong cách ERP" ,new String[]{"vue3","vue","vue3Native"}),
     /**
-     * 多表（内嵌子表风格）
+     * Đa bảng (phong cách bảng lồng)
      */
-    INNER_TABLE(2, "innerTable", "/jeecg/code-template-online", "inner-table.onetomany", "内嵌子表风格" ,new String[]{"vue3","vue"}),
+    INNER_TABLE(2, "innerTable", "/jeecg/code-template-online", "inner-table.onetomany", "Phong cách bảng lồng" ,new String[]{"vue3","vue"}),
     /**
-     * 多表（tab风格）
-     *  */
-    TAB(2, "tab", "/jeecg/code-template-online", "tab.onetomany", "Tab风格" ,new String[]{"vue3","vue"}),
-    /**
-     * 树形列表
+     * Đa bảng (phong cách tab)
      */
-    TREE(3, "tree", "/jeecg/code-template-online", "default.tree", "树形列表" ,new String[]{"vue3","vue","vue3Native"});
+    TAB(2, "tab", "/jeecg/code-template-online", "tab.onetomany", "Phong cách Tab" ,new String[]{"vue3","vue"}),
+    /**
+     * Danh sách cây
+     */
+    TREE(3, "tree", "/jeecg/code-template-online", "default.tree", "Danh sách cây" ,new String[]{"vue3","vue","vue3Native"});
 
     /**
-     * 类型 1/单表 2/一对多 3/树
+     * Loại 1/đơn bảng 2/một đối nhiều 3/cây
      */
     int type;
     /**
-     * 编码标识
+     * Mã định danh
      */
     String code;
     /**
-     * 代码生成器模板路径
+     * Đường dẫn mẫu trình tạo mã
      */
     String templatePath;
     /**
-     * 代码生成器模板路径
+     * Đường dẫn mẫu trình tạo mã
      */
     String stylePath;
     /**
-     * 模板风格名称
+     * Tên phong cách mẫu
      */
     String note;
     /**
-     * 支持代码风格 vue3:vue3包装代码 vue3Native:vue3原生代码 vue:vue2代码
+     * Hỗ trợ phong cách mã vue3: mã gói vue3 vue3Native: mã gốc vue3 vue: mã vue2
      */
     String[] vueStyle;
 
     /**
-     * 构造器
+     * Constructor
      *
-     * @param type 类型 1/单表 2/一对多 3/树
-     * @param code 模板编码
-     * @param templatePath  模板路径
-     * @param stylePath  模板子路径
+     * @param type Loại 1/đơn bảng 2/một đối nhiều 3/cây
+     * @param code Mã mẫu
+     * @param templatePath Đường dẫn mẫu
+     * @param stylePath Đường dẫn con mẫu
      * @param note
-     * @param vueStyle 支持代码风格
+     * @param vueStyle Hỗ trợ phong cách mã
      */
     CgformEnum(int type, String code, String templatePath, String stylePath, String note, String[] vueStyle) {
         this.type = type;
@@ -87,7 +87,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据code获取模板路径
+     * Lấy đường dẫn mẫu theo mã
      *
      * @param code
      * @return
@@ -130,7 +130,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据code找枚举
+     * Tìm enum theo mã
      *
      * @param code
      * @return
@@ -145,7 +145,7 @@ public enum CgformEnum {
     }
 
     /**
-     * 根据类型找所有
+     * Tìm tất cả theo loại
      *
      * @param type
      * @return

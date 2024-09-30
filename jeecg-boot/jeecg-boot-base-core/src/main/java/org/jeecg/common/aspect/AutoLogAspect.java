@@ -127,10 +127,10 @@ public class AutoLogAspect {
     }
 
     /**
-     * @Description: 获取请求参数
+     * @Description: Lấy tham số yêu cầu
      * @author: scott
      * @date: 2020/4/16 0:10
-     * @param request:  request
+     * @param request:  yêu cầu
      * @param joinPoint:  joinPoint
      * @Return: java.lang.String
      */
@@ -139,18 +139,18 @@ public class AutoLogAspect {
         String params = "";
         if (CommonConstant.HTTP_POST.equals(httpMethod) || CommonConstant.HTTP_PUT.equals(httpMethod) || CommonConstant.HTTP_PATCH.equals(httpMethod)) {
             Object[] paramsArray = joinPoint.getArgs();
-            // java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
+            // java.lang.IllegalStateException: Gọi phương thức này là không hợp lệ nếu yêu cầu hiện tại không ở chế độ không đồng bộ (tức là isAsyncStarted() trả về false)
             //  https://my.oschina.net/mengzhang6/blog/2395893
             Object[] arguments  = new Object[paramsArray.length];
             for (int i = 0; i < paramsArray.length; i++) {
                 if (paramsArray[i] instanceof BindingResult || paramsArray[i] instanceof ServletRequest || paramsArray[i] instanceof ServletResponse || paramsArray[i] instanceof MultipartFile) {
-                    //ServletRequest不能序列化，从入参里排除，否则报异常：java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
-                    //ServletResponse不能序列化 从入参里排除，否则报异常：java.lang.IllegalStateException: getOutputStream() has already been called for this response
+                    //ServletRequest không thể tuần tự hóa, loại trừ khỏi tham số đầu vào, nếu không sẽ báo lỗi: java.lang.IllegalStateException: Gọi phương thức này là không hợp lệ nếu yêu cầu hiện tại không ở chế độ không đồng bộ (tức là isAsyncStarted() trả về false)
+                    //ServletResponse không thể tuần tự hóa, loại trừ khỏi tham số đầu vào, nếu không sẽ báo lỗi: java.lang.IllegalStateException: getOutputStream() đã được gọi cho phản hồi này
                     continue;
                 }
                 arguments[i] = paramsArray[i];
             }
-            //update-begin-author:taoyan date:20200724 for:日志数据太长的直接过滤掉
+            //update-begin-author:taoyan date:20200724 for: Lọc bỏ dữ liệu nhật ký quá dài
             PropertyFilter profilter = new PropertyFilter() {
                 @Override
                 public boolean apply(Object o, String name, Object value) {
@@ -165,13 +165,13 @@ public class AutoLogAspect {
                 }
             };
             params = JSONObject.toJSONString(arguments, profilter);
-            //update-end-author:taoyan date:20200724 for:日志数据太长的直接过滤掉
+            //update-end-author:taoyan date:20200724 for: Lọc bỏ dữ liệu nhật ký quá dài
         } else {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
-            // 请求的方法参数值
+            // Giá trị tham số của phương thức yêu cầu
             Object[] args = joinPoint.getArgs();
-            // 请求的方法参数名称
+            // Tên tham số của phương thức yêu cầu
             LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
             String[] paramNames = u.getParameterNames(method);
             if (args != null && paramNames != null) {
@@ -184,7 +184,7 @@ public class AutoLogAspect {
     }
 
     /**
-     * online日志内容拼接
+     * Nội dung nhật ký trực tuyến
      * @param obj
      * @param content
      * @return
@@ -195,12 +195,12 @@ public class AutoLogAspect {
             String msg = res.getMessage();
             String tableName = res.getOnlTable();
             if(oConvertUtils.isNotEmpty(tableName)){
-                content+=",表名:"+tableName;
+                content+=",Tên bảng:"+tableName;
             }
             if(res.isSuccess()){
-                content+= ","+(oConvertUtils.isEmpty(msg)?"操作成功":msg);
+                content+= ","+(oConvertUtils.isEmpty(msg)?"Thao tác thành công":msg);
             }else{
-                content+= ","+(oConvertUtils.isEmpty(msg)?"操作失败":msg);
+                content+= ","+(oConvertUtils.isEmpty(msg)?"Thao tác thất bại":msg);
             }
         }
         return content;

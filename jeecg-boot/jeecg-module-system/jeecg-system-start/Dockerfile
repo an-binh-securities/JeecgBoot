@@ -1,8 +1,6 @@
 FROM registry.cn-hangzhou.aliyuncs.com/jeecgdocker/alpine-java:8_server-jre_unlimited
 
-MAINTAINER jeecgos@163.com
-
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
 #RUN mkdir -p /jeecg-boot/config/jeecg/
 

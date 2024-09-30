@@ -120,8 +120,8 @@
     },
     data () {
       return {
-        description: '${tableVo.ftlDescription}管理页面',
-        // 表头
+        description: 'Trang quản lý ${tableVo.ftlDescription}',
+        // Tiêu đề bảng
         columns: [
           {
             title: '#',
@@ -143,7 +143,7 @@
 		   </#if>
 		  </#list>
           {
-            title: '操作',
+            title: 'Thao tác',
             dataIndex: 'action',
             align:"center",
             scopedSlots: { customRender: 'action' },

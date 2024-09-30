@@ -1,56 +1,55 @@
 <template>
   <div>
-    <!--引用表格-->
+    <!--Tham chiếu bảng-->
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
-      <!--插槽:table标题-->
+      <!--Khe cắm: tiêu đề bảng-->
       <template #tableTitle>
-        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls" :disabled="isDisabledAuth('system:user:export')"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
-        <a-button type="primary" @click="openModal(true, {})" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
+        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> Thêm mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls" :disabled="isDisabledAuth('system:user:export')"> Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
+        <a-button type="primary" @click="openModal(true, {})" preIcon="ant-design:hdd-outlined"> Thùng rác</a-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
               <a-menu-item key="2" @click="batchFrozen(2)">
                 <Icon icon="ant-design:lock-outlined"></Icon>
-                冻结
+                Đóng băng
               </a-menu-item>
               <a-menu-item key="3" @click="batchFrozen(1)">
                 <Icon icon="ant-design:unlock-outlined"></Icon>
-                解冻
+                Mở khóa
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Thao tác hàng loạt
             <Icon icon="mdi:chevron-down"></Icon>
           </a-button>
         </a-dropdown>
       </template>
-      <!--操作栏-->
+      <!--Thanh thao tác-->
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
       </template>
     </BasicTable>
-    <!--用户抽屉-->
+    <!--Ngăn kéo người dùng-->
     <UserDrawer @register="registerDrawer" @success="handleSuccess" />
-    <!--修改密码-->
+    <!--Đổi mật khẩu-->
     <PasswordModal @register="registerPasswordModal" @success="reload" />
-    <!--用户代理-->
+    <!--Đại lý người dùng-->
     <UserAgentModal @register="registerAgentModal" @success="reload" />
-    <!--回收站-->
+    <!--Thùng rác-->
     <UserRecycleBinModal @register="registerModal" @success="reload" />
-    <!-- 离职受理人弹窗 -->
+    <!-- Cửa sổ bật lên người xử lý nghỉ việc -->
     <UserQuitAgentModal @register="registerQuitAgentModal" @success="reload" />
-    <!-- 离职人员列弹窗 -->
+    <!-- Cửa sổ bật lên người nghỉ việc -->
     <UserQuitModal @register="registerQuitModal" @success="reload" />
   </div>
 </template>
-
 <script lang="ts" name="system-user" setup>
   //ts语法
   import { ref, computed, unref } from 'vue';
@@ -72,24 +71,24 @@
 
   const { createMessage, createConfirm } = useMessage();
   const { isDisabledAuth } = usePermission();
-  //注册drawer
+  // đăng ký drawer
   const [registerDrawer, { openDrawer }] = useDrawer();
-  //回收站model
+  // model thùng rác
   const [registerModal, { openModal }] = useModal();
-  //密码model
+  // model mật khẩu
   const [registerPasswordModal, { openModal: openPasswordModal }] = useModal();
-  //代理人model
+  // model đại lý
   const [registerAgentModal, { openModal: openAgentModal }] = useModal();
-  //离职代理人model
+  // model đại lý nghỉ việc
   const [registerQuitAgentModal, { openModal: openQuitAgentModal }] = useModal();
-  //离职用户列表model
+  // model danh sách người dùng nghỉ việc
   const [registerQuitModal, { openModal: openQuitModal }] = useModal();
 
-  // 列表页面公共参数、方法
+  // Các tham số và phương thức chung của trang danh sách
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     designScope: 'user-list',
     tableProps: {
-      title: '用户列表',
+      title: 'Danh sách người dùng',
       api: listNoCareTenant,
       columns: columns,
       size: 'small',
@@ -105,7 +104,7 @@
       },
     },
     exportConfig: {
-      name: '用户列表',
+      name: 'Danh sách người dùng',
       url: getExportUrl,
     },
     importConfig: {
@@ -113,11 +112,11 @@
     },
   });
 
-  //注册table数据
+  // đăng ký dữ liệu bảng
   const [registerTable, { reload, updateTableDataRecord }, { rowSelection, selectedRows, selectedRowKeys }] = tableContext;
 
   /**
-   * 新增事件
+   * Sự kiện thêm mới
    */
   function handleCreate() {
     openDrawer(true, {
@@ -127,7 +126,7 @@
     });
   }
   /**
-   * 编辑事件
+   * Sự kiện chỉnh sửa
    */
   async function handleEdit(record: Recordable) {
     openDrawer(true, {
@@ -138,7 +137,7 @@
     });
   }
   /**
-   * 详情
+   * Chi tiết
    */
   async function handleDetail(record: Recordable) {
     openDrawer(true, {
@@ -149,22 +148,22 @@
     });
   }
   /**
-   * 删除事件
+   * Sự kiện xóa
    */
   async function handleDelete(record) {
     if ('admin' == record.username) {
-      createMessage.warning('管理员账号不允许此操作！');
+      createMessage.warning('Tài khoản quản trị viên không được phép thao tác này!');
       return;
     }
     await deleteUser({ id: record.id }, reload);
   }
   /**
-   * 批量删除事件
+   * Sự kiện xóa hàng loạt
    */
   async function batchHandleDelete() {
     let hasAdmin = unref(selectedRows).filter((item) => item.username == 'admin');
     if (unref(hasAdmin).length > 0) {
-      createMessage.warning('管理员账号不允许此操作！');
+      createMessage.warning('Tài khoản quản trị viên không được phép thao tác này!');
       return;
     }
     await batchDeleteUser({ ids: selectedRowKeys.value }, () => {
@@ -173,47 +172,47 @@
     });
   }
   /**
-   * 成功回调
+   * Gọi lại thành công
    */
   function handleSuccess() {
     reload();
   }
 
   /**
-   * 打开修改密码弹窗
+   * Mở cửa sổ bật lên thay đổi mật khẩu
    */
   function handleChangePassword(username) {
     openPasswordModal(true, { username });
   }
   /**
-   * 打开代理人弹窗
+   * Mở cửa sổ bật lên đại lý
    */
   function handleAgentSettings(userName) {
     openAgentModal(true, { userName });
   }
   /**
-   * 冻结解冻
+   * Đóng băng/giải phóng
    */
   async function handleFrozen(record, status) {
     if ('admin' == record.username) {
-      createMessage.warning('管理员账号不允许此操作！');
+      createMessage.warning('Tài khoản quản trị viên không được phép thao tác này!');
       return;
     }
     await frozenBatch({ ids: record.id, status: status }, reload);
   }
   /**
-   * 批量冻结解冻
+   * Đóng băng/giải phóng hàng loạt
    */
   function batchFrozen(status) {
     let hasAdmin = selectedRows.value.filter((item) => item.username == 'admin');
     if (unref(hasAdmin).length > 0) {
-      createMessage.warning('管理员账号不允许此操作！');
+      createMessage.warning('Tài khoản quản trị viên không được phép thao tác này!');
       return;
     }
     createConfirm({
       iconType: 'warning',
-      title: '确认操作',
-      content: '是否' + (status == 1 ? '解冻' : '冻结') + '选中账号?',
+      title: 'Xác nhận thao tác',
+      content: 'Bạn có muốn ' + (status == 1 ? 'giải phóng' : 'đóng băng') + ' tài khoản đã chọn không?',
       onOk: async () => {
         await frozenBatch({ ids: unref(selectedRowKeys).join(','), status: status }, reload);
       },
@@ -221,77 +220,77 @@
   }
 
   /**
-   *同步钉钉和微信回调
+   * Đồng bộ DingTalk và WeChat gọi lại
    */
   function onSyncFinally({ isToLocal }) {
-    // 同步到本地时刷新下数据
+    // Đồng bộ về local thì làm mới dữ liệu
     if (isToLocal) {
       reload();
     }
   }
 
   /**
-   * 操作栏
+   * Cột thao tác
    */
   function getTableAction(record): ActionItem[] {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
         // ifShow: () => hasPermission('system:user:edit'),
       },
     ];
   }
   /**
-   * 下拉操作栏
+   * Cột thao tác thả xuống
    */
   function getDropDownAction(record): ActionItem[] {
     return [
       {
-        label: '详情',
+        label: 'Chi tiết',
         onClick: handleDetail.bind(null, record),
       },
       {
-        label: '密码',
+        label: 'Mật khẩu',
         //auth: 'user:changepwd',
         onClick: handleChangePassword.bind(null, record.username),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa',
           confirm: handleDelete.bind(null, record),
         },
       },
       {
-        label: '冻结',
+        label: 'Đóng băng',
         ifShow: record.status == 1,
         popConfirm: {
-          title: '确定冻结吗?',
+          title: 'Bạn có chắc chắn muốn đóng băng?',
           confirm: handleFrozen.bind(null, record, 2),
         },
       },
       {
-        label: '解冻',
+        label: 'Giải phóng',
         ifShow: record.status == 2,
         popConfirm: {
-          title: '确定解冻吗?',
+          title: 'Bạn có chắc chắn muốn giải phóng?',
           confirm: handleFrozen.bind(null, record, 1),
         },
       },
       {
-        label: '代理人',
+        label: 'Đại lý',
         onClick: handleAgentSettings.bind(null, record.username),
       },
     ];
   }
 
   /**
-   * 离职
+   * Nghỉ việc
    * @param userName
    */
   function handleQuit(userName) {
-    //打开离职代理人弹窗
+    // mở cửa sổ bật lên đại lý nghỉ việc
     openQuitAgentModal(true, { userName });
   }
 </script>

@@ -2,26 +2,26 @@ import type { DropMenu } from '../components/Dropdown';
 import type { LocaleSetting, LocaleType } from '/#/config';
 
 export const LOCALE: { [key: string]: LocaleType } = {
-  ZH_CN: 'zh_CN',
+  VI_VN: 'zh_CN',
   EN_US: 'en',
 };
 
 export const localeSetting: LocaleSetting = {
-  // 是否显示语言选择器
+  // Có hiển thị bộ chọn ngôn ngữ hay không
   showPicker: true,
-  // 当前语言
+  // Ngôn ngữ hiện tại
   locale: LOCALE.ZH_CN,
-  // 默认语言
+  // Ngôn ngữ mặc định
   fallback: LOCALE.ZH_CN,
-  // 允许的语言
+  // Ngôn ngữ được phép
   availableLocales: [LOCALE.ZH_CN, LOCALE.EN_US],
 };
 
-// 语言列表
+// Danh sách ngôn ngữ
 export const localeList: DropMenu[] = [
   {
-    text: '简体中文',
-    event: LOCALE.ZH_CN,
+    text: 'Tiếng Việt',
+    event: LOCALE.VI_VN,
   },
   {
     text: 'English',

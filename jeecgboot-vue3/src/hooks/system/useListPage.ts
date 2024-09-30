@@ -196,7 +196,7 @@ export function useListTable(tableProps: TableProps): [
     selectedRowKeys: Ref<any[]>;
   }
 ] {
-  // 自适应列配置
+  // Cấu hình cột tự động điều chỉnh
   const adaptiveColProps: Partial<ColEx> = {
     xs: 24, // <576px
     sm: 12, // ≥576px
@@ -207,19 +207,19 @@ export function useListTable(tableProps: TableProps): [
   };
   const defaultTableProps: TableProps = {
     rowKey: 'id',
-    // 使用查询条件区域
+    // Sử dụng khu vực điều kiện tìm kiếm
     useSearchForm: true,
-    // 查询条件区域配置
+    // Cấu hình khu vực điều kiện tìm kiếm
     formConfig: {
-      // 紧凑模式
+      // Chế độ gọn nhẹ
       compact: true,
-      // label默认宽度
+      // Chiều rộng mặc định của nhãn
       // labelWidth: 120,
-      // 按下回车后自动提交
+      // Tự động gửi khi nhấn Enter
       autoSubmitOnEnter: true,
-      // 默认 row 配置
+      // Cấu hình row mặc định
       rowProps: { gutter: 8 },
-      // 默认 col 配置
+      // Cấu hình col mặc định
       baseColProps: {
         ...adaptiveColProps,
       },
@@ -232,43 +232,43 @@ export function useListTable(tableProps: TableProps): [
         xxl: 6,
       },
       wrapperCol: {},
-      // 是否显示 展开/收起 按钮
+      // Có hiển thị nút Mở rộng/Thu gọn hay không
       showAdvancedButton: true,
-      // 超过指定列数默认折叠
+      // Tự động thu gọn khi vượt quá số cột chỉ định
       autoAdvancedCol: 3,
-      // 操作按钮配置
+      // Cấu hình nút thao tác
       actionColOptions: {
         ...adaptiveColProps,
         style: { textAlign: 'left' },
       },
     },
-    // 斑马纹
+    // Vằn ngựa
     striped: false,
-    // 是否可以自适应高度
+    // Có thể tự điều chỉnh chiều cao hay không
     canResize: true,
-    // 表格最小高度
-    // update-begin--author:liaozhiyang---date:20240603---for【TV360X-861】列表查询区域不可往上滚动
+    // Chiều cao tối thiểu của bảng
+    // update-begin--author:liaozhiyang---date:20240603---for【TV360X-861】Khu vực tìm kiếm danh sách không thể cuộn lên trên
     minHeight: 300,
-    // update-end--author:liaozhiyang---date:20240603---for【TV360X-861】列表查询区域不可往上滚动
-    // 点击行选中
+    // update-end--author:liaozhiyang---date:20240603---for【TV360X-861】Khu vực tìm kiếm danh sách không thể cuộn lên trên
+    // Chọn khi nhấp vào hàng
     clickToRowSelect: false,
-    // 是否显示边框
+    // Có hiển thị viền hay không
     bordered: true,
-    // 是否显示序号列
+    // Có hiển thị cột số thứ tự hay không
     showIndexColumn: false,
-    // 显示表格设置
+    // Hiển thị cài đặt bảng
     showTableSetting: true,
-    // 表格全屏设置
+    // Cài đặt toàn màn hình bảng
     tableSetting: {
       fullScreen: false,
     },
-    // 是否显示操作列
+    // Có hiển thị cột thao tác hay không
     showActionColumn: true,
-    // 操作列
+    // Cột thao tác
     actionColumn: {
       width: 120,
-      title: '操作',
-      //是否锁定操作列取值 right ,left,false
+      title: 'Thao tác',
+      // Có khóa cột thao tác hay không, giá trị có thể là right, left, false
       fixed: false,
       dataIndex: 'action',
       slots: { customRender: 'action' },

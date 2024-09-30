@@ -70,7 +70,7 @@
     immediate: false,
     actionColumn: {
       width: 100,
-      title: '操作',
+      title: 'Thao tác',
       dataIndex: 'action',
       slots: { customRender: 'action' },
       fixed: undefined,
@@ -78,7 +78,7 @@
   });
 
   /**
-   * 新增
+   * Thêm mới
    */
   function handleCreate() {
     openModal(true, {
@@ -87,7 +87,7 @@
   }
 
   /**
-   * 编辑
+   * Chỉnh sửa
    */
   function handleEdit(record) {
     openModal(true, {
@@ -97,25 +97,25 @@
   }
 
   /**
-   * 删除
+   * Xóa
    */
   async function handleDelete(record) {
     await deleteRule({ id: record.id }, reload);
   }
 
   /**
-   * 操作栏
+   * Cột thao tác
    */
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa',
           confirm: handleDelete.bind(null, record),
         },
       },

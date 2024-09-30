@@ -18,26 +18,26 @@
   const schema: DescItem[] = [
     {
       field: 'username',
-      label: '用户名',
+      label: 'Tên người dùng',
     },
     {
       field: 'nickName',
-      label: '昵称',
+      label: 'Biệt danh',
       render: (curVal, data) => {
         return `${data.username}-${curVal}`;
       },
     },
     {
       field: 'phone',
-      label: '联系电话',
+      label: 'Số điện thoại liên hệ',
     },
     {
       field: 'email',
-      label: '邮箱',
+      label: 'Email',
     },
     {
       field: 'addr',
-      label: '地址',
+      label: 'Địa chỉ',
     },
   ];
   export default defineComponent({
