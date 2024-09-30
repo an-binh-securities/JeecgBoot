@@ -1,6 +1,4 @@
-FROM mysql:8.0.19
-
-MAINTAINER thanh.nguyenduy@abs.vn
+FROM registry.cn-hangzhou.aliyuncs.com/jeecgdocker/mysql:8.0.19
 
 ENV TZ=Asia/Ho_Chi_Minh
 
