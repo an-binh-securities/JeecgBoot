@@ -18,29 +18,30 @@ UPDATE `onl_drag_comp` SET `parent_id` = '100', `comp_name` = '自定义查询' 
 UPDATE `onl_drag_comp` SET `parent_id` = '100', `comp_name` = '查询条件' WHERE `id` = '100100';
 
 
--- 积木报表升级到1.8.1版本--
+-- Nâng cấp báo cáo Jimu lên phiên bản 1.8.1 --
 ALTER TABLE jimu_report 
-ADD COLUMN update_count int NULL DEFAULT 0 COMMENT '乐观锁版本' AFTER tenant_id;
-update jimu_report set update_count = 0 where update_count is null;
+ADD COLUMN update_count int NULL DEFAULT 0 COMMENT 'Phiên bản khóa lạc quan' AFTER tenant_id;
+UPDATE jimu_report SET update_count = 0 WHERE update_count IS NULL;
 
 ALTER TABLE jimu_report
-ADD COLUMN `submit_form` tinyint(1) NULL COMMENT '是否填报报表 0不是,1是' ;
+ADD COLUMN `submit_form` tinyint(1) NULL COMMENT 'Có phải là báo cáo điền vào không 0 không, 1 có';
 ALTER TABLE jimu_report
-MODIFY COLUMN type varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型' AFTER status;
+MODIFY COLUMN type varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Loại' AFTER status;
+
 CREATE TABLE `jimu_report_category`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分类名称',
-  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父级id',
-  `iz_leaf` int(1) NULL DEFAULT NULL COMMENT '是否为叶子节点(0 否 1是)',
-  `source_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '来源类型( report 积木报表 screen 大屏  drag 仪表盘)',
-  `del_flag` int(1) NULL DEFAULT NULL COMMENT '删除标识(0 正常 1 已删除)',
-  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  `tenant_id` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Khóa chính',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Tên danh mục',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID cha',
+  `iz_leaf` int(1) NULL DEFAULT NULL COMMENT 'Có phải là nút lá không (0 không, 1 có)',
+  `source_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Loại nguồn (report báo cáo Jimu, screen màn hình lớn, drag bảng điều khiển)',
+  `del_flag` int(1) NULL DEFAULT NULL COMMENT 'Dấu xóa (0 bình thường, 1 đã xóa)',
+  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Người tạo',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT 'Thời gian tạo',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Người cập nhật',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT 'Thời gian cập nhật',
+  `tenant_id` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID người thuê',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Danh mục' ROW_FORMAT = Dynamic;
 
 INSERT INTO jimu_report_category (id, name, parent_id, iz_leaf, source_type, del_flag, create_by, create_time, update_by, update_time, tenant_id) VALUES ('984272091947253760', '数据报表', '0', 1, 'report', 0, 'admin', '2024-08-16 11:52:44', NULL, NULL, '1000');
 INSERT INTO jimu_report_category (id, name, parent_id, iz_leaf, source_type, del_flag, create_by, create_time, update_by, update_time, tenant_id) VALUES ('984302961118724096', '图形报表', '0', 1, 'report', 0, 'admin', '2024-08-16 13:55:24', NULL, NULL, '1000');
@@ -74,7 +75,7 @@ INSERT INTO `jimu_report_share` (`id`, `report_id`, `preview_url`, `preview_lock
 -- 积木报表表小改动
 UPDATE jimu_report_db_field SET search_mode = 3 WHERE id = '8fb53733d1fb32d21d2bc2b3c0178c73';
 INSERT INTO `jimu_report` (`id`, `code`, `name`, `note`, `status`, `type`, `json_str`, `api_url`, `thumb`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `api_method`, `api_code`, `template`, `view_count`, `css_str`, `js_str`, `py_str`, `tenant_id`) VALUES ('975549294469992448', '20240723101422', '简单表达式混合运算', NULL, NULL, 'datainfo', '{\"loopBlockList\":[],\"printConfig\":{\"paper\":\"A4\",\"width\":210,\"height\":297,\"definition\":1,\"isBackend\":false,\"marginX\":10,\"marginY\":10,\"layout\":\"portrait\",\"printCallBackUrl\":\"\"},\"hidden\":{\"rows\":[],\"cols\":[]},\"dbexps\":[],\"dicts\":[],\"freeze\":\"A1\",\"dataRectWidth\":1097,\"autofilter\":{},\"validations\":[],\"cols\":{\"0\":{\"width\":81},\"1\":{\"width\":55},\"2\":{\"width\":144},\"3\":{\"width\":143},\"4\":{\"width\":112},\"5\":{\"width\":129},\"7\":{\"width\":333},\"len\":100},\"area\":false,\"pyGroupEngine\":false,\"excel_config_id\":\"975549294469992448\",\"hiddenCells\":[],\"zonedEditionList\":[],\"rows\":{\"0\":{\"cells\":{\"0\":{\"text\":\"1\"},\"1\":{},\"2\":{\"text\":\"SUM(A1,A2)\"},\"3\":{\"text\":\"=SUM(A1,A2)\"},\"4\":{\"text\":\"SUM(A1:A10)\"},\"5\":{\"text\":\"=SUM(A1:A10)\"}}},\"1\":{\"cells\":{\"0\":{\"text\":\"2\"},\"1\":{},\"2\":{\"text\":\"SUM(A1,A2)*2\"},\"3\":{\"text\":\"=SUM(A1,A2)*2\"},\"4\":{\"text\":\"SUM(A1:A10)*2\"},\"5\":{\"text\":\"=SUM(A1:A10)*2\"},\"6\":{},\"7\":{\"text\":\"=2+SUM(A1,A2)*2 \"}}},\"2\":{\"cells\":{\"0\":{\"text\":\"3\"},\"2\":{\"text\":\"SUM(A1,A2)/2\"},\"3\":{\"text\":\"=SUM(A1,A2)/2\"},\"4\":{\"text\":\"SUM(A1:A10)/2\"},\"5\":{\"text\":\"=SUM(A1:A10)/2\"},\"7\":{\"text\":\"=A1*A2\"}}},\"3\":{\"cells\":{\"0\":{\"text\":\"4\"},\"2\":{\"text\":\"SUM(A1,A2)+2\"},\"3\":{\"text\":\"=SUM(A1,A2)+2\"},\"4\":{\"text\":\"SUM(A1:A10)+2\"},\"5\":{\"text\":\"=SUM(A1:A10)+2\"}}},\"4\":{\"cells\":{\"0\":{\"text\":\"5\"},\"2\":{\"text\":\"SUM(A1,A2)-2\"},\"3\":{\"text\":\"=SUM(A1,A2)-2\"},\"4\":{\"text\":\"SUM(A1:A10)-2\"},\"5\":{\"text\":\"=SUM(A1:A10)-2\"},\"7\":{}}},\"5\":{\"cells\":{\"0\":{\"text\":\"6\"}}},\"6\":{\"cells\":{\"0\":{\"text\":\"7\"},\"2\":{\"text\":\"MAX(A1,A2)\"},\"3\":{\"text\":\"=MAX(A1,A2)\"},\"4\":{\"text\":\"MAX(A1:A10)\"},\"5\":{\"text\":\"=MAX(A1:A10)\"}}},\"7\":{\"cells\":{\"0\":{\"text\":\"8\"},\"2\":{\"text\":\"MAX(A1,A2)*2\"},\"3\":{\"text\":\"=MAX(A1,A2)*2\"},\"4\":{\"text\":\"MAX(A1:A10)*2\"},\"5\":{\"text\":\"=MAX(A1:A10)*2\"}}},\"8\":{\"cells\":{\"0\":{\"text\":\"9\"},\"2\":{\"text\":\"MAX(A1,A2)/2\"},\"3\":{\"text\":\"=MAX(A1,A2)/2\"},\"4\":{\"text\":\"MAX(A1:A10)/2\"},\"5\":{\"text\":\"=MAX(A1:A10)/2\"}}},\"9\":{\"cells\":{\"0\":{\"text\":\"10\"},\"2\":{\"text\":\"MAX(A1,A2)+2\"},\"3\":{\"text\":\"=MAX(A1,A2)+2\"},\"4\":{\"text\":\"MAX(A1:A10)+2\"},\"5\":{\"text\":\"=MAX(A1:A10)+2\"}}},\"10\":{\"cells\":{\"0\":{},\"2\":{\"text\":\"MAX(A1,A2)-2\"},\"3\":{\"text\":\"=MAX(A1,A2)-2\"},\"4\":{\"text\":\"MAX(A1:A10)-2\"},\"5\":{\"text\":\"=MAX(A1:A10)-2\"}}},\"11\":{\"cells\":{\"0\":{}}},\"12\":{\"cells\":{\"2\":{\"text\":\"MIN(A1,A2)\"},\"3\":{\"text\":\"=MIN(A1,A2)\"},\"4\":{\"text\":\"MIN(A1:A10)\"},\"5\":{\"text\":\"=MIN(A1:A10)\"}}},\"13\":{\"cells\":{\"2\":{\"text\":\"MIN(A1,A2)*2\"},\"3\":{\"text\":\"=MIN(A1,A2)*2\"},\"4\":{\"text\":\"MIN(A1:A10)*2\"},\"5\":{\"text\":\"=MIN(A1:A10)*2\"}}},\"14\":{\"cells\":{\"2\":{\"text\":\"MIN(A1,A2)/2\"},\"3\":{\"text\":\"=MIN(A1,A2)/2\"},\"4\":{\"text\":\"MIN(A1:A10)/2\"},\"5\":{\"text\":\"=MIN(A1:A10)/2\"}}},\"15\":{\"cells\":{\"2\":{\"text\":\"MIN(A1,A2)+2\"},\"3\":{\"text\":\"=MIN(A1,A2)+2\"},\"4\":{\"text\":\"MIN(A1:A10)+2\"},\"5\":{\"text\":\"=MIN(A1:A10)+2\"}}},\"16\":{\"cells\":{\"2\":{\"text\":\"MIN(A1,A2)-2\"},\"3\":{\"text\":\"=MIN(A1,A2)-2\"},\"4\":{\"text\":\"MIN(A1:A10)-2\"},\"5\":{\"text\":\"=MIN(A1:A10)-2\"}}},\"18\":{\"cells\":{\"2\":{\"text\":\"AVERAGE(A1,A2)\"},\"3\":{\"text\":\"=AVERAGE(A1,A2)\"},\"4\":{\"text\":\"AVERAGE(A1:A10)\"},\"5\":{\"text\":\"=AVERAGE(A1:A10)\"}}},\"19\":{\"cells\":{\"2\":{\"text\":\"AVERAGE(A1,A2)*2\"},\"3\":{\"text\":\"=AVERAGE(A1,A2)*2\"},\"4\":{\"text\":\"AVERAGE(A1:A10)*2\"},\"5\":{\"text\":\"=AVERAGE(A1:A10)*2\"}}},\"20\":{\"cells\":{\"2\":{\"text\":\"AVERAGE(A1,A2)/2\"},\"3\":{\"text\":\"=AVERAGE(A1,A2)/2\"},\"4\":{\"text\":\"AVERAGE(A1:A10)/2\"},\"5\":{\"text\":\"=AVERAGE(A1:A10)/2\"}}},\"21\":{\"cells\":{\"2\":{\"text\":\"AVERAGE(A1,A2)+2\"},\"3\":{\"text\":\"=AVERAGE(A1,A2)+2\"},\"4\":{\"text\":\"AVERAGE(A1:A10)+2\"},\"5\":{\"text\":\"=AVERAGE(A1:A10)+2\"}}},\"22\":{\"cells\":{\"2\":{\"text\":\"AVERAGE(A1,A2)-2\"},\"3\":{\"text\":\"=AVERAGE(A1,A2)-2\"},\"4\":{\"text\":\"AVERAGE(A1:A10)-2\"},\"5\":{\"text\":\"=AVERAGE(A1:A10)-2\"}}},\"24\":{\"cells\":{\"2\":{\"text\":\"COUNTNZ(A1,A2)\"},\"3\":{\"text\":\"=COUNTNZ(A1,A2)\"},\"4\":{\"text\":\"COUNTNZ(A1:A10)\"},\"5\":{\"text\":\"=COUNTNZ(A1:A10)\"}}},\"25\":{\"cells\":{\"2\":{\"text\":\"COUNTNZ(A1,A2)*2\"},\"3\":{\"text\":\"=COUNTNZ(A1,A2)*2\"},\"4\":{\"text\":\"COUNTNZ(A1:A10)*2\"},\"5\":{\"text\":\"=COUNTNZ(A1:A10)*2\"}}},\"26\":{\"cells\":{\"2\":{\"text\":\"COUNTNZ(A1,A2)/2\"},\"3\":{\"text\":\"=COUNTNZ(A1,A2)/2\"},\"4\":{\"text\":\"COUNTNZ(A1:A10)/2\"},\"5\":{\"text\":\"=COUNTNZ(A1:A10)/2\"}}},\"27\":{\"cells\":{\"2\":{\"text\":\"COUNTNZ(A1,A2)+2\"},\"3\":{\"text\":\"=COUNTNZ(A1,A2)+2\"},\"4\":{\"text\":\"COUNTNZ(A1:A10)+2\"},\"5\":{\"text\":\"=COUNTNZ(A1:A10)+2\"}}},\"28\":{\"cells\":{\"2\":{\"text\":\"COUNTNZ(A1,A2)-2\"},\"3\":{\"text\":\"=COUNTNZ(A1,A2)-2\"},\"4\":{\"text\":\"COUNTNZ(A1:A10)-2\"},\"5\":{\"text\":\"=COUNTNZ(A1:A10)-2\"}}},\"len\":200},\"rpbar\":{\"show\":true,\"pageSize\":\"\",\"btnList\":[]},\"fixedPrintHeadRows\":[],\"fixedPrintTailRows\":[],\"displayConfig\":{},\"background\":false,\"name\":\"sheet1\",\"styles\":[],\"freezeLineColor\":\"rgb(185, 185, 185)\",\"merges\":[]}', NULL, NULL, 'admin', '2024-07-23 10:14:22', 'admin', '2024-07-24 19:17:39', 0, NULL, NULL, 0, 71, NULL, NULL, NULL, NULL);
-ALTER TABLE `jimu_report_data_source` MODIFY COLUMN `connect_times` int(11) NULL DEFAULT 0 COMMENT '连接失败次数' AFTER `update_time`;
+ALTER TABLE `jimu_report_data_source` MODIFY COLUMN `connect_times` int(11) NULL DEFAULT 0 COMMENT 'Số lần kết nối thất bại' AFTER `update_time`;
 UPDATE sys_quartz_job SET create_time = '2021-06-30 16:03:09' WHERE id = 'df26ecacf0f75d219d746750fe84bbee';
 
 -- 补充权限注解--
@@ -88,11 +89,11 @@ INSERT INTO `sys_permission` VALUES ('1800373633509441537', '1701575168519839746
 INSERT INTO `sys_permission` VALUES ('1800373733220630530', '1701575168519839746', '通过id查询', NULL, NULL, 0, NULL, NULL, 2, 'system:tableWhite:queryById', '1', NULL, 0, NULL, 1, 0, 0, 0, NULL, '15931993294', '2024-06-11 11:45:22', NULL, NULL, 0, NULL, '1', 0);
 update sys_permission set is_leaf = 0 where id = '1701575168519839746';
 
--- 网关路由支持逻辑删除---
+-- Hỗ trợ xóa logic tuyến cổng ---
 ALTER TABLE `sys_gateway_route`
-ADD COLUMN `del_flag` int(11) NULL DEFAULT NULL COMMENT '删除状态' AFTER `sys_org_code`;
+ADD COLUMN `del_flag` int(11) NULL DEFAULT NULL COMMENT 'Trạng thái xóa' AFTER `sys_org_code`;
 ALTER TABLE `sys_gateway_route`
-MODIFY COLUMN `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '服务名' AFTER `router_id`;
+MODIFY COLUMN `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Tên dịch vụ' AFTER `router_id`;
 UPDATE sys_gateway_route SET del_flag = 0 WHERE del_flag is null;
 INSERT INTO sys_permission(id, parent_id, name, url, component, is_route, component_name, redirect, menu_type, perms, perms_type, sort_no, always_show, icon, is_leaf, keep_alive, hidden, hide_tab, description, create_by, create_time, update_by, update_time, del_flag, rule_flag, status, internal_or_external) VALUES ('1810923799513612290', '1439399179791409153', '彻底删除', NULL, NULL, 0, NULL, NULL, 2, 'system:gateway:deleteRecycleBin', '1', NULL, 0, NULL, 1, 0, 0, 0, NULL, '15931993294', '2024-07-10 14:27:33.792000', NULL, NULL, 0, NULL, '1', 0);
 INSERT INTO sys_permission(id, parent_id, name, url, component, is_route, component_name, redirect, menu_type, perms, perms_type, sort_no, always_show, icon, is_leaf, keep_alive, hidden, hide_tab, description, create_by, create_time, update_by, update_time, del_flag, rule_flag, status, internal_or_external) VALUES ('1811685464467230721', '1439399179791409153', '还原逻辑删除', NULL, NULL, 0, NULL, NULL, 2, 'system:gateway:putRecycleBin', '1', NULL, 0, NULL, 1, 0, 0, 0, NULL, '15931993294', '2024-07-12 16:54:08.873000', NULL, NULL, 0, NULL, '1', 0);
