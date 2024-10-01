@@ -1,6 +1,17 @@
+FROM node:20-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+WORKDIR /app
+COPY ./ .
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
+
 FROM registry.cn-hangzhou.aliyuncs.com/dockerhub_mirror/nginx
 VOLUME /tmp
-ENV LANG en_US.UTF-8
+ENV LANG=en_US.UTF-8
 RUN echo "server {  \
                       listen       80; \
                       location   /jeecgboot/ { \
@@ -24,6 +35,6 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
-ADD dist/ /var/www/html/
+COPY --from=build /app/dist/ /var/www/html/
 EXPOSE 80
 EXPOSE 443
