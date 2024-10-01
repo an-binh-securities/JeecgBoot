@@ -39,7 +39,7 @@ services:
       - jeecg-boot-mysql
       - jeecg-boot-redis
     container_name: jeecg-boot-system
-    image: jeecg-system-start
+    image: jeecg-boot-system
     hostname: jeecg-boot-system
     ports:
       - "8088:8080"
