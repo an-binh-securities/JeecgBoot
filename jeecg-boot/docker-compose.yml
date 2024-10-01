@@ -32,14 +32,14 @@ services:
       - jeecg-boot
 
   jeecg-boot-system:
-    build:
-      context: ./jeecg-module-system/jeecg-system-start
+#    build:
+#      context: ./jeecg-module-system/jeecg-system-start
     restart: on-failure
     depends_on:
       - jeecg-boot-mysql
       - jeecg-boot-redis
     container_name: jeecg-boot-system
-    image: jeecg-boot-system
+    image: jeecg-system-start
     hostname: jeecg-boot-system
     ports:
       - "8088:8080"
