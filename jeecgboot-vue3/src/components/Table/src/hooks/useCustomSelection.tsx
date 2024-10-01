@@ -277,11 +277,11 @@ export function useCustomSelection(
       }
     };
 
-    // 当数据量大于120条时，全选会导致页面卡顿，需进行慢速全选
+    // Khi số lượng dữ liệu lớn hơn 120, việc chọn tất cả sẽ gây ra hiện tượng giật lag, cần thực hiện chọn tất cả chậm
     if (flattedData.value.length > 120) {
       modal = createConfirm({
-        title: '全选',
-        content: '当前数据量较大，全选可能会导致页面卡顿，确定要执行此操作吗？',
+        title: 'Chọn tất cả',
+        content: 'Số lượng dữ liệu hiện tại khá lớn, việc chọn tất cả có thể gây ra hiện tượng giật lag, bạn có chắc chắn muốn thực hiện thao tác này không?',
         iconType: 'warning',
         onOk: () => checkAll(),
       });
