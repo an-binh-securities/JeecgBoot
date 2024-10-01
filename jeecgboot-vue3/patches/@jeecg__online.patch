@@ -1,0 +1,1312 @@
+diff --git a/auth.data-511e5197.mjs b/auth.data-511e5197.mjs
+index f05ab922f44527247f4afaed7ebaced7d4d96057..aa0d981a4f1215a03370211771780e9342459c7a 100644
+--- a/auth.data-511e5197.mjs
++++ b/auth.data-511e5197.mjs
+@@ -2,88 +2,88 @@ import { computed as p } from "vue";
+ import { useConditionFilter as h } from "/@/utils/index";
+ const f = [
+   {
+-    title: "启用",
++    title: "Kích hoạt",
+     dataIndex: "switch",
+     width: 100,
+     align: "center",
+     slots: { customRender: "switch" }
+   },
+   {
+-    title: "字段名称",
++    title: "Tên trường",
+     width: 200,
+     dataIndex: "code"
+   },
+   {
+-    title: "字段描述",
++    title: "Mô tả trường",
+     // width: 200,
+     dataIndex: "title"
+   },
+   {
+-    title: "列表控制",
++    title: "Kiểm soát danh sách",
+     dataIndex: "list",
+     width: 120,
+     slots: { customRender: "list" }
+   },
+   {
+-    title: "表单控制",
++    title: "Kiểm soát biểu mẫu",
+     dataIndex: "form",
+     width: 180,
+     slots: { customRender: "form" }
+   }
+ ], C = [
+   {
+-    title: "启用",
++    title: "Kích hoạt",
+     dataIndex: "switch",
+     width: 80,
+     slots: { customRender: "switch" }
+   },
+   {
+-    title: "名称",
++    title: "Tên",
+     dataIndex: "title"
+   },
+   {
+-    title: "编码",
++    title: "Mã",
+     dataIndex: "code"
+   },
+   {
+-    title: "权限控制",
++    title: "Kiểm soát quyền",
+     dataIndex: "control",
+     width: 180,
+     slots: { customRender: "control" }
+   }
+ ], v = [
+-  { code: "add", title: "新增", status: 0 },
+-  { code: "update", title: "编辑", status: 0 },
+-  { code: "delete", title: "删除", status: 0 },
+-  { code: "batch_delete", title: "批量删除", status: 0 },
+-  { code: "export", title: "导出", status: 0 },
+-  { code: "import", title: "导入", status: 0 },
+-  { code: "bpm", title: "提交流程", status: 0 },
+-  { code: "super_query", title: "高级查询", status: 0 }
++  { code: "add", title: "Thêm mới", status: 0 },
++  { code: "update", title: "Chỉnh sửa", status: 0 },
++  { code: "delete", title: "Xóa", status: 0 },
++  { code: "batch_delete", title: "Xóa hàng loạt", status: 0 },
++  { code: "export", title: "Xuất", status: 0 },
++  { code: "import", title: "Nhập", status: 0 },
++  { code: "bpm", title: "Gửi quy trình", status: 0 },
++  { code: "super_query", title: "Truy vấn nâng cao", status: 0 }
+ ], n = "USE_SQL_RULES", w = [
+   {
+-    title: "启用",
++    title: "Kích hoạt",
+     dataIndex: "switch",
+     width: 80,
+     slots: { customRender: "switch" }
+   },
+   {
+-    title: "规则名称",
++    title: "Tên quy tắc",
+     dataIndex: "ruleName",
+     width: 130
+   },
+   {
+-    title: "规则描述",
++    title: "Mô tả quy tắc",
+     dataIndex: "description",
+     customRender({ record: { ruleOperator: o, ruleValue: e, ruleColumn: s } }) {
+-      return o == n ? `自定义SQL: ${e}` : `${s} ${o} ${e}`;
++      return o == n ? `SQL tùy chỉnh: ${e}` : `${s} ${o} ${e}`;
+     }
+   }
+ ];
+ function y(o, e) {
+   return { formSchemas: p(() => [
+     {
+-      label: "规则名称",
++      label: "Tên quy tắc",
+       field: "ruleName",
+       required: !0,
+       component: "Input",
+@@ -92,7 +92,7 @@ function y(o, e) {
+       }
+     },
+     {
+-      label: "规则字段",
++      label: "Trường quy tắc",
+       field: "ruleColumn",
+       component: "JSearchSelect",
+       componentProps: {
+@@ -101,13 +101,13 @@ function y(o, e) {
+         onChange: e.onRuleColumnChange
+       },
+       dynamicRules({ model: t }) {
+-        return [{ required: t.ruleOperator != n, message: "请输入规则字段" }];
++        return [{ required: t.ruleOperator != n, message: "Vui lòng nhập trường quy tắc" }];
+       },
+       show: ({ model: t }) => t.ruleOperator != n
+     },
+-    // -update-begin--author:liaozhiyang---date:20240617---for：【TV360X-201】权限管理条件根据控件过滤
++    // -update-begin--author:liaozhiyang---date:20240617---for：【TV360X-201】Quản lý quyền điều kiện lọc theo điều khiển
+     {
+-      label: "条件规则",
++      label: "Quy tắc điều kiện",
+       field: "ruleOperator",
+       required: !0,
+       component: "JDictSelectTag",
+@@ -131,13 +131,13 @@ function y(o, e) {
+               value: (r = l.val) != null ? r : l.value
+             };
+           });
+-          return d.push({ value: "USE_SQL_RULES", label: "自定义SQL" }), d;
++          return d.push({ value: "USE_SQL_RULES", label: "SQL tùy chỉnh" }), d;
+         } else
+-          return [{ value: "USE_SQL_RULES", label: "自定义SQL" }];
++          return [{ value: "USE_SQL_RULES", label: "SQL tùy chỉnh" }];
+       }
+     },
+     // {
+-    //   label: '条件规则',
++    //   label: 'Quy tắc điều kiện',
+     //   field: 'ruleOperator',
+     //   required: true,
+     //   component: 'JDictSelectTag',
+@@ -147,60 +147,60 @@ function y(o, e) {
+     //     getPopupContainer: () => document.body,
+     //   },
+     // },
+-    // -update-end--author:liaozhiyang---date:20240617---for：【TV360X-201】权限管理条件根据控件过滤
++    // -update-end--author:liaozhiyang---date:20240617---for：【TV360X-201】Quản lý quyền điều kiện lọc theo điều khiển
+     {
+-      label: "规则值",
++      label: "Giá trị quy tắc",
+       field: "ruleValue",
+       required: !0,
+-      // -update-begin--author:liaozhiyang---date:20240607---for：【TV360X-536】数据权限配置配置优化及新增JInputSelect组件
++      // -update-begin--author:liaozhiyang---date:20240607---for：【TV360X-536】Cấu hình quyền dữ liệu tối ưu hóa và thêm thành phần JInputSelect
+       component: "JInputSelect",
+       componentProps: {
+-        selectPlaceholder: "可选择系统变量",
+-        inputPlaceholder: "请输入",
++        selectPlaceholder: "Có thể chọn biến hệ thống",
++        inputPlaceholder: "Vui lòng nhập",
+         getPopupContainer: () => document.body,
+         selectWidth: "200px",
+         options: [
+           {
+-            label: "登录用户账号",
++            label: "Tài khoản người dùng đăng nhập",
+             value: "#{sys_user_code}"
+           },
+           {
+-            label: "登录用户名称",
++            label: "Tên người dùng đăng nhập",
+             value: "#{sys_user_name}"
+           },
+           {
+-            label: "当前日期",
++            label: "Ngày hiện tại",
+             value: "#{sys_date}"
+           },
+           {
+-            label: "当前时间",
++            label: "Thời gian hiện tại",
+             value: "#{sys_time}"
+           },
+           {
+-            label: "登录用户部门",
++            label: "Phòng ban người dùng đăng nhập",
+             value: "#{sys_org_code}"
+           },
+           {
+-            label: "用户拥有的部门",
++            label: "Phòng ban người dùng sở hữu",
+             value: "#{sys_multi_org_code}"
+           },
+           {
+-            label: "登录用户租户",
++            label: "Người thuê người dùng đăng nhập",
+             value: "#{tenant_id}"
+           }
+         ]
+       }
+-      // -update-end--author:liaozhiyang---date:20240607---for：【TV360X-536】数据权限配置配置优化及新增JInputSelect组件
++      // -update-end--author:liaozhiyang---date:20240607---for：【TV360X-536】Cấu hình quyền dữ liệu tối ưu hóa và thêm thành phần JInputSelect
+     },
+     {
+-      label: "状态",
++      label: "Trạng thái",
+       field: "status",
+       required: !0,
+       component: "RadioButtonGroup",
+       componentProps: {
+         options: [
+-          { label: "有效", value: 1 },
+-          { label: "无效", value: 0 }
++          { label: "Hiệu lực", value: 1 },
++          { label: "Vô hiệu", value: 0 }
+         ]
+       },
+       defaultValue: 1
+diff --git a/cgform.data-475d4984.mjs b/cgform.data-475d4984.mjs
+index 1d7a89eab5883ab3692a5c3284c0f8f9140c8a72..4a0939eadc207aaf0ca6f165cd757f953239d1a0 100644
+--- a/cgform.data-475d4984.mjs
++++ b/cgform.data-475d4984.mjs
+@@ -3,37 +3,37 @@ import { filterDictText as n } from "/@/utils/dict/JDictSelectUtil";
+ import { buildUUID as s } from "/@/utils/uuid";
+ const r = "validate-failed", h = [
+   {
+-    title: "表类型",
++    title: "Loại bảng",
+     align: "center",
+     sorter: !0,
+     dataIndex: "tableType",
+     width: 140,
+     customRender({ text: d, record: e }) {
+       let i = l("cgform_table_type"), t = n(i, d);
+-      return e.isTree === "Y" && (t += "(树)"), e.themeTemplate === "innerTable" ? t += "(内嵌)" : e.themeTemplate === "erp" ? t += "(ERP)" : e.themeTemplate === "tab" && (t += "(TAB)"), t;
++      return e.isTree === "Y" && (t += "(Cây)"), e.themeTemplate === "innerTable" ? t += "(Nội bộ)" : e.themeTemplate === "erp" ? t += "(ERP)" : e.themeTemplate === "tab" && (t += "(TAB)"), t;
+     }
+   },
+   {
+-    title: "表名",
++    title: "Tên bảng",
+     sorter: !0,
+     align: "center",
+     dataIndex: "tableName",
+     width: 240
+   },
+   {
+-    title: "表描述",
++    title: "Mô tả bảng",
+     align: "center",
+     dataIndex: "tableTxt",
+     width: 220
+   },
+   {
+-    title: "版本",
++    title: "Phiên bản",
+     align: "center",
+     dataIndex: "tableVersion",
+     width: 120
+   },
+   {
+-    title: "同步状态",
++    title: "Trạng thái đồng bộ",
+     align: "center",
+     sorter: !0,
+     dataIndex: "isDbSynch",
+@@ -41,7 +41,7 @@ const r = "validate-failed", h = [
+     width: 120
+   },
+   {
+-    title: "创建时间",
++    title: "Thời gian tạo",
+     align: "center",
+     sorter: !0,
+     dataIndex: "createTime",
+@@ -49,12 +49,12 @@ const r = "validate-failed", h = [
+   }
+ ], u = [
+   {
+-    label: "表名",
++    label: "Tên bảng",
+     field: "tableName",
+     component: "JInput"
+   },
+   {
+-    label: "表类型",
++    label: "Loại bảng",
+     field: "tableType_MultiString",
+     component: "JDictSelectTag",
+     componentProps: {
+@@ -63,12 +63,12 @@ const r = "validate-failed", h = [
+     }
+   },
+   {
+-    label: "表描述",
++    label: "Mô tả bảng",
+     field: "tableTxt",
+     component: "JInput"
+   }
+ ], m = {
+-  // 对接报表打印
++  // Đối nối báo cáo in
+   reportPrintShow: 0,
+   reportPrintUrl: "",
+   joinQuery: 0,
+@@ -86,7 +86,7 @@ function y() {
+   let d = [
+     {
+       dbFieldName: "id",
+-      dbFieldTxt: "主键",
++      dbFieldTxt: "Khóa chính",
+       dbLength: 36,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -104,7 +104,7 @@ function y() {
+     },
+     {
+       dbFieldName: "create_by",
+-      dbFieldTxt: "创建人",
++      dbFieldTxt: "Người tạo",
+       dbLength: 50,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -121,7 +121,7 @@ function y() {
+     },
+     {
+       dbFieldName: "create_time",
+-      dbFieldTxt: "创建日期",
++      dbFieldTxt: "Ngày tạo",
+       dbLength: 0,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -138,7 +138,7 @@ function y() {
+     },
+     {
+       dbFieldName: "update_by",
+-      dbFieldTxt: "更新人",
++      dbFieldTxt: "Người cập nhật",
+       dbLength: 50,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -155,7 +155,7 @@ function y() {
+     },
+     {
+       dbFieldName: "update_time",
+-      dbFieldTxt: "更新日期",
++      dbFieldTxt: "Ngày cập nhật",
+       dbLength: 0,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -172,7 +172,7 @@ function y() {
+     },
+     {
+       dbFieldName: "sys_org_code",
+-      dbFieldTxt: "所属部门",
++      dbFieldTxt: "Phòng ban",
+       dbLength: 64,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -226,7 +226,7 @@ function c() {
+   return [
+     {
+       dbFieldName: "pid",
+-      dbFieldTxt: "父级节点",
++      dbFieldTxt: "Nút cha",
+       dbLength: 32,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -243,7 +243,7 @@ function c() {
+     },
+     {
+       dbFieldName: "has_child",
+-      dbFieldTxt: "是否有子节点",
++      dbFieldTxt: "Có nút con",
+       dbLength: 3,
+       dbPointLength: 0,
+       dbDefaultVal: "",
+@@ -263,12 +263,12 @@ function c() {
+   ];
+ }
+ const g = [
+-  { code: "add", title: "新增", status: 0 },
+-  { code: "edit", title: "编辑", status: 0 },
+-  { code: "delete", title: "删除", status: 0 },
+-  { code: "export", title: "导出", status: 0 },
+-  { code: "import", title: "导入", status: 0 },
+-  { code: "query", title: "查询", status: 0 }
++  { code: "add", title: "Thêm mới", status: 0 },
++  { code: "edit", title: "Chỉnh sửa", status: 0 },
++  { code: "delete", title: "Xóa", status: 0 },
++  { code: "export", title: "Xuất", status: 0 },
++  { code: "import", title: "Nhập", status: 0 },
++  { code: "query", title: "Truy vấn", status: 0 }
+ ];
+ export {
+   m as E,
+diff --git a/index-30e0e923.mjs b/index-30e0e923.mjs
+index 6af1017b52ac8c3e9b9bc9b6d981fccbc67ae655..498bba39554bcd26e14ca558d58aaf1e4fc0a0d1 100644
+--- a/index-30e0e923.mjs
++++ b/index-30e0e923.mjs
+@@ -1194,52 +1194,52 @@ const Se = () => {
+       doneLabel: "完成",
+       steps: [
+         {
+-          title: "第一步",
++          title: "Bước đầu tiên",
+           element: document.querySelector(`.${n.value}`),
+-          intro: "点击<strong>新增</strong>按钮，新建一个表。"
++          intro: "Nhấn vào nút <strong>Thêm mới</strong> để tạo một bảng mới."
+         },
+         {
+-          title: "第二步",
+-          intro: '在列表中找到刚才新建数据，在操作列点击<strong>"更多"</strong>，选择<strong>"同步数据库"</strong>。'
++          title: "Bước thứ hai",
++          intro: 'Trong danh sách, tìm dữ liệu vừa tạo, nhấn vào <strong>"Thêm"</strong> trong cột hành động, chọn <strong>"Đồng bộ cơ sở dữ liệu"</strong>.'
+         },
+         {
+-          title: "第三步",
+-          intro: '在列表中找到刚才新建数据，在操作列点击<strong>"更多"</strong>，选择<strong>"功能测试"</strong>。'
++          title: "Bước thứ ba",
++          intro: 'Trong danh sách, tìm dữ liệu vừa tạo, nhấn vào <strong>"Thêm"</strong> trong cột hành động, chọn <strong>"Kiểm tra chức năng"</strong>.'
+         },
+         {
+-          title: "AI建表",
++          title: "Tạo bảng AI",
+           element: document.querySelector(`.${e.value}`),
+-          intro: "输入修饰词即可通过AI创建工作表"
++          intro: "Nhập từ khóa để tạo bảng làm việc thông qua AI."
+         },
+         {
+-          title: "代码生成",
++          title: "Tạo mã",
+           element: document.querySelector(`.${c.value}`),
+-          intro: "选中一条记录，通过代码生成可将已配置好的表单，一键生成前后端代码，复杂需求可在此基础上进行二次开发。"
++          intro: "Chọn một bản ghi, thông qua tạo mã có thể tạo mã front-end và back-end cho bảng đã cấu hình, các yêu cầu phức tạp có thể được phát triển thêm dựa trên mã này."
+         },
+         {
+-          title: "自定义按钮",
++          title: "Nút tùy chỉnh",
+           element: document.querySelector(`.${o.value}`),
+-          intro: '选中一条记录，点击自定义按钮，配置按钮相关信息即可在当前记录的<strong>"功能测试"</strong>页面新增一个按钮'
++          intro: 'Chọn một bản ghi, nhấn vào nút tùy chỉnh, cấu hình thông tin liên quan để thêm một nút vào trang <strong>"Kiểm tra chức năng"</strong> của bản ghi hiện tại.'
+         },
+         {
+-          title: "JS强增",
++          title: "Tăng cường JS",
+           element: document.querySelector(`.${i.value}`),
+-          intro: '选中一条记录，通过js增强可为<strong>"自定义按钮"</strong>添加不同操作，可操作列表和表单数据等，也可以添加表单前置事件。'
++          intro: 'Chọn một bản ghi, thông qua tăng cường JS có thể thêm các hành động khác nhau cho <strong>"Nút tùy chỉnh"</strong>, có thể thao tác dữ liệu danh sách và biểu mẫu, cũng có thể thêm sự kiện trước biểu mẫu.'
+         },
+         {
+-          title: "SQL增强",
++          title: "Tăng cường SQL",
+           element: document.querySelector(`.${r.value}`),
+-          intro: "选中一条记录，通过增强SQL，可以关联修改业务数据。"
++          intro: "Chọn một bản ghi, thông qua tăng cường SQL có thể liên kết và sửa đổi dữ liệu nghiệp vụ."
+         },
+         {
+-          title: "java增强",
++          title: "Tăng cường Java",
+           element: document.querySelector(`.${s.value}`),
+-          intro: "选中一条记录，通过Java增强可在表单的增加、修改、和删除数据时实现额外的功能，类似spring中的AOP切面编程。"
++          intro: "Chọn một bản ghi, thông qua tăng cường Java có thể thực hiện các chức năng bổ sung khi thêm, sửa, và xóa dữ liệu trong biểu mẫu, tương tự như lập trình AOP trong spring."
+         },
+         {
+-          title: "导入数据库表",
++          title: "Nhập bảng cơ sở dữ liệu",
+           element: document.querySelector(`.${a.value}`),
+-          intro: "可将已有数据库中的表，直接导入生成表单。"
++          intro: "Có thể nhập trực tiếp các bảng từ cơ sở dữ liệu hiện có để tạo biểu mẫu."
+         }
+       ]
+     }), u.start();
+@@ -1379,7 +1379,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:plus"
+           }, {
+             default: j(() => [
+-              O("新增")
++              O("Thêm mới")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1390,7 +1390,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:plus"
+           }, {
+             default: j(() => [
+-              O("AI建表")
++              O("Tạo bảng AI")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1401,7 +1401,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:highlight"
+           }, {
+             default: j(() => [
+-              O("自定义按钮")
++              O("Nút tùy chỉnh")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1412,7 +1412,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:strikethrough"
+           }, {
+             default: j(() => [
+-              O("JS增强")
++              O("Tăng cường JS")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1423,7 +1423,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:filter"
+           }, {
+             default: j(() => [
+-              O(" SQL增强 ")
++              O("Tăng cường SQL")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1434,7 +1434,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:tool"
+           }, {
+             default: j(() => [
+-              O("JAVA增强")
++              O("Tăng cường JAVA")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1445,7 +1445,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "ant-design:database"
+           }, {
+             default: j(() => [
+-              O("导入数据库表")
++              O("Nhập bảng cơ sở dữ liệu")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+@@ -1456,7 +1456,7 @@ function Ne(t, e, n, o, i, r) {
+             preIcon: "bx:bx-code-alt"
+           }, {
+             default: j(() => [
+-              O(" 代码生成 ")
++              O("Tạo mã")
+             ]),
+             _: 1
+           }, 8, ["class", "onClick"]),
+diff --git a/useSchemas-a9c75b0f.mjs b/useSchemas-a9c75b0f.mjs
+index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639d28380a8 100644
+--- a/useSchemas-a9c75b0f.mjs
++++ b/useSchemas-a9c75b0f.mjs
+@@ -38,59 +38,59 @@ function F(d, n, t) {
+     { label: "", field: "id", component: "Input", show: !1 },
+     { label: "", field: "tableVersion", component: "Input", show: !1 },
+     e({
+-      label: "表名",
++      label: "Tên bảng",
+       field: "tableName",
+       component: "Input",
+       required: !0,
+-      // 如果版本号为1 表示未曾修改 未曾同步 可以修改表名
++      // Nếu phiên bản là 1, có nghĩa là chưa từng sửa đổi, chưa từng đồng bộ, có thể sửa tên bảng
+       dynamicDisabled: ({ model: o }) => o.tableVersion && o.tableVersion != 1,
+       dynamicRules: ({ model: o, schema: a }) => [
+         {
+           validator: (s, p) => new Promise((i, u) => {
+-            /[\u4E00-\u9FA5]/g.test(p) && u("不允许输入中文"), i();
++            /[\u4E00-\u9FA5]/g.test(p) && u("Không cho phép nhập tiếng Trung"), i();
+           })
+         },
+-        // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
++        // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】Kiểm tra độ dài tên bảng, tên trường, mô tả bảng, ghi chú
+         {
+           validator: (s, p) => new Promise((i, u) => {
+-            p.length > 50 && u("表名最长50个字符"), i();
++            p.length > 50 && u("Tên bảng dài nhất 50 ký tự"), i();
+           })
+         },
+-        // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
++        // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】Kiểm tra độ dài tên bảng, tên trường, mô tả bảng, ghi chú
+         ...S.duplicateCheckRule("onl_cgform_head", "table_name", o, a, !0)
+       ]
+     }),
+     e({
+-      label: "表描述",
++      label: "Mô tả bảng",
+       field: "tableTxt",
+       component: "Input",
+       required: !0,
+-      // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
++      // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】Kiểm tra độ dài tên bảng, tên trường, mô tả bảng, ghi chú
+       dynamicRules: ({ model: o, schema: a }) => [
+         {
+           validator: (s, p) => new Promise((i, u) => {
+-            p.length > 200 && u("表描述最长200个字"), i();
++            p.length > 200 && u("Mô tả bảng dài nhất 200 ký tự"), i();
+           })
+         }
+       ]
+-      // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
++      // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】Kiểm tra độ dài tên bảng, tên trường, mô tả bảng, ghi chú
+     }),
+     e({
+-      label: "表类型",
++      label: "Loại bảng",
+       field: "tableType",
+       component: "Select",
+       defaultValue: 1,
+       componentProps: {
+         options: [
+-          { label: "单表", value: 1 },
+-          { label: "主表", value: 2 },
+-          { label: "附表", value: 3 }
++          { label: "Bảng đơn", value: 1 },
++          { label: "Bảng chính", value: 2 },
++          { label: "Bảng phụ", value: 3 }
+         ],
+         onChange: t.onTableTypeChange,
+         allowClear: !1
+       }
+     }),
+-    // 此处为占位符，用于将 relationType 顶到最右边
++    // Đây là chỗ giữ chỗ, để đẩy relationType sang bên phải
+     {
+       label: "",
+       field: "relationType",
+@@ -106,8 +106,8 @@ function F(d, n, t) {
+       defaultValue: 0,
+       componentProps: {
+         options: [
+-          { label: "一对多", value: 0 },
+-          { label: "一对一", value: 1 }
++          { label: "Một đối nhiều", value: 0 },
++          { label: "Một đối một", value: 1 }
+         ],
+         allowClear: !1
+       },
+@@ -120,7 +120,7 @@ function F(d, n, t) {
+       ifShow: r
+     }),
+     e({
+-      label: "序号",
++      label: "Số thứ tự",
+       field: "tabOrderNum",
+       component: "InputNumber",
+       componentProps: {
+@@ -136,7 +136,7 @@ function F(d, n, t) {
+       ifShow: r
+     }),
+     e({
+-      label: "表单分类",
++      label: "Phân loại biểu mẫu",
+       field: "formCategory",
+       component: "JDictSelectTag",
+       defaultValue: "temp",
+@@ -146,56 +146,56 @@ function F(d, n, t) {
+       }
+     }),
+     e({
+-      label: "主键策略",
++      label: "Chiến lược khóa chính",
+       field: "idType",
+       component: "Select",
+       defaultValue: "UUID",
+       componentProps: {
+         options: [
+-          { label: "ID_WORKER(分布式自增)", value: "UUID" }
+-          // { label: 'NATIVE(自增长方式)', value: 'NATIVE' },
+-          // { label: 'SEQUENCE(序列方式)', value: 'SEQUENCE' },
++          { label: "ID_WORKER(Tăng dần phân tán)", value: "UUID" }
++          // { label: 'NATIVE(Tăng dần tự động)', value: 'NATIVE' },
++          // { label: 'SEQUENCE(Theo chuỗi)', value: 'SEQUENCE' },
+         ],
+         allowClear: !1
+       }
+     }),
+     e({
+-      label: "序号名称",
++      label: "Tên chuỗi",
+       field: "idSequence",
+       component: "Input",
+       componentProps: {},
+       ifShow: r
+     }),
+     e({
+-      label: "显示复选框",
++      label: "Hiển thị hộp kiểm",
+       field: "isCheckbox",
+       component: "Select",
+       defaultValue: "Y",
+       componentProps: {
+         options: [
+-          { label: "是", value: "Y" },
+-          { label: "否", value: "N" }
++          { label: "Có", value: "Y" },
++          { label: "Không", value: "N" }
+         ],
+         allowClear: !1
+       }
+     }),
+     e({
+-      label: "主题模板",
++      label: "Mẫu chủ đề",
+       field: "themeTemplate",
+       component: "Select",
+       defaultValue: "normal",
+       componentProps: {
+         options: [
+-          { label: "默认主题", value: "normal" },
+-          { label: "ERP主题(一对多)", value: "erp" },
+-          { label: "内嵌子表主题(一对多)", value: "innerTable" },
+-          { label: "TAB主题(一对多)", value: "tab" }
++          { label: "Chủ đề mặc định", value: "normal" },
++          { label: "Chủ đề ERP(Một đối nhiều)", value: "erp" },
++          { label: "Chủ đề bảng con nội bộ(Một đối nhiều)", value: "innerTable" },
++          { label: "Chủ đề TAB(Một đối nhiều)", value: "tab" }
+         ],
+         allowClear: !1
+       },
+-      // 单表时禁用该字段
++      // Khi là bảng đơn thì vô hiệu hóa trường này
+       dynamicDisabled: ({ model: o }) => o.tableType === 1,
+-      // update-begin--author:liaozhiyang---date:20231123---for：【QQYUN-7073】提示ERP、内嵌子表不支持联合查询
++      // update-begin--author:liaozhiyang---date:20231123---for：【QQYUN-7073】Thông báo ERP, bảng con nội bộ không hỗ trợ truy vấn liên kết
+       dynamicRules() {
+         return [
+           {
+@@ -203,82 +203,82 @@ function F(d, n, t) {
+               const a = n.value;
+               if (o === "erp") {
+                 if (a.joinQuery)
+-                  return Promise.reject("ERP不支持联合查询功能");
++                  return Promise.reject("ERP không hỗ trợ truy vấn liên kết");
+               } else if (o === "innerTable" && a.joinQuery)
+-                return Promise.reject("内嵌子表不支持联合查询功能");
++                return Promise.reject("Bảng con nội bộ không hỗ trợ truy vấn liên kết");
+               return Promise.resolve();
+             }
+           }
+         ];
+       }
+-      // update-end--author:liaozhiyang---date:20231123---for：【QQYUN-7073】提示ERP、内嵌子表不支持联合查询
++      // update-end--author:liaozhiyang---date:20231123---for：【QQYUN-7073】Thông báo ERP, bảng con nội bộ không hỗ trợ truy vấn liên kết
+     }),
+     e({
+-      label: "表单风格",
++      label: "Phong cách biểu mẫu",
+       field: "formTemplate",
+       component: "Select",
+       defaultValue: "1",
+       componentProps: {
+         options: [
+-          { label: "一列", value: "1" },
+-          { label: "两列", value: "2" },
+-          { label: "三列", value: "3" },
+-          { label: "四列", value: "4" }
++          { label: "Một cột", value: "1" },
++          { label: "Hai cột", value: "2" },
++          { label: "Ba cột", value: "3" },
++          { label: "Bốn cột", value: "4" }
+         ],
+-        placeholder: "请选择PC表单风格",
++        placeholder: "Vui lòng chọn phong cách biểu mẫu PC",
+         allowClear: !1
+       }
+     }),
+     e({
+-      label: "移动表单风格",
++      label: "Phong cách biểu mẫu di động",
+       field: "formTemplateMobile",
+       component: "Select",
+       defaultValue: "1",
+       componentProps: {
+         options: [
+-          { label: "AntDesign模板", value: "1" },
+-          { label: "Bootstrap模板", value: "2" }
++          { label: "Mẫu AntDesign", value: "1" },
++          { label: "Mẫu Bootstrap", value: "2" }
+         ],
+-        placeholder: "请选择移动表单风格"
++        placeholder: "Vui lòng chọn phong cách biểu mẫu di động"
+       },
+-      // 暂时先隐藏
++      // Tạm thời ẩn
+       ifShow: !1
+     }),
+     e({
+-      label: "滚动条",
++      label: "Thanh cuộn",
+       field: "scroll",
+       component: "Select",
+       defaultValue: 1,
+       componentProps: {
+         options: [
+-          { label: "有", value: 1 },
+-          { label: "无", value: 0 }
++          { label: "Có", value: 1 },
++          { label: "Không", value: 0 }
+         ],
+         allowClear: !1
+       }
+     }),
+     e({
+-      label: "是否分页",
++      label: "Có phân trang không",
+       field: "isPage",
+       component: "Select",
+       defaultValue: "Y",
+       componentProps: {
+         options: [
+-          { label: "是", value: "Y" },
+-          { label: "否", value: "N" }
++          { label: "Có", value: "Y" },
++          { label: "Không", value: "N" }
+         ],
+         allowClear: !1
+       }
+     }),
+     e({
+-      label: "是否树",
++      label: "Có phải cây",
+       field: "isTree",
+       component: "Select",
+       defaultValue: "N",
+       componentProps: {
+         options: [
+-          { label: "是", value: "Y" },
+-          { label: "否", value: "N" }
++          { label: "Có", value: "Y" },
++          { label: "Không", value: "N" }
+         ],
+         onChange: t.onIsTreeChange,
+         allowClear: !1
+@@ -287,40 +287,40 @@ function F(d, n, t) {
+         return [
+           {
+             validator({}, a) {
+-              return a === "Y" && (o.tableType == 2 || o.tableType == 3) ? Promise.reject("主表和附表不支持树类型！") : Promise.resolve();
++              return a === "Y" && (o.tableType == 2 || o.tableType == 3) ? Promise.reject("Bảng chính và bảng phụ không hỗ trợ loại cây!") : Promise.resolve();
+             }
+           }
+         ];
+       },
+-      // update-begin--author:liaozhiyang---date:20240604---for：【TV360X-125】选择主表和附表时隐藏树表配置
++      // update-begin--author:liaozhiyang---date:20240604---for：【TV360X-125】Chọn bảng chính và bảng phụ khi ẩn cấu hình bảng cây
+       show({ model: o, values: a }) {
+         return o.tableType == 2 || o.tableType == 3 ? (o.isTree = "N", t.onIsTreeChange("N"), !1) : !0;
+       }
+-      // update-end--author:liaozhiyang---date:20240604---for：【TV360X-125】选择主表和附表时隐藏树表配置
++      // update-end--author:liaozhiyang---date:20240604---for：【TV360X-125】Chọn bảng chính và bảng phụ khi ẩn cấu hình bảng cây
+     }),
+     e({
+-      // 空格不要删，否则布局会乱
++      // Không xóa khoảng trắng, nếu không sẽ làm rối bố cục
+       label: " ",
+-      // 扩展配置
++      // Cấu hình mở rộng
+       field: "extConfigJson",
+       component: "Input",
+       slot: "extConfigButton",
+       itemProps: { colon: !1 }
+     }),
+     e({
+-      label: "树表单父ID",
++      label: "ID cha của bảng cây",
+       field: "treeParentIdField",
+       component: "Input",
+       ifShow: r
+     }),
+     e({
+-      label: "是否有子节点字段",
++      label: "Có trường nút con không",
+       field: "treeIdField",
+       component: "Input",
+       show: !1
+     }),
+     e({
+-      label: "树开表单列",
++      label: "Cột mở bảng cây",
+       field: "treeFieldname",
+       required: !0,
+       component: "Input",
+@@ -328,7 +328,7 @@ function F(d, n, t) {
+     }),
+     e(
+       {
+-        label: "附表",
++        label: "Bảng phụ",
+         field: "subTableStr",
+         component: "Input",
+         componentProps: {
+@@ -380,16 +380,16 @@ function R(d, n) {
+     "left"
+   );
+   return { formSchemas: [
+-    // 弹窗
++    //弹窗
+     t(
+       {
+-        label: "弹窗默认全屏",
++        label: "Mặc định toàn màn hình",
+         field: "modelFullscreen",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid"
+         }
+@@ -398,36 +398,36 @@ function R(d, n) {
+     ),
+     t(
+       {
+-        label: "弹窗宽度",
++        label: "Chiều rộng cửa sổ",
+         field: "modalMinWidth",
+         component: "InputNumber",
+         componentProps: {
+           style: "width: 80%",
+-          placeholder: "弹窗最小宽度（单位：px）"
++          placeholder: "Chiều rộng tối thiểu của cửa sổ (đơn vị: px)"
+         },
+-        // update-begin--author:liaozhiyang---date:20240520---for：【TV360X-77】弹窗全屏后，输入宽度框禁用
++        // update-begin--author:liaozhiyang---date:20240520---for：【TV360X-77】Khi toàn màn hình, vô hiệu hóa hộp nhập chiều rộng
+         dynamicDisabled: ({ model: l }) => l.modelFullscreen
+-        // update-end--author:liaozhiyang---date:20240520---for：【TV360X-77】弹窗全屏后，输入宽度框禁用
++        // update-end--author:liaozhiyang---date:20240520---for：【TV360X-77】Khi toàn màn hình, vô hiệu hóa hộp nhập chiều rộng
+       },
+       "right"
+     ),
+-    //----------------------------表单评论 begin-----------------------------------------
++    //----------------------------Bình luận biểu mẫu begin-----------------------------------------
+     t(
+       {
+-        label: "开启表单评论",
++        label: "Bật bình luận biểu mẫu",
+         field: "commentStatus",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid"
+         }
+       },
+       "left"
+     ),
+-    // 此处为占位符
++    // Đây là chỗ giữ chỗ
+     t(
+       {
+         label: "",
+@@ -437,16 +437,16 @@ function R(d, n) {
+       },
+       "right"
+     ),
+-    // 启用联合查询
++    // Bật truy vấn liên kết
+     t(
+       {
+-        label: "启用联合查询",
++        label: "Bật truy vấn liên kết",
+         field: "joinQuery",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid",
+           onChange: n.onJoinQueryChange
+@@ -454,7 +454,7 @@ function R(d, n) {
+       },
+       "left"
+     ),
+-    // 此处为占位符
++    // Đây là chỗ giữ chỗ
+     t(
+       {
+         label: "",
+@@ -464,16 +464,16 @@ function R(d, n) {
+       },
+       "right"
+     ),
+-    // 积木报表打印
++    // In báo cáo tích hợp
+     t(
+       {
+-        label: "集成积木报表",
++        label: "Tích hợp báo cáo",
+         field: "reportPrintShow",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid",
+           onChange: n.onReportPrintShowChange
+@@ -483,7 +483,7 @@ function R(d, n) {
+     ),
+     t(
+       {
+-        label: "报表地址",
++        label: "Địa chỉ báo cáo",
+         field: "reportPrintUrl",
+         component: "Input",
+         componentProps: {
+@@ -491,10 +491,10 @@ function R(d, n) {
+         },
+         dynamicDisabled: ({ model: l }) => !l.reportPrintShow,
+         dynamicRules: ({ model: l }) => [
+-          { required: !!l.reportPrintShow, message: "请输入报表地址！" },
++          { required: !!l.reportPrintShow, message: "Vui lòng nhập địa chỉ báo cáo!" },
+           {
+             validator({}, r) {
+-              return /\/jmreport\/view\/{积木报表ID}/.test(r) ? Promise.reject("请将{积木报表ID}替换为真实的积木报表ID！") : Promise.resolve();
++              return /\/jmreport\/view\/{ID báo cáo tích hợp}/.test(r) ? Promise.reject("Vui lòng thay thế {ID báo cáo tích hợp} bằng ID báo cáo tích hợp thực tế!") : Promise.resolve();
+             }
+           }
+         ]
+@@ -504,13 +504,13 @@ function R(d, n) {
+     // update-begin--author:liaozhiyang---date:20231213---for：【QQYUN-7421】vue3先注释集成设计表单功能
+     // mapFormSchema(
+     //   {
+-    //     label: '集成设计表单',
++    //     label: 'Thiết kế biểu mẫu tích hợp',
+     //     field: 'isDesForm',
+     //     component: 'RadioButtonGroup',
+     //     componentProps: {
+     //       options: [
+-    //         { label: '开启', value: 'Y' },
+-    //         { label: '关闭', value: 'N' },
++    //         { label: 'Mở', value: 'Y' },
++    //         { label: 'Đóng', value: 'N' },
+     //       ],
+     //       buttonStyle: 'solid',
+     //       onChange: handlers.onIsDesformChange,
+@@ -520,7 +520,7 @@ function R(d, n) {
+     // ),
+     // mapFormSchema(
+     //   {
+-    //     label: '表单编码',
++    //     label: 'Mã biểu mẫu',
+     //     field: 'desFormCode',
+     //     component: 'Input',
+     //     componentProps: {
+@@ -528,22 +528,22 @@ function R(d, n) {
+     //     },
+     //     dynamicDisabled: ({ model }) => model.isDesForm !== 'Y',
+     //     dynamicRules: ({ model }) => {
+-    //       return [{ required: model.isDesForm === 'Y', message: '请输入表单编码！' }];
++    //       return [{ required: model.isDesForm === 'Y', message: 'Vui lòng nhập mã biểu mẫu!' }];
+     //     },
+     //   },
+     //   'right'
+     // ),
+     // update-end--author:liaozhiyang---date:20231213---for：【QQYUN-7421】vue3先注释集成设计表单功能
+-    // 列表操作列
++    // Cột thao tác danh sách
+     t(
+       {
+-        label: "固定操作列",
++        label: "Cố định cột thao tác",
+         field: "tableFixedAction",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid"
+         },
+@@ -553,33 +553,33 @@ function R(d, n) {
+     ),
+     t(
+       {
+-        label: "固定方式",
++        label: "Cách cố định",
+         field: "tableFixedActionType",
+         component: "Select",
+         componentProps: {
+           options: [
+-            { label: "固定到右侧", value: "right" },
+-            { label: "固定到左侧", value: "left" }
++            { label: "Cố định bên phải", value: "right" },
++            { label: "Cố định bên trái", value: "left" }
+           ],
+           style: "width: 80%"
+         },
+         defaultValue: "right",
+         dynamicDisabled: ({ model: l }) => !l.tableFixedAction,
+-        dynamicRules: ({ model: l }) => [{ required: !!l.tableFixedAction, message: "请选择固定方式！" }]
++        dynamicRules: ({ model: l }) => [{ required: !!l.tableFixedAction, message: "Vui lòng chọn cách cố định!" }]
+       },
+       "right"
+     ),
+-    //--------------------------表单评论 end-----------------------------------------
++    //--------------------------Bình luận biểu mẫu end-----------------------------------------
+     // update-begin--author:liaozhiyang---date:20240329---for：【QQYUN-7872】online表单label较长优化
+     t(
+       {
+-        label: "表单Label长度",
++        label: "Độ dài nhãn biểu mẫu",
+         field: "formLabelLengthShow",
+         component: "RadioButtonGroup",
+         componentProps: {
+           options: [
+-            { label: "开启", value: 1 },
+-            { label: "关闭", value: 0 }
++            { label: "Mở", value: 1 },
++            { label: "Đóng", value: 0 }
+           ],
+           buttonStyle: "solid",
+           onChange: n.onFormLabelLengthShow
+@@ -589,15 +589,15 @@ function R(d, n) {
+     ),
+     t(
+       {
+-        label: "Label长度",
++        label: "Độ dài nhãn",
+         field: "formLabelLength",
+         component: "InputNumber",
+         componentProps: {
+           style: "width: 80%",
+-          placeholder: "自定义表单Label长度"
++          placeholder: "Độ dài nhãn biểu mẫu tùy chỉnh"
+         },
+         dynamicDisabled: ({ model: l }) => !l.formLabelLengthShow,
+-        dynamicRules: ({ model: l }) => [{ required: !!l.formLabelLengthShow, message: "请填写表单label长度" }]
++        dynamicRules: ({ model: l }) => [{ required: !!l.formLabelLengthShow, message: "Vui lòng nhập độ dài nhãn biểu mẫu" }]
+       },
+       "right"
+     )
+@@ -607,7 +607,7 @@ function R(d, n) {
+ function N(d, n, t) {
+   const e = c(
+     {
+-      // 一列
++      // Một cột
+       one: {
+         colProps: { xs: 24, sm: 24 },
+         itemProps: {
+@@ -615,7 +615,7 @@ function N(d, n, t) {
+           wrapperCol: { xs: 24, sm: 16 }
+         }
+       },
+-      // 两列中的一列
++      // Một cột trong hai cột
+       towOne: {
+         colProps: { xs: 24, sm: 24 },
+         itemProps: {
+@@ -623,7 +623,7 @@ function N(d, n, t) {
+           wrapperCol: { xs: 24, sm: 20 }
+         }
+       },
+-      // 两列
++      // Hai cột
+       tow: {
+         colProps: { xs: 24, sm: 12 },
+         itemProps: {
+@@ -637,7 +637,7 @@ function N(d, n, t) {
+   return { formSchemas: b(() => [
+     e(
+       {
+-        label: "代码生成目录",
++        label: "Thư mục tạo mã",
+         field: "projectPath",
+         render: ({ model: o, field: a }) => m(
+           f.Search,
+@@ -655,7 +655,7 @@ function N(d, n, t) {
+                 preIcon: "ant-design:folder-open"
+               },
+               {
+-                default: () => "浏览",
++                default: () => "Duyệt",
+                 icon: () => m(P)
+               }
+             )
+@@ -663,13 +663,13 @@ function N(d, n, t) {
+         ),
+         component: "InputSearch",
+         required: !0
+-        // 如果版本号为1 表示未曾修改 未曾同步 可以修改表名
++        // Nếu phiên bản là 1, có nghĩa là chưa từng sửa đổi, chưa từng đồng bộ, có thể sửa tên bảng
+       },
+       t.value ? "one" : "towOne"
+     ),
+     e(
+       {
+-        label: "页面风格",
++        label: "Phong cách trang",
+         field: "jspMode",
+         component: "Select",
+         componentProps: {
+@@ -683,16 +683,16 @@ function N(d, n, t) {
+     ),
+     e(
+       {
+-        label: "功能说明",
++        label: "Mô tả chức năng",
+         field: "ftlDescription",
+         component: "Input"
+       },
+       l.value
+     ),
+-    { label: "数据模型", field: "jformType", component: "Input", show: !1 },
++    { label: "Mô hình dữ liệu", field: "jformType", component: "Input", show: !1 },
+     e(
+       {
+-        label: "表名",
++        label: "Tên bảng",
+         field: "tableName_tmp",
+         required: !0,
+         dynamicDisabled: !0,
+@@ -702,35 +702,35 @@ function N(d, n, t) {
+     ),
+     e(
+       {
+-        label: "实体类名",
++        label: "Tên lớp thực thể",
+         field: "entityName",
+         required: !0,
+         component: "Input",
+         componentProps: {
+-          placeholder: "请输入实体类名(首字母大写)"
++          placeholder: "Vui lòng nhập tên lớp thực thể (chữ cái đầu viết hoa)"
+         }
+       },
+       l.value
+     ),
+     e(
+       {
+-        label: "包名(小写)",
++        label: "Tên gói (chữ thường)",
+         field: "entityPackage",
+         component: "Input",
+-        rules: [{ required: !0, pattern: /^[a-zA-Z0-9._]*$/, message: "包名必填，且只允许字母、数字、下划线、小数点组合" }]
++        rules: [{ required: !0, pattern: /^[a-zA-Z0-9._]*$/, message: "Tên gói là bắt buộc và chỉ cho phép chữ cái, số, dấu gạch dưới, dấu chấm" }]
+       },
+       l.value
+     ),
+     e(
+       {
+-        label: "代码分层样式",
++        label: "Phong cách phân lớp mã",
+         field: "packageStyle",
+         component: "Select",
+         componentProps: {
+           disabled: !0,
+           options: [
+-            { label: "业务分层", value: "service" },
+-            { label: "代码分层", value: "project" }
++            { label: "Phân lớp dịch vụ", value: "service" },
++            { label: "Phân lớp mã", value: "project" }
+           ]
+         }
+       },
+@@ -738,7 +738,7 @@ function N(d, n, t) {
+     ),
+     e(
+       {
+-        label: "页面代码",
++        label: "Mã trang",
+         field: "vueStyle",
+         required: !0,
+         component: "Input",
+@@ -747,7 +747,7 @@ function N(d, n, t) {
+         // componentProps: {
+         //   options: [
+         //     { label: 'Vue3(BasicForm)', value: 'vue3' },
+-        //     { label: 'Vue3原生(a-form)', value: 'vue3Native' },
++        //     { label: 'Vue3 nguyên bản (a-form)', value: 'vue3Native' },
+         //     { label: 'Vue2', value: 'vue' },
+         //   ],
+         // },
+@@ -769,7 +769,7 @@ function N(d, n, t) {
+       },
+       l.value
+     ),
+-    { label: "需要生成的代码", field: "codeTypes", component: "Input", show: !1 }
++    { label: "Mã cần tạo", field: "codeTypes", component: "Input", show: !1 }
+   ]) };
+ }
+ export {
