@@ -1,6 +1,6 @@
 FROM maven:3.9-eclipse-temurin-8 AS build
 WORKDIR /app
-COPY . ./
+COPY ./../../ ./
 RUN mvn install -Dmaven.test.skip=true
 
 FROM registry.cn-hangzhou.aliyuncs.com/jeecgdocker/alpine-java:8_server-jre_unlimited
@@ -14,6 +14,7 @@ WORKDIR /jeecg-boot
 EXPOSE 8080
 
 #ADD ./src/main/resources/jeecg ./config/jeecg
-ADD ./target/jeecg-system-start-3.7.1.jar ./
+#ADD ./target/jeecg-system-start-3.7.1.jar ./
+ADD --from=build /app/jeecg-module-system/jeecg-system-start/target/jeecg-system-start-3.7.1.jar ./
 
 CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar jeecg-system-start-3.7.1.jar
