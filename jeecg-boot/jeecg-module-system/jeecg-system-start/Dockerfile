@@ -1,3 +1,8 @@
+FROM maven:3.9-eclipse-temurin-8 AS build
+WORKDIR /app
+COPY . ./
+RUN mvn install -Dmaven.test.skip=true
+
 FROM registry.cn-hangzhou.aliyuncs.com/jeecgdocker/alpine-java:8_server-jre_unlimited
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
