@@ -56,7 +56,7 @@ services:
       - jeecg-boot-system
     container_name: jeecg-boot-vue
     image: jeecg-boot-vue
-    hostname: jeecg-boot-system
+    hostname: jeecg-boot-vue
     ports:
       - "8089:80"
       - "4433:443"
