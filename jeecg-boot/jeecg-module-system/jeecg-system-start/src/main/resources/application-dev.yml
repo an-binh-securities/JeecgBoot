@@ -166,11 +166,11 @@ spring:
           password: d5CkAy4#REAnKuveo
           driver-class-name: com.mysql.cj.jdbc.Driver
           # 多数据源配置
-          #multi-datasource1:
-          #url: jdbc:mysql://localhost:3306/jeecg-boot2?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-          #username: root
-          #password: root
-          #driver-class-name: com.mysql.cj.jdbc.Driver
+        multi-datasource1:
+          url: jdbc:mysql://localhost:3306/thanglx_test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: Thang@#2024
+          driver-class-name: com.mysql.cj.jdbc.Driver
   #redis 配置
   redis:
     database: 0
