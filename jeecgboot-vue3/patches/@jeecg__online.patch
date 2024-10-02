@@ -1,5 +1,1986 @@
+diff --git a/AiModal-6de335e3.mjs b/AiModal-6de335e3.mjs
+index 2322e47f7ef486afe2f6e2e57dae851f2b888265..0d113362ab01b81b4bf73af8d309d76026f9dede 100644
+--- a/AiModal-6de335e3.mjs
++++ b/AiModal-6de335e3.mjs
+@@ -22,17 +22,17 @@ const u = (o) => (y("data-v-4ab211b3"), o = o(), B(), o), R = { class: "aiWrap"
+       fill: "currentColor"
+     })
+   ]),
+-  /* @__PURE__ */ e("h3", null, "创建工作表字段需要专业建议?试试AI智能推荐吧")
+-], -1)), E = /* @__PURE__ */ u(() => /* @__PURE__ */ e("p", { class: "tip" }, "可尝试添加修饰词，如:智能家居行业的生产计划表", -1)), H = { class: "content" }, P = {
++  /* @__PURE__ */ e("h3", null, "Tạo trường bảng cần tư vấn chuyên nghiệp? Hãy thử đề xuất thông minh của AI nhé")
++], -1)), E = /* @__PURE__ */ u(() => /* @__PURE__ */ e("p", { class: "tip" }, "Có thể thử thêm từ bổ nghĩa, chẳng hạn như: Bảng kế hoạch sản xuất trong ngành nhà thông minh", -1)), H = { class: "content" }, P = {
+   __name: "AiModal",
+   emits: ["register", "success"],
+   setup(o, { emit: _ }) {
+     const m = {
+       aigc: "/online/cgform/api/aigc"
+-    }, [v, { closeModal: h }] = S(), { createMessage: f } = z(), t = l(""), a = l(!1), g = l("ai创建表"), i = () => {
++    }, [v, { closeModal: h }] = S(), { createMessage: f } = z(), t = l(""), a = l(!1), g = l("Tạo bảng AI"), i = () => {
+       h();
+     }, C = () => {
+-      t.value.trim() === "" ? f.warning("请输入修饰词~") : (a.value = !0, N.post({ url: `${m.aigc}?prompt=${t.value}`, timeout: 1e3 * 60 }).then((s) => {
++      t.value.trim() === "" ? f.warning("Vui lòng nhập từ bổ nghĩa~") : (a.value = !0, N.post({ url: `${m.aigc}?prompt=${t.value}`, timeout: 1e3 * 60 }).then((s) => {
+         a.value = !1, i(), _("success"), t.value = "";
+       }).catch((s) => {
+         a.value = !1;
+@@ -59,7 +59,7 @@ const u = (o) => (y("data-v-4ab211b3"), o = o(), B(), o), R = { class: "aiWrap"
+                 value: t.value,
+                 "onUpdate:value": n[0] || (n[0] = (b) => t.value = b),
+                 valueModifiers: { trim: !0 },
+-                placeholder: "请输入修饰词"
++                placeholder: "Vui lòng nhập từ bổ nghĩa"
+               }, null, 8, ["value"]),
+               d(w, {
+                 loading: a.value,
+@@ -67,7 +67,7 @@ const u = (o) => (y("data-v-4ab211b3"), o = o(), B(), o), R = { class: "aiWrap"
+                 onClick: C
+               }, {
+                 default: p(() => [
+-                  k("生成表")
++                  k("Tạo bảng")
+                 ]),
+                 _: 1
+               }, 8, ["loading"])
+diff --git a/AuthDataConfig-5c3a8e6b.mjs b/AuthDataConfig-5c3a8e6b.mjs
+index 93ea391ede186591dbcad4751d7d706749bfd06f..1fb7380155d9ed061a472621f41ba0ae1119ad9c 100644
+--- a/AuthDataConfig-5c3a8e6b.mjs
++++ b/AuthDataConfig-5c3a8e6b.mjs
+@@ -94,10 +94,10 @@ const we = Y({
+       });
+     }
+     function U() {
+-      T({ title: "新增" });
++      T({ title: "Thêm mới" });
+     }
+     function V(e) {
+-      T({ title: "编辑", record: e, isUpdate: !0 });
++      T({ title: "Chỉnh sửa", record: e, isUpdate: !0 });
+     }
+     function L(e) {
+       n.value = !0, he(e).then(u).finally(() => n.value = !1);
+@@ -152,7 +152,7 @@ const we = Y({
+     function q(e) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: () => V(e)
+         }
+       ];
+@@ -197,7 +197,7 @@ function Ae(t, n, o, u, f, p) {
+           preIcon: "ant-design:plus"
+         }, {
+           default: d(() => [
+-            ae("新增")
++            ae("Thêm mới")
+           ]),
+           _: 1
+         }, 8, ["onClick"])
+diff --git a/CgformCopyList-365b3e8f.mjs b/CgformCopyList-365b3e8f.mjs
+index 6351efedd1dbad69ec2e4656b67eea08564ce7df..aa253e928b96ac919fb1d98bcb5b47d2487816cd 100644
+--- a/CgformCopyList-365b3e8f.mjs
++++ b/CgformCopyList-365b3e8f.mjs
+@@ -216,8 +216,8 @@ function X(o, S, E, A, b, w) {
+           }, 8, ["onClick"])
+         ]),
+         dbSync: n(({ text: r }) => [
+-          r === "Y" ? (C(), M("span", U, "已同步")) : T("", !0),
+-          r === "N" ? (C(), M("span", W, "未同步")) : T("", !0)
++          r === "Y" ? (C(), M("span", U, "Đã đồng bộ")) : T("", !0),
++          r === "N" ? (C(), M("span", W, "Chưa đồng bộ")) : T("", !0)
+         ]),
+         action: n(({ record: r }) => [
+           t(m, {
+diff --git a/CgformModal-21c5c387.mjs b/CgformModal-21c5c387.mjs
+index 8ab03be38e9da0ee37853df89e7cb0cd1491c36e..e8a6e0c16886c80193c4f0e0cdc7bbb34b48b09a 100644
+--- a/CgformModal-21c5c387.mjs
++++ b/CgformModal-21c5c387.mjs
+@@ -66,7 +66,7 @@ function fe(a, n) {
+     { joinParamsToUrl: !0 }
+   );
+ }
+-const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, timeout: 12e3, timeoutErrorMessage: "同步数据库超时，已自动刷新" }), mt = (a) => v.post({ url: `/online/cgform/head/copyOnline?code=${a}` }), gt = (a, n, c) => v.get({ url: `/online/cgform/head/copyOnlineTable/${a}`, params: O({ tableName: n }, c) }), q = {
++const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, timeout: 12e3, timeoutErrorMessage: "Đồng bộ cơ sở dữ liệu quá thời gian, đã tự động làm mới" }), mt = (a) => v.post({ url: `/online/cgform/head/copyOnline?code=${a}` }), gt = (a, n, c) => v.get({ url: `/online/cgform/head/copyOnlineTable/${a}`, params: O({ tableName: n }, c) }), q = {
+   // 查询表字段 e3e3NcxzbUiGa53YYVXxWc8ADo5ISgQGx/gaZwERF91oAryDlivjqBv3wqRArgChupi+Y/Gg/swwGEyL0PuVFg==
+   doQueryField: (a, n) => v.get({ url: "/online/cgform/field/listByHeadId", params: O({ headId: a }, n) }),
+   // 查询表index配置
+@@ -100,7 +100,7 @@ const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, tim
+   setup(a, { emit: n }) {
+     const { createMessage: c } = ma(), E = y(), h = y(!1);
+     let p = {};
+-    const _ = ce(() => h.value ? "编辑" : "新增"), F = y(!0), T = y(!1), g = y("dbTable"), A = y(!0), d = {
++      const _ = ce(() => h.value ? "Chỉnh sửa" : "Thêm mới"), F = y(!0), T = y(!1), g = y("dbTable"), A = y(!0), d = {
+       dbTable: y(),
+       pageTable: y(),
+       checkTable: y(),
+@@ -269,7 +269,7 @@ const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, tim
+         Object.assign(e, t);
+         let l = Ue(e);
+         return Ve(l);
+-      }).catch((t) => (t === M || (t == null ? void 0 : t.code) === M ? c.warning("校验未通过") : t != null && t.msg && c.warning(t.msg), Promise.reject(null)));
++      }).catch((t) => (t === M || (t == null ? void 0 : t.code) === M ? c.warning("Xác minh không thành công") : t != null && t.msg && c.warning(t.msg), Promise.reject(null)));
+     }
+     function Qe() {
+       return new Promise((e, t) => D(this, null, function* () {
+@@ -318,7 +318,7 @@ const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, tim
+         }
+         r ? t(e) : l({
+           code: -1,
+-          msg: "外键只允许配置一个!",
++          msg: "Chỉ cho phép cấu hình một khóa ngoại!",
+           error: M
+         });
+       });
+@@ -376,9 +376,9 @@ const ft = (a, n) => v.post({ url: `/online/cgform/api/doDbSynch/${a}/${n}`, tim
+             }
+           });
+         } else
+-          c.warning("没搜到相关字段名称或字段备注~");
+-      } else
+-        c.warning("请输入字段名称或字段备注~");
++            c.warning("Không tìm thấy tên trường hoặc ghi chú trường liên quan~");
++        } else
++          c.warning("Vui lòng nhập tên trường hoặc ghi chú trường~");
+     };
+     return de(O({}, d), {
+       modalRef: E,
+@@ -438,7 +438,7 @@ function La(a, n, c, E, h, p) {
+         P("div", Oa, [
+           u(_, { onClick: a.onCancel }, {
+             default: b(() => [
+-              w("关闭")
++              w("Đóng")
+             ]),
+             _: 1
+           }, 8, ["onClick"]),
+@@ -449,7 +449,7 @@ function La(a, n, c, E, h, p) {
+             onClick: a.onSubmit
+           }, {
+             default: b(() => [
+-              w("保存")
++              w("Lưu")
+             ]),
+             _: 1
+           }, 8, ["loading", "onClick"])
+@@ -459,7 +459,7 @@ function La(a, n, c, E, h, p) {
+             u(G, {
+               value: a.aiTestTable,
+               "onUpdate:value": n[1] || (n[1] = (s) => a.aiTestTable = s),
+-              placeholder: "请选择测试的数据模型",
++              placeholder: "Vui lòng chọn mô hình dữ liệu để kiểm tra",
+               getPopupContainer: (s) => s == null ? void 0 : s.parentElement,
+               style: { width: "300px", margin: "0 10px 0 0", "text-align": "left" }
+             }, {
+@@ -482,7 +482,7 @@ function La(a, n, c, E, h, p) {
+               onClick: a.initVirtualData
+             }, {
+               default: b(() => [
+-                w("生成数据>>")
++                w("Tạo dữ liệu>>")
+               ]),
+               _: 1
+             }, 8, ["onClick"])
+@@ -491,7 +491,7 @@ function La(a, n, c, E, h, p) {
+             u(Y, {
+               value: a.positioning,
+               "onUpdate:value": n[2] || (n[2] = (s) => a.positioning = s),
+-              placeholder: "请输入字段名称或字段备注",
++              placeholder: "Vui lòng nhập tên trường hoặc ghi chú trường",
+               allowClear: "",
+               onPressEnter: a.handlePositioning
+             }, null, 8, ["value", "onPressEnter"]),
+@@ -501,7 +501,7 @@ function La(a, n, c, E, h, p) {
+               onClick: a.handlePositioning
+             }, {
+               default: b(() => [
+-                w("定位")
++                w("Định vị")
+               ]),
+               _: 1
+             }, 8, ["onClick"])
+@@ -523,7 +523,7 @@ function La(a, n, c, E, h, p) {
+                   onClick: a.onOpenExtConfig
+                 }, {
+                   default: b(() => [
+-                    w("扩展配置")
++                    w("Cấu hình mở rộng")
+                   ]),
+                   _: 1
+                 }, 8, ["onClick"])
+@@ -544,7 +544,7 @@ function La(a, n, c, E, h, p) {
+               }, {
+                 default: b(() => [
+                   u(g, {
+-                    tab: "数据库属性",
++                    tab: "Thuộc tính cơ sở dữ liệu",
+                     key: "dbTable",
+                     forceRender: ""
+                   }, {
+@@ -564,7 +564,7 @@ function La(a, n, c, E, h, p) {
+                     _: 1
+                   }),
+                   u(g, {
+-                    tab: "页面属性",
++                    tab: "Thuộc tính trang",
+                     key: "pageTable",
+                     forceRender: ""
+                   }, {
+@@ -574,7 +574,7 @@ function La(a, n, c, E, h, p) {
+                     _: 1
+                   }),
+                   u(g, {
+-                    tab: "校验字段",
++                    tab: "Xác minh trường",
+                     key: "checkTable",
+                     forceRender: ""
+                   }, {
+@@ -584,7 +584,7 @@ function La(a, n, c, E, h, p) {
+                     _: 1
+                   }),
+                   u(g, {
+-                    tab: "外键",
++                    tab: "Khóa ngoại",
+                     key: "fkTable",
+                     forceRender: ""
+                   }, {
+@@ -597,7 +597,7 @@ function La(a, n, c, E, h, p) {
+                     _: 1
+                   }),
+                   u(g, {
+-                    tab: "索引",
++                    tab: "Chỉ mục",
+                     key: "idxTable",
+                     forceRender: ""
+                   }, {
+@@ -615,10 +615,10 @@ function La(a, n, c, E, h, p) {
+                   }, {
+                     tab: b(() => [
+                       P("span", null, [
+-                        w(" 个性查询配置 "),
++                        w(" Cấu hình truy vấn cá nhân "),
+                         u(K, null, {
+                           title: b(() => [
+-                            w("允许自定义，查询表单字段控件类型！")
++                            w("Cho phép tùy chỉnh, loại điều khiển trường biểu mẫu truy vấn!")
+                           ]),
+                           default: b(() => [
+                             u(B, { icon: "bx:help-circle" })
+diff --git a/CgreportModal-edefa8e3.mjs b/CgreportModal-edefa8e3.mjs
+index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8c674f6b9 100644
+--- a/CgreportModal-edefa8e3.mjs
++++ b/CgreportModal-edefa8e3.mjs
+@@ -40,10 +40,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+   o();
+ }), it = (t, o) => {
+   Pe({
+-    title: "确认删除",
+-    content: "是否删除选中数据",
+-    okText: "确认",
+-    cancelText: "取消",
++    title: "Xác nhận xóa",
++    content: "Có chắc chắn muốn xóa dữ liệu đã chọn không?",
++    okText: "Xác nhận",
++    cancelText: "Hủy",
+     iconType: "warning",
+     onOk: () => x.delete({ url: "/online/cgreport/head/deleteBatch", data: t }, { joinParamsToUrl: !0 }).then(() => {
+       o();
+@@ -56,44 +56,44 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+   url: "/online/cgreport/head/parseSql?" + t
+ }), Re = Ie(), ct = [
+   {
+-    title: "报表名字",
++    title: "Tên báo cáo",
+     align: "center",
+     dataIndex: "name",
+     width: 120
+   },
+   {
+-    title: "报表编码",
++    title: "Mã báo cáo",
+     align: "center",
+     dataIndex: "code",
+     width: 120
+   },
+   {
+-    title: "报表SQL",
++    title: "Báo cáo SQL",
+     align: "center",
+     dataIndex: "cgrSql",
+     width: 360
+   },
+   {
+-    title: "数据源",
++    title: "Nguồn dữ liệu",
+     align: "center",
+     dataIndex: "dbSource",
+     customRender: ({ text: t, record: o }) => o.dbSource_dictText ? o.dbSource_dictText : t,
+     width: 120
+   },
+   {
+-    title: "创建时间",
++    title: "Thời gian tạo",
+     align: "center",
+     dataIndex: "createTime",
+     width: 120
+   }
+ ], dt = [
+   {
+-    label: "报表名称",
++    label: "Tên báo cáo",
+     field: "name",
+     component: "JInput"
+   },
+   {
+-    label: "报表编码",
++    label: "Mã báo cáo",
+     field: "code",
+     component: "JInput"
+   }
+@@ -105,7 +105,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+     show: !1
+   },
+   {
+-    label: "报表编码",
++    label: "Mã báo cáo",
+     field: "code",
+     component: "Input",
+     colProps: {
+@@ -121,9 +121,9 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+         required: !0,
+         validator: (l, m) => new Promise((v, f) => {
+           if (!m)
+-            return f("请输入报表编码！");
++            return f("Vui lòng nhập mã báo cáo!");
+           if (!Ne.test(m))
+-            return f("编码必须以字母开头，可包含数字、下划线、横杠！");
++            return f("Mã phải bắt đầu bằng chữ cái, có thể chứa số, dấu gạch dưới, dấu gạch ngang!");
+           let h = {
+             tableName: "onl_cgreport_head",
+             fieldName: "code",
+@@ -131,16 +131,16 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+             dataId: o.id
+           };
+           ke(h).then((c) => {
+-            c.success ? v() : f("报表编码已存在!");
++            c.success ? v() : f("Mã báo cáo đã tồn tại!");
+           }).catch((c) => {
+-            f(c.message || "校验失败");
++            f(c.message || "Xác minh thất bại");
+           });
+         })
+       }
+     ]
+   },
+   {
+-    label: "报表名字",
++    label: "Tên báo cáo",
+     field: "name",
+     component: "Input",
+     colProps: {
+@@ -151,10 +151,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+       xl: 8,
+       xxl: 8
+     },
+-    dynamicRules: () => [{ required: !0, message: "请输入报表名字!" }]
++    dynamicRules: () => [{ required: !0, message: "Vui lòng nhập tên báo cáo!" }]
+   },
+   {
+-    label: "动态数据源",
++    label: "Nguồn dữ liệu động",
+     field: "dbSource",
+     colProps: {
+       sm: 24,
+@@ -165,7 +165,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+       xxl: 8
+     },
+     component: "ApiSelect",
+-    rules: [{ required: Re.sysSafeMode, message: "请选择数据源！" }],
++    rules: [{ required: Re.sysSafeMode, message: "Vui lòng chọn nguồn dữ liệu!" }],
+     componentProps: {
+       api: $e
+     }
+@@ -185,10 +185,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+         },
+     },*/
+   {
+-    label: "报表SQL",
++    label: "Báo cáo SQL",
+     field: "cgrSql",
+     component: "JCodeEditor",
+-    rules: [{ required: !0, message: "请填写报表SQL" }],
++    rules: [{ required: !0, message: "Vui lòng điền báo cáo SQL" }],
+     // update-begin--author:liaozhiyang---date:20240509---for：【QQYUN-9230】报表图表弹窗样式调整
+     // itemProps: {
+     //   labelCol: { xs: 24, sm: 4, md: 2, lg: 2, xl: 3, xxl: 2 },
+@@ -229,69 +229,69 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+   }
+ ], Me = [
+   {
+-    title: "参数字段",
++    title: "Trường tham số",
+     key: "paramName",
+     type: i.input,
+     width: "200px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: "",
+-    validateRules: [{ required: !0, message: "${title}不能为空" }]
++    validateRules: [{ required: !0, message: "${title} không được để trống" }]
+   },
+   {
+-    title: "参数文本",
++    title: "Văn bản tham số",
+     key: "paramTxt",
+     type: i.input,
+     width: "200px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: "",
+-    validateRules: [{ required: !0, message: "${title}不能为空" }]
++    validateRules: [{ required: !0, message: "${title} không được để trống" }]
+   },
+   {
+-    title: "参数默认值",
++    title: "Giá trị mặc định tham số",
+     key: "paramValue",
+     type: i.input,
+     width: "200px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: ""
+   }
+ ], Be = [
+   {
+-    title: "字段名字",
++    title: "Tên trường",
+     key: "fieldName",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: "",
+-    validateRules: [{ required: !0, message: "${title}不能为空" }]
++    validateRules: [{ required: !0, message: "${title} không được để trống" }]
+   },
+   {
+-    title: "字段文本",
++    title: "Văn bản trường",
+     key: "fieldTxt",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: "",
+-    validateRules: [{ required: !0, message: "${title}不能为空" }]
++    validateRules: [{ required: !0, message: "${title} không được để trống" }]
+   },
+   {
+-    title: "字段类型",
++    title: "Loại trường",
+     key: "fieldType",
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: "",
+-    validateRules: [{ required: !0, message: "${title}不能为空" }],
++    validateRules: [{ required: !0, message: "${title} không được để trống" }],
+     type: i.select,
+     options: [
+-      { title: "数值类型", value: "Integer" },
+-      { title: "字符类型", value: "String" },
+-      { title: "日期类型", value: "Date" },
+-      { title: "时间类型", value: "Datetime" },
+-      { title: "长整型", value: "Long" },
+-      { title: "图片类型", value: "Image" }
++      { title: "Loại số", value: "Integer" },
++      { title: "Loại ký tự", value: "String" },
++      { title: "Loại ngày", value: "Date" },
++      { title: "Loại thời gian", value: "Datetime" },
++      { title: "Loại số nguyên dài", value: "Long" },
++      { title: "Loại hình ảnh", value: "Image" }
+     ]
+   },
+   {
+-    title: "是否显示",
++    title: "Có hiển thị không",
+     key: "isShow",
+     minWidth: "80px",
+     align: "center",
+@@ -300,50 +300,50 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+     defaultChecked: !0
+   },
+   {
+-    title: "字段href",
++    title: "Trường href",
+     key: "fieldHref",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: ""
+   },
+   {
+-    title: "查询模式",
++    title: "Chế độ truy vấn",
+     key: "searchMode",
+     type: i.select,
+     minWidth: "150px",
+-    placeholder: "请选择${title}",
++    placeholder: "Vui lòng chọn ${title}",
+     options: [
+-      { title: "单条件查询", value: "single" },
+-      { title: "范围查询", value: "group" }
++      { title: "Truy vấn đơn điều kiện", value: "single" },
++      { title: "Truy vấn phạm vi", value: "group" }
+     ]
+   },
+   {
+-    title: "取值表达式",
++    title: "Biểu thức giá trị",
+     key: "replaceVal",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: ""
+   },
+   {
+-    title: "字典code",
++    title: "Mã từ điển",
+     key: "dictCode",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: ""
+   },
+   {
+-    title: "分组标题",
++    title: "Tiêu đề nhóm",
+     key: "groupTitle",
+     type: i.input,
+     minWidth: "150px",
+-    placeholder: "请输入${title}",
++    placeholder: "Vui lòng nhập ${title}",
+     defaultValue: ""
+   },
+   {
+-    title: "是否查询",
++    title: "Có truy vấn không",
+     key: "isSearch",
+     type: i.checkbox,
+     customValue: ["1", "0"],
+@@ -352,7 +352,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+     defaultChecked: !1
+   },
+   {
+-    title: "是否合计",
++    title: "Có tổng hợp không",
+     align: "center",
+     key: "isTotal",
+     type: i.checkbox,
+@@ -389,7 +389,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+       V,
+       h,
+       f
+-    ), le = ge(() => b(m) ? "编辑" : "新增");
++    ), le = ge(() => b(m) ? "Chỉnh sửa" : "Thêm mới");
+     function re() {
+       return R(this, null, function* () {
+         yield E(), h.value = "onlCgreportItem", k.dataSource = [], I.dataSource = [];
+@@ -421,7 +421,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+         let { cgrSql: r, dbSource: a } = e, s = "sql=" + encodeURIComponent(r);
+         a && (s += "&dbKey=" + a), qe(s).then((u) => {
+           if (u) {
+-            l.success("解析成功");
++            l.success("Phân tích thành công");
+             let { fields: n, params: p } = u, g = n.filter((q) => q.fieldName != "__row_number__"), N = d.value.getTableData(), $ = z(N, g || [], "fieldName");
+             $ = $.sort((q, M) => q.orderNum - M.orderNum), I.dataSource = $;
+             let se = c.value.getTableData(), D = z(se, p || [], "paramName");
+@@ -472,20 +472,20 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+             analyseButton: _(() => [
+               C("div", Fe, [
+                 y(s, {
+-                  title: "使用指南",
++                  title: "Hướng dẫn sử dụng",
+                   trigger: "hover",
+                   style: { margin: "0 10px 0 6px" }
+                 }, {
+                   content: _(() => [
+-                    P(" 您可以键入“”作为一个参数，这里abc是参数的名称。例如："),
++                    P(" Bạn có thể nhập “${abc}” làm tham số, ở đây abc là tên tham số. Ví dụ:"),
+                     Oe,
+-                    P(" select * from table where id = ${abc}。"),
++                    P(" select * from table where id = ${abc}."),
+                     We,
+-                    P(" select * from table where id like concat('%',${abc},'%')。(mysql模糊查询)"),
++                    P(" select * from table where id like concat('%',${abc},'%'). (truy vấn mờ mysql)"),
+                     ze,
+-                    P(" select * from table where id like '%'||${abc}||'%'。(oracle模糊查询)"),
++                    P(" select * from table where id like '%'||${abc}||'%'. (truy vấn mờ oracle)"),
+                     Ae,
+-                    P(" select * from table where id like '%'+${abc}+'%'。(sqlserver模糊查询)"),
++                    P(" select * from table where id like '%'+${abc}+'%'. (truy vấn mờ sqlserver)"),
+                     Je,
+                     Ue
+                   ]),
+@@ -500,7 +500,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+                   onClick: ie
+                 }, {
+                   default: _(() => [
+-                    P("SQL解析")
++                    P("Phân tích SQL")
+                   ]),
+                   _: 1
+                 })
+@@ -520,7 +520,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+           }, {
+             default: _(() => [
+               (F(), O(g, {
+-                tab: "动态报表配置明细",
++                tab: "Cấu hình chi tiết báo cáo động",
+                 key: f.value[0],
+                 forceRender: !0
+               }, {
+@@ -543,7 +543,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+                 _: 1
+               })),
+               (F(), O(g, {
+-                tab: "报表参数",
++                tab: "Tham số báo cáo",
+                 key: f.value[1],
+                 forceRender: !0
+               }, {
+diff --git a/CheckDictTable-1bc8322d.mjs b/CheckDictTable-1bc8322d.mjs
+index 916c0f7d8871abfb240d82aa23ba9eaac080921b..9641b95ad1975c3522764763db9c7c01f3c19b82 100644
+--- a/CheckDictTable-1bc8322d.mjs
++++ b/CheckDictTable-1bc8322d.mjs
+@@ -31,99 +31,99 @@ const W = S({
+   },
+   setup() {
+     const { prefixCls: e } = Q("cgform-check-dict-table"), { createMessage: t } = G(), a = E([
+-      { title: "字段名称", key: "dbFieldName", width: 100 },
+-      { title: "字段备注", key: "dbFieldTxt", width: 100 },
+-      {
+-        title: "字段Href",
+-        key: "fieldHref",
+-        width: 130,
+-        type: n.textarea,
+-        defaultValue: ""
+-      },
+-      {
+-        title: "验证规则",
+-        key: "fieldValidType",
+-        width: 170,
+-        type: n.slot,
+-        slotName: "fieldValidType",
+-        allowInput: !0,
+-        defaultValue: "",
+-        placeholder: "空"
+-      },
+-      {
+-        title: "校验必填",
+-        key: "fieldMustInput",
+-        width: 80,
+-        type: n.checkbox,
+-        align: "center",
+-        customValue: ["1", "0"],
+-        defaultChecked: !1
+-      },
+-      {
+-        title: "字典Table",
+-        key: "dictTable",
+-        width: 280,
+-        type: n.textarea,
+-        defaultValue: ""
+-      },
+-      {
+-        title: "字典Code",
+-        key: "dictField",
+-        width: 280,
+-        type: n.input,
+-        defaultValue: "",
+-        validateRules: [{ handler: r }]
+-      },
+-      {
+-        title: "字典Text",
+-        key: "dictText",
+-        width: 280,
+-        type: n.input,
+-        defaultValue: "",
+-        validateRules: [{ handler: r }]
+-      }
++    { title: "Tên trường", key: "dbFieldName", width: 100 },
++    { title: "Ghi chú trường", key: "dbFieldTxt", width: 100 },
++    {
++      title: "Href trường",
++      key: "fieldHref",
++      width: 130,
++      type: n.textarea,
++      defaultValue: ""
++    },
++    {
++      title: "Quy tắc xác minh",
++      key: "fieldValidType",
++      width: 170,
++      type: n.slot,
++      slotName: "fieldValidType",
++      allowInput: !0,
++      defaultValue: "",
++      placeholder: "Không"
++    },
++    {
++      title: "Xác minh bắt buộc",
++      key: "fieldMustInput",
++      width: 80,
++      type: n.checkbox,
++      align: "center",
++      customValue: ["1", "0"],
++      defaultChecked: !1
++    },
++    {
++      title: "Bảng từ điển",
++      key: "dictTable",
++      width: 280,
++      type: n.textarea,
++      defaultValue: ""
++    },
++    {
++      title: "Mã từ điển",
++      key: "dictField",
++      width: 280,
++      type: n.input,
++      defaultValue: "",
++      validateRules: [{ handler: r }]
++    },
++    {
++      title: "Văn bản từ điển",
++      key: "dictText",
++      width: 280,
++      type: n.input,
++      defaultValue: "",
++      validateRules: [{ handler: r }]
++    }
+     ]), v = K(a), { tableRef: k, tables: w } = v, p = E([
+-      { label: "空", value: "" },
+-      { label: "唯一校验", value: "only" },
+-      { label: "6到16位数字", value: "n6-16" },
+-      { label: "6到18位字母", value: "s6-18" },
+-      { label: "6到16位任意字符", value: "*6-16" },
+-      { label: "网址", value: "url" },
+-      { label: "电子邮件", value: "e" },
+-      { label: "手机号码", value: "m" },
+-      { label: "邮政编码", value: "p" },
+-      { label: "字母", value: "s" },
+-      { label: "数字", value: "n" },
+-      { label: "整数", value: "z" },
+-      { label: "非空", value: "*" },
+-      { label: "金额", value: "money" }
++      { label: "Không", value: "" },
++      { label: "Xác minh duy nhất", value: "only" },
++      { label: "6 đến 16 chữ số", value: "n6-16" },
++      { label: "6 đến 18 chữ cái", value: "s6-18" },
++      { label: "6 đến 16 ký tự bất kỳ", value: "*6-16" },
++      { label: "Địa chỉ web", value: "url" },
++      { label: "Email", value: "e" },
++      { label: "Số điện thoại", value: "m" },
++      { label: "Mã bưu điện", value: "p" },
++      { label: "Chữ cái", value: "s" },
++      { label: "Chữ số", value: "n" },
++      { label: "Số nguyên", value: "z" },
++      { label: "Không rỗng", value: "*" },
++      { label: "Số tiền", value: "money" }
+     ]), m = $(() => p.value.map((l) => l.value)), { createJPrompt: d } = L();
+     function f(l) {
+       return l != null && !m.value.includes(l);
+     }
+     function b(l) {
+       d({
+-        title: "自定义正则表达式",
+-        placeholder: "请输入正则表达式",
+-        rules: [{ required: !0, message: "正则表达式不能为空！" }, { validator: o }],
++        title: "Biểu thức chính quy tùy chỉnh",
++        placeholder: "Vui lòng nhập biểu thức chính quy",
++        rules: [{ required: !0, message: "Biểu thức chính quy không được để trống!" }, { validator: o }],
+         onOk: (u) => {
+-          l.triggerChange(u), t.success("添加成功");
++          l.triggerChange(u), t.success("Thêm thành công");
+         }
+       });
+     }
+     function g(l) {
+       d({
+-        title: "修改自定义正则表达式",
++        title: "Chỉnh sửa biểu thức chính quy tùy chỉnh",
+         defaultValue: l.value,
+-        placeholder: "请输入正则表达式",
+-        rules: [{ required: !0, message: "正则表达式不能为空！" }, { validator: o }],
++        placeholder: "Vui lòng nhập biểu thức chính quy",
++        rules: [{ required: !0, message: "Biểu thức chính quy không được để trống!" }, { validator: o }],
+         onOk: (u) => {
+-          l.triggerChange(u), u !== l.value && t.success("修改成功");
++          l.triggerChange(u), u !== l.value && t.success("Chỉnh sửa thành công");
+         }
+       });
+     }
+     function o(l, u) {
+-      return f(u) ? Promise.resolve() : Promise.reject("当前校验已存在");
++      return f(u) ? Promise.resolve() : Promise.reject("Xác minh hiện tại đã tồn tại");
+     }
+     function h(l) {
+       l.dbIsNull === "0" && k.value.setValues([
+@@ -135,7 +135,7 @@ const W = S({
+     }
+     function r({ cellValue: l, row: u }, _) {
+       const { dbFieldName: A } = u, y = w.pageTable.value.tableRef.getTableData(), C = y == null ? void 0 : y.find((B) => B.dbFieldName === A);
+-      (C == null ? void 0 : C.fieldShowType) === "popup_dict" ? l.indexOf(",") == -1 ? _(!0) : _(!1, "popup字典组件只允许填写一个字段") : _(!0);
++      (C == null ? void 0 : C.fieldShowType) === "popup_dict" ? l.indexOf(",") == -1 ? _(!0) : _(!1, "Thành phần từ điển popup chỉ cho phép điền một trường") : _(!0);
+     }
+     return R(x({}, v), {
+       prefixCls: e,
+@@ -179,7 +179,7 @@ function ee(e, t, a, v, k, w) {
+               i(m, {
+                 value: o.value,
+                 options: e.validTypeOptions,
+-                placeholder: "空",
++                placeholder: "Trống",
+                 style: { width: "100%" },
+                 onChange: o.triggerChange,
+                 virtual: !1
+@@ -191,10 +191,10 @@ function ee(e, t, a, v, k, w) {
+                   z(T("div", Y, [
+                     T("div", {
+                       class: "ant-select-item ant-select-item-option",
+-                      title: "使用自定义正则表达式作为校验规则",
++                      title: "Sử dụng biểu thức chính quy tùy chỉnh làm quy tắc xác minh",
+                       onClick: (r) => e.onAddCustomRegexp(o),
+                       onMousedown: t[0] || (t[0] = (r) => r.preventDefault())
+-                    }, " 正则表达式 ", 40, Z)
++                    }, " Biểu thức chính quy ", 40, Z)
+                   ], 512), [
+                     [j, !e.isCustomRegexp(o.value)]
+                   ])
+@@ -206,7 +206,7 @@ function ee(e, t, a, v, k, w) {
+           }, 1024),
+           i(d, {
+             class: "right",
+-            title: "修改自定义正则表达式"
++            title: "Chỉnh sửa biểu thức chính quy tùy chỉnh"
+           }, {
+             default: c(() => [
+               i(f, {
+diff --git a/CustomButtonList-f07bc695.mjs b/CustomButtonList-f07bc695.mjs
+index 5b4550e8f8beb0559a130c2c432b8fbb808e3d6d..5679d5e45af560828555fe0e28553b1c7867ed2e 100644
+--- a/CustomButtonList-f07bc695.mjs
++++ b/CustomButtonList-f07bc695.mjs
+@@ -208,7 +208,7 @@ const pe = (e, o) => o ? y.put({ url: "/online/cgform/button/edit", params: e })
+       e.value = n.row.id, m();
+     })), { aiTestMode: B, genButtons: v } = te(), [h, b] = se(), f = I(!1), g = Q({
+       onRegister: h,
+-      title: W(() => f != null && f.value ? "修改" : "新增"),
++      title: W(() => f != null && f.value ? "修改" : "Thêm mới"),
+       width: 800,
+       confirmLoading: !1,
+       onOk: z,
+@@ -258,7 +258,7 @@ const pe = (e, o) => o ? y.put({ url: "/online/cgform/button/edit", params: e })
+     function G(n) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: () => j(n)
+         }
+       ];
+@@ -332,7 +332,7 @@ function Ce(e, o, t, c, s, m) {
+             preIcon: "ant-design:plus"
+           }, {
+             default: l(() => [
+-              w("新增")
++              w("Thêm mới")
+             ]),
+             _: 1
+           }, 8, ["onClick"]),
+diff --git a/DBAttributeTable-285d40db.mjs b/DBAttributeTable-285d40db.mjs
+index d6d05ce4a5a03e8797e78ee5fe8d0415f5ded4fa..792aa4fec0f408439e12ad6a7c3fde08a94f4df2 100644
+--- a/DBAttributeTable-285d40db.mjs
++++ b/DBAttributeTable-285d40db.mjs
+@@ -257,29 +257,29 @@ const te = [
+   setup(e, { emit: a }) {
+     const d = Q(), R = f(!1), N = f([
+       {
+-        title: "字段名称",
++        title: "Tên trường",
+         key: "dbFieldName",
+         width: 140,
+         type: E.input,
+         defaultValue: "",
+-        placeholder: "请输入${title}",
++        placeholder: "Vui lòng nhập ${title}",
+         validateRules: [
+-          { required: !0, message: "${title}不能为空" },
++          { required: !0, message: "${title} không được để trống" },
+           {
+             pattern: /^[a-zA-Z]{1}(?!_)[a-zA-Z0-9_\\$]+$/,
+-            message: "命名规则：只能由字母、数字、下划线、$符号组成；必须以字母开头；不能以单个字母加下滑线开头"
++            message: "Quy tắc đặt tên: Chỉ được bao gồm chữ cái, số, dấu gạch dưới, ký hiệu $; phải bắt đầu bằng chữ cái; không được bắt đầu bằng một chữ cái duy nhất và dấu gạch dưới"
+           },
+-          { unique: !0, message: "${title}不能重复" },
++          { unique: !0, message: "${title} không được trùng lặp" },
+           {
+             handler({ cellValue: t }, i) {
+-              te.includes(t.toUpperCase()) ? i(!1, t + "是关键字，不能作为字段名称使用！") : i(!0);
++              te.includes(t.toUpperCase()) ? i(!1, t + " là từ khóa, không thể sử dụng làm tên trường!") : i(!0);
+             }
+           },
+           { handler: O },
+           // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
+           {
+             handler({ cellValue: t }, i) {
+-              t.length > 32 ? i(!1, "字段名最长32个字符") : i(!0);
++              t.length > 32 ? i(!1, "Tên trường dài nhất 32 ký tự") : i(!0);
+             }
+           }
+           // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
+@@ -287,45 +287,45 @@ const te = [
+         disabled: !e.actionButton
+       },
+       {
+-        title: "字段备注",
++        title: "Ghi chú trường",
+         key: "dbFieldTxt",
+         width: 140,
+         type: E.input,
+         defaultValue: "",
+-        placeholder: "请输入${title}",
++        placeholder: "Vui lòng nhập ${title}",
+         validateRules: [
+-          { required: !0, message: "${title}不能为空" },
++          { required: !0, message: "${title} không được để trống" },
+           // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
+           {
+             handler({ cellValue: t }, i) {
+-              t.length > 200 ? i(!1, "字段名最长200个字") : i(!0);
++              t.length > 200 ? i(!1, "Tên trường dài nhất 200 ký tự") : i(!0);
+             }
+           }
+           // update-end--author:liaozhiyang---date:20240603---for：【TV360X-631】表名字段名表描述字段备注长度校验
+         ]
+       },
+       {
+-        title: "字段长度",
++        title: "Độ dài trường",
+         key: "dbLength",
+         width: 120,
+         type: E.inputNumber,
+         defaultValue: 32,
+-        placeholder: "请输入${title}",
+-        validateRules: [{ required: !0, message: "${title}不能为空" }],
++        placeholder: "Vui lòng nhập ${title}",
++        validateRules: [{ required: !0, message: "${title} không được để trống" }],
+         disabled: !e.actionButton
+       },
+       {
+-        title: "小数点",
++        title: "Số thập phân",
+         key: "dbPointLength",
+         width: 100,
+         type: E.inputNumber,
+         defaultValue: 0,
+-        placeholder: "请输入${title}",
+-        validateRules: [{ required: !0, message: "${title}不能为空" }],
++        placeholder: "Vui lòng nhập ${title}",
++        validateRules: [{ required: !0, message: "${title} không được để trống" }],
+         disabled: !e.actionButton
+       },
+       {
+-        title: "默认值",
++        title: "Giá trị mặc định",
+         key: "dbDefaultVal",
+         width: 140,
+         type: E.input,
+@@ -333,7 +333,7 @@ const te = [
+         disabled: !e.actionButton
+       },
+       {
+-        title: "字段类型",
++        title: "Loại trường",
+         key: "dbType",
+         width: 140,
+         type: E.select,
+@@ -348,12 +348,12 @@ const te = [
+           { title: "Blob", value: "Blob" }
+         ],
+         defaultValue: "string",
+-        placeholder: "请选择${title}",
++        placeholder: "Vui lòng chọn ${title}",
+         disabled: !e.actionButton,
+-        validateRules: [{ required: !0, message: "请选择${title}" }, { handler: x }]
++        validateRules: [{ required: !0, message: "Vui lòng chọn ${title}" }, { handler: x }]
+       },
+       {
+-        title: "主键",
++        title: "Khóa chính",
+         key: "dbIsKey",
+         width: 80,
+         type: E.checkbox,
+@@ -363,7 +363,7 @@ const te = [
+         disabled: !e.actionButton
+       },
+       {
+-        title: "允许空值",
++        title: "Cho phép giá trị rỗng",
+         key: "dbIsNull",
+         width: 80,
+         type: E.checkbox,
+@@ -372,7 +372,7 @@ const te = [
+         disabled: !e.actionButton
+       },
+       {
+-        title: "同步数据库",
++        title: "Đồng bộ cơ sở dữ liệu",
+         key: "dbIsPersist",
+         minWidth: 80,
+         type: E.checkbox,
+@@ -439,12 +439,12 @@ const te = [
+         r == t && l(!0);
+         let C = o.idxTable.value.tableRef.getTableData();
+         for (let T of C)
+-          T.indexField.split(",").indexOf(r) >= 0 && l(!1, "当前字段存在索引配置，请先删除索引再修改字段");
++          T.indexField.split(",").indexOf(r) >= 0 && l(!1, "Trường hiện tại có cấu hình chỉ mục, vui lòng xóa chỉ mục trước khi chỉnh sửa trường");
+       }
+       l(!0);
+     }
+     function x({ cellValue: t, row: i }, l) {
+-      i.dbType == "int" && i.dbPointLength > 0 && l(!1, "设置了小数点不可设置integer类型"), l(!0);
++      i.dbType == "int" && i.dbPointLength > 0 && l(!1, "Đã đặt số thập phân thì không thể đặt loại integer"), l(!0);
+     }
+     return {
+       tableRef: A,
+diff --git a/DbToOnlineModal-5dcb67c3.mjs b/DbToOnlineModal-5dcb67c3.mjs
+index c4064ee58f2b95d60e1cb8c875a57d1fef43183b..3fde67cc4d50035e619c904678e29007cbc00291 100644
+--- a/DbToOnlineModal-5dcb67c3.mjs
++++ b/DbToOnlineModal-5dcb67c3.mjs
+@@ -13,7 +13,7 @@ const x = D({
+   components: { BasicModal: A, BasicTable: $ },
+   emits: ["success", "register"],
+   setup(o, { emit: h }) {
+-    const { createMessage: f } = O(), t = i("暂无数据"), u = i(!1), s = i(!1), n = i([]), a = i([]), { prefixCls: c } = V("online-db-import-form-modal"), p = c, C = document.documentElement.clientHeight, b = C - 180, M = b > 690 ? 690 : b, [L, { setPagination: y, getForm: B }, { rowSelection: F, selectedRowKeys: r }] = q({
++    const { createMessage: f } = O(), t = i("Không có dữ liệu"), u = i(!1), s = i(!1), n = i([]), a = i([]), { prefixCls: c } = V("online-db-import-form-modal"), p = c, C = document.documentElement.clientHeight, b = C - 180, M = b > 690 ? 690 : b, [L, { setPagination: y, getForm: B }, { rowSelection: F, selectedRowKeys: r }] = q({
+       bordered: !0,
+       columns: [{ title: "表名", align: "left", dataIndex: "id" }],
+       dataSource: a,
+@@ -49,7 +49,7 @@ const x = D({
+       }
+     }), [E, { closeModal: v }] = P(() => {
+       var e;
+-      (e = B()) == null || e.resetFields(), s.value = !1, t.value = "暂无数据", r.value = [], w();
++      (e = B()) == null || e.resetFields(), s.value = !1, t.value = "Không có dữ liệu", r.value = [], w();
+     });
+     function w() {
+       return u.value = !0, T.get(
+@@ -70,7 +70,7 @@ const x = D({
+       });
+     }
+     function N(e) {
+-      n.value.length !== 0 && (e ? (a.value = n.value.filter((S) => S.id.toLowerCase().includes(e.toLowerCase())), t.value = a.value.length === 0 ? "无筛选结果" : "暂无数据") : a.value = [...n.value], y({ current: 1 }));
++      n.value.length !== 0 && (e ? (a.value = n.value.filter((S) => S.id.toLowerCase().includes(e.toLowerCase())), t.value = a.value.length === 0 ? "无筛选结果" : "Không có dữ liệu") : a.value = [...n.value], y({ current: 1 }));
+     }
+     function k() {
+       v();
+diff --git a/EnhanceJavaModal-45c66cd5.mjs b/EnhanceJavaModal-45c66cd5.mjs
+index 7f209f9d20d39704ef4eaaedc93d34e2ac0d4843..2291876ef714e34481d2ab6858d836474de1d4cb 100644
+--- a/EnhanceJavaModal-45c66cd5.mjs
++++ b/EnhanceJavaModal-45c66cd5.mjs
+@@ -65,7 +65,7 @@ const Ce = Z({
+       e.value = n.row.id, l();
+     })), { aiTestMode: w, genEnhanceJavaData: y } = pe(), [M, d] = se(), m = k(!1), B = x({
+       onRegister: M,
+-      title: ee(() => m != null && m.value ? "修改" : "新增"),
++      title: ee(() => m != null && m.value ? "修改" : "Thêm mới"),
+       width: 800,
+       confirmLoading: !1,
+       bodyStyle: { height: "350px" },
+@@ -118,7 +118,7 @@ const Ce = Z({
+     function q(n) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: () => z(n)
+         }
+       ];
+@@ -199,7 +199,7 @@ function we(e, t, o, _, f, h) {
+             preIcon: "ant-design:plus"
+           }, {
+             default: a(() => [
+-              g("新增")
++              g("Thêm mới")
+             ]),
+             _: 1
+           }, 8, ["onClick"]),
+diff --git a/EnhanceSqlModal-7ea1b300.mjs b/EnhanceSqlModal-7ea1b300.mjs
+index a97e5ec06f29822f0575a86a1ba9d28182b56244..096035f74324c72e43c219a8a480a13b6bed3e29 100644
+--- a/EnhanceSqlModal-7ea1b300.mjs
++++ b/EnhanceSqlModal-7ea1b300.mjs
+@@ -65,7 +65,7 @@ const we = x({
+       e.value = n.row.id, t.value = n.row.tableName, i();
+     })), { aiTestMode: S, genEnhanceSqlData: B } = fe(), [C, m] = se(), f = y(!1), F = ee({
+       onRegister: C,
+-      title: oe(() => f != null && f.value ? "修改" : "新增"),
++      title: oe(() => f != null && f.value ? "修改" : "Thêm mới"),
+       width: 800,
+       confirmLoading: !1,
+       onOk: H,
+@@ -118,7 +118,7 @@ const we = x({
+     function Q(n) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: () => z(n)
+         }
+       ];
+@@ -200,7 +200,7 @@ function ve(e, t, o, g, p, b) {
+             preIcon: "ant-design:plus"
+           }, {
+             default: a(() => [
+-              _("新增")
++              _("Thêm mới")
+             ]),
+             _: 1
+           }, 8, ["onClick"]),
+diff --git a/ExtendConfigModal-a89ae052.mjs b/ExtendConfigModal-a89ae052.mjs
+index b1fde4072e95c26630ac498a27f0617e9ee7b8f8..80015e755756f7e0d2c1200b0c01b0d6e11d17fe 100644
+--- a/ExtendConfigModal-a89ae052.mjs
++++ b/ExtendConfigModal-a89ae052.mjs
+@@ -66,11 +66,11 @@ const I = B({
+     function C(t) {
+       if (t === "Y") {
+         let { themeTemplate: i } = r.parentForm.getFieldsValue(["themeTemplate"]);
+-        i === "erp" && (r.parentForm.setFieldsValue({ themeTemplate: "normal" }), o.warning("请注意：erp风格不支持对接表单设计，已自动改为默认风格！"));
++        i === "erp" && (r.parentForm.setFieldsValue({ themeTemplate: "normal" }), o.warning("Vui lòng lưu ý: phong cách erp không hỗ trợ thiết kế biểu mẫu tích hợp, đã tự động chuyển sang phong cách mặc định!"));
+       } else
+         n("desFormCode");
+     }
+-    const u = "{{ window._CONFIG['domianURL'] }}/jmreport/view/{积木报表ID}";
++    const u = "{{ window._CONFIG['domianURL'] }}/jmreport/view/{ID báo cáo tích hợp}";
+     function y(t) {
+       return m(this, null, function* () {
+         let i = a().reportPrintUrl;
+@@ -85,7 +85,7 @@ const I = B({
+     function T(t) {
+       if (t === 1) {
+         let { themeTemplate: i, isTree: k, tableType: g } = r.parentForm.getFieldsValue(["themeTemplate", "isTree", "tableType"]);
+-        i === "erp" && (o.warning("请注意：erp风格不支持联合查询，配置无效!"), e({ joinQuery: 0 })), i === "innerTable" && (o.warning("请注意：内嵌风格不支持联合查询，配置无效!"), e({ joinQuery: 0 })), g === 1 ? (o.warning("请注意：单表不支持联合查询，配置无效!"), e({ joinQuery: 0 })) : g === 3 ? (o.warning("请注意：当前表为附表，请在对应主表配置!"), e({ joinQuery: 0 })) : k === "Y" && (o.warning("请注意：树形列表不支持联合查询，配置无效!"), e({ joinQuery: 0 }));
++        i === "erp" && (o.warning("Vui lòng lưu ý: phong cách erp không hỗ trợ truy vấn liên kết, cấu hình không hợp lệ!"), e({ joinQuery: 0 })), i === "innerTable" && (o.warning("Vui lòng lưu ý: phong cách nhúng không hỗ trợ truy vấn liên kết, cấu hình không hợp lệ!"), e({ joinQuery: 0 })), g === 1 ? (o.warning("Vui lòng lưu ý: bảng đơn không hỗ trợ truy vấn liên kết, cấu hình không hợp lệ!"), e({ joinQuery: 0 })) : g === 3 ? (o.warning("Vui lòng lưu ý: bảng hiện tại là bảng phụ, vui lòng cấu hình trong bảng chính tương ứng!"), e({ joinQuery: 0 })) : k === "Y" && (o.warning("Vui lòng lưu ý: danh sách dạng cây không hỗ trợ truy vấn liên kết, cấu hình không hợp lệ!"), e({ joinQuery: 0 }));
+       }
+     }
+     return {
+@@ -100,8 +100,8 @@ function $(r, c, o, p, s, f) {
+   const e = h("BasicForm"), a = h("BasicModal");
+   return j(), x(a, {
+     onRegister: r.registerModal,
+-    title: "表单扩展配置项",
+-    width: 1e3,
++    title: "Cấu hình mở rộng biểu mẫu",
++    width: 1200,
+     onOk: r.handleOk,
+     onCancel: r.handleCancel
+   }, {
+diff --git a/FieldExtendJsonModal-32135634.mjs b/FieldExtendJsonModal-32135634.mjs
+index dcde6eeae816c7e33296ca750bfbcf73a528ad22..222b91e7a933eecd0bda1b430ce272503aea1245 100644
+--- a/FieldExtendJsonModal-32135634.mjs
++++ b/FieldExtendJsonModal-32135634.mjs
+@@ -68,7 +68,7 @@ const Z = C({
+         show: !1
+       },
+       {
+-        label: "文件上传数量",
++        label: "Số lượng tệp tải lên",
+         field: "uploadnum",
+         component: "InputNumber",
+         componentProps: {
+@@ -79,95 +79,95 @@ const Z = C({
+         ifShow: () => l.value === "file" || l.value === "image"
+       },
+       {
+-        label: "是否多选",
++        label: "Có đa chọn không",
+         field: "popupMulti",
+         component: "RadioGroup",
+         defaultValue: !0,
+         componentProps: {
+           options: [
+-            { label: "否", value: !1 },
+-            { label: "是", value: !0 }
++            { label: "Không", value: !1 },
++            { label: "Có", value: !0 }
+           ]
+         },
+         ifShow: () => l.value === "popup" || l.value === "popup_dict"
+       },
+       {
+-        label: "是否多选",
++        label: "Có đa chọn không",
+         field: "multiSelect",
+         component: "RadioGroup",
+         defaultValue: !0,
+         componentProps: {
+           options: [
+-            { label: "否", value: !1 },
+-            { label: "是", value: !0 }
++            { label: "Không", value: !1 },
++            { label: "Có", value: !0 }
+           ]
+         },
+         ifShow: () => l.value === "sel_user" || l.value === "sel_depart"
+       },
+       {
+-        label: "存储字段",
++        label: "Trường lưu trữ",
+         field: "store",
+         component: "Input",
+         ifShow: () => l.value === "sel_user" || l.value === "sel_depart"
+       },
+       {
+-        label: "展示字段",
++        label: "Trường hiển thị",
+         field: "text",
+         component: "Input",
+         ifShow: () => l.value === "sel_user" || l.value === "sel_depart"
+       },
+       {
+-        label: "默认排序",
++        label: "Sắp xếp mặc định",
+         field: "orderRule",
+         component: "RadioGroup",
+         defaultValue: "",
+         componentProps: {
+           options: [
+-            { label: "降序", value: "desc" },
+-            { label: "升序", value: "asc" },
+-            { label: "不默认排序", value: "" }
++            { label: "Giảm dần", value: "desc" },
++            { label: "Tăng dần", value: "asc" },
++            { label: "Không", value: "" }
+           ]
+         },
+         ifShow: () => p.value === "1" || ["Datetime", "string", "Date", "int", "BigDecimal", "double"].includes(r.value)
+       },
+       {
+-        label: "校验提示",
++        label: "Thông báo xác minh",
+         field: "validateError",
+         component: "Input",
+         componentProps: {
+-          placeholder: "请输入校验提示文本"
++          placeholder: "Vui lòng nhập văn bản thông báo xác minh"
+         }
+       },
+       {
+-        label: "查询label长度",
++        label: "Độ dài nhãn truy vấn",
+         field: "labelLength",
+         component: "InputNumber",
+         componentProps: {
+-          placeholder: "请输入label长度"
++          placeholder: "Vui lòng nhập độ dài nhãn"
+         }
+       },
+       {
+-        label: "是否固定",
++        label: "Có cố định không",
+         field: "isFixed",
+         component: "RadioGroup",
+         defaultValue: 0,
+         componentProps: {
+           options: [
+-            { label: "是", value: 1 },
+-            { label: "否", value: 0 }
++            { label: "Có", value: 1 },
++            { label: "Không", value: 0 }
+           ]
+         }
+       },
+       // update-begin--author:liaozhiyang---date:20240105---for：【QQYUN-7499】多列风格富文本、markdown增加独占一行功能
+       {
+-        label: "是否独占一行",
++        label: "Có độc chiếm một hàng không",
+         field: "isOneRow",
+         component: "RadioGroup",
+         defaultValue: !1,
+         componentProps: {
+           options: [
+-            { label: "否", value: !1 },
+-            { label: "是", value: !0 }
++            { label: "Không", value: !1 },
++            { label: "Có", value: !0 }
+           ]
+         },
+         ifShow: () => l.value === "markdown" || l.value === "umeditor"
+@@ -175,17 +175,17 @@ const Z = C({
+       // update-end--author:liaozhiyang---date:20240105---for：【QQYUN-7499】多列风格富文本、markdown增加独占一行功能
+       // update-begin--author:liaozhiyang---date:20240430---for：【issues/6094】online 日期(年月日)控件增加年、年月，年周，年季度等格式
+       {
+-        label: "日期格式",
++        label: "Định dạng ngày",
+         field: "picker",
+         component: "RadioGroup",
+         defaultValue: "default",
+         componentProps: {
+           options: [
+-            { label: "年", value: "year" },
+-            { label: "年月", value: "month" },
+-            { label: "年周", value: "week" },
+-            { label: "年季度", value: "quarter" },
+-            { label: "年月日", value: "default" }
++            { label: "Năm", value: "year" },
++            { label: "Năm tháng", value: "month" },
++            { label: "Năm tuần", value: "week" },
++            { label: "Năm quý", value: "quarter" },
++            { label: "Năm tháng ngày", value: "default" }
+           ]
+         },
+         ifShow: () => l.value === "date"
+@@ -193,7 +193,7 @@ const Z = C({
+       // update-end--author:liaozhiyang---date:20240430---for：【issues/6094】online 日期(年月日)控件增加年、年月，年周，年季度等格式
+       // update-begin--author:liaozhiyang---date:20240308---for：【TV360X-25】扩展参数配置中增加开关是否选项配置
+       {
+-        label: "开关值",
++        label: "Giá trị công tắc",
+         field: "switchOptions",
+         component: "Input",
+         slot: "switchOptions",
+@@ -204,7 +204,7 @@ const Z = C({
+       schemas: c,
+       showActionButtonGroup: !1,
+       labelAlign: "right",
+-      labelWidth: 100
++      labelWidth: 150
+     }), [M, { closeModal: k }] = Y((e) => R(this, null, function* () {
+       if (f(), e.jsonStr) {
+         let o = JSON.parse(e.jsonStr);
+@@ -245,11 +245,11 @@ const Z = C({
+ function ee(t, a, n, f, i, l) {
+   const d = w("SetSwitchOptions"), p = w("BasicForm"), r = w("a-spin"), c = w("BasicModal");
+   return $(), A(c, J({ wrapClassName: "field-extend-config-modal" }, t.$attrs, {
+-    title: "字段扩展配置项",
++    title: "Cấu hình mở rộng trường",
+     onRegister: t.registerModal,
+     keyboard: "",
+     canFullscreen: !1,
+-    cancelText: "关闭",
++    cancelText: "Đóng",
+     onOk: t.handleSubmit
+   }), {
+     default: y(() => [
+diff --git a/ForeignKeyTable-7f7e28a7.mjs b/ForeignKeyTable-7f7e28a7.mjs
+index 5dd7df1adc91a0e91e025089733bd0cead3f006c..2c746f8e511d9803a9e56d07127421c4f8c1bd86 100644
+--- a/ForeignKeyTable-7f7e28a7.mjs
++++ b/ForeignKeyTable-7f7e28a7.mjs
+@@ -29,17 +29,17 @@ const F = b({
+   },
+   setup() {
+     const e = f([
+-      { title: "字段名称", key: "dbFieldName", width: 160 },
+-      { title: "字段备注", key: "dbFieldTxt", width: 160 },
++      { title: "Tên trường", key: "dbFieldName", width: 160 },
++      { title: "Ghi chú trường", key: "dbFieldTxt", width: 160 },
+       {
+-        title: "主表名",
++        title: "Tên bảng chính",
+         key: "mainTable",
+         width: 280,
+         type: l.input,
+         defaultValue: ""
+       },
+       {
+-        title: "主表字段",
++        title: "Trường bảng chính",
+         key: "mainField",
+         width: 280,
+         type: l.input,
+diff --git a/IndexTable-cdcc2b48.mjs b/IndexTable-cdcc2b48.mjs
+index cb5383ac6094869e8774e93ff653128ff508d939..4431bfa95c5bcd84cefdb0207c5e8cd4999ae251 100644
+--- a/IndexTable-cdcc2b48.mjs
++++ b/IndexTable-cdcc2b48.mjs
+@@ -23,34 +23,34 @@ const x = f({
+   setup() {
+     const e = b([
+       {
+-        title: "索引名称",
++        title: "Tên chỉ mục",
+         key: "indexName",
+         width: 330,
+         type: o.input,
+         defaultValue: "",
+-        placeholder: "请输入${title}",
++        placeholder: "Vui lòng nhập ${title}",
+         validateRules: [
+-          { required: !0, message: "${title}不能为空" },
++          { required: !0, message: "${title} không được để trống" },
+           // update-begin--author:liaozhiyang---date:20240807---for：【TV360X-1974】online索引名称增加校验
+           {
+             pattern: /^[a-zA-Z][a-zA-Z0-9_-]*$/,
+-            message: "命名规则：只能由字母、数字、下划线组成；必须以字母开头"
++            message: "Quy tắc đặt tên: Chỉ được bao gồm chữ cái, số, dấu gạch dưới; phải bắt đầu bằng chữ cái"
+           }
+           // update-end--author:liaozhiyang---date:20240807---for：【TV360X-1974】online索引名称增加校验
+         ]
+       },
+       {
+-        title: "索引栏位",
++        title: "Trường chỉ mục",
+         key: "indexField",
+         width: 330,
+         type: o.selectMultiple,
+         options: [],
+         defaultValue: "",
+-        placeholder: "请选择${title}",
+-        validateRules: [{ required: !0, message: "请选择${title}" }]
++        placeholder: "Vui lòng chọn ${title}",
++        validateRules: [{ required: !0, message: "Vui lòng chọn ${title}" }]
+       },
+       {
+-        title: "索引类型",
++        title: "Loại chỉ mục",
+         key: "indexType",
+         width: 330,
+         type: o.select,
+@@ -59,8 +59,8 @@ const x = f({
+           { title: "unique", value: "unique" }
+         ],
+         defaultValue: "normal",
+-        placeholder: "请选择${title}",
+-        validateRules: [{ required: !0, message: "请选择${title}" }]
++        placeholder: "Vui lòng chọn ${title}",
++        validateRules: [{ required: !0, message: "Vui lòng chọn ${title}" }]
+       }
+     ]), l = T(e), { tableRef: r, loading: i, dataSource: n, tableHeight: u, tableProps: t, setDataSource: d, validateData: p } = l;
+     function m(c) {
+diff --git a/LeftRole-2ed8a2bf.mjs b/LeftRole-2ed8a2bf.mjs
+index bb51870645946fa6adf00171b8922cc2a72b8898..d0c396d5c6eecf1ea2e797fe6f4a1ca67a0c3fc7 100644
+--- a/LeftRole-2ed8a2bf.mjs
++++ b/LeftRole-2ed8a2bf.mjs
+@@ -34,8 +34,8 @@ const B = g({
+         size: "small",
+         bordered: !0,
+         columns: [
+-          { title: "角色编码", align: "center", dataIndex: "roleCode" },
+-          { title: "角色名称", align: "center", dataIndex: "roleName" }
++          { title: "Mã vai trò", align: "center", dataIndex: "roleCode" },
++          { title: "Tên vai trò", align: "center", dataIndex: "roleName" }
+         ],
+         rowSelection: {
+           type: "radio",
+diff --git a/LeftUser-22baa378.mjs b/LeftUser-22baa378.mjs
+index 8db5bfb86484a8fab86257bb9538731d9b6d78f7..91ab0d783cfc44c72ea56c2c5d2c916e872e3692 100644
+--- a/LeftUser-22baa378.mjs
++++ b/LeftUser-22baa378.mjs
+@@ -46,19 +46,19 @@ const R = g({
+         formConfig: {
+           schemas: [
+             {
+-              label: "账号",
++              label: "Tài khoản",
+               field: "username",
+               component: "JInput",
+               componentProps: {
+-                placeholder: "输入账号"
++                placeholder: "Nhập tài khoản"
+               }
+             },
+             {
+-              label: "姓名",
++              label: "Họ tên",
+               field: "realname",
+               component: "JInput",
+               componentProps: {
+-                placeholder: "输入姓名"
++                placeholder: "Nhập họ tên"
+               }
+             }
+           ]
+diff --git a/OnlCgformErpList-58acdfa0.mjs b/OnlCgformErpList-58acdfa0.mjs
+index ea33f9ec1d80a96e3e0db148710cc3e066d5af84..63165bd11e5aa4ab0086cd3d3050d78fb3caef9e 100644
+--- a/OnlCgformErpList-58acdfa0.mjs
++++ b/OnlCgformErpList-58acdfa0.mjs
+@@ -273,7 +273,7 @@ const bo = { class: "p-2 cgformErpList" }, ho = { class: "content" }, Co = {
+                 onClick: e(ce)
+               }, {
+                 default: l(() => [
+-                  f("新增")
++                  f("Thêm mới")
+                 ]),
+                 _: 1
+               }, 8, ["onClick"])) : m("", !0),
+@@ -284,7 +284,7 @@ const bo = { class: "p-2 cgformErpList" }, ho = { class: "content" }, Co = {
+                 onClick: e(de)
+               }, {
+                 default: l(() => [
+-                  f("导入")
++                  f("Nhập khẩu")
+                 ]),
+                 _: 1
+               }, 8, ["onClick"])) : m("", !0),
+diff --git a/OnlCgformErpSubTable-9b1e1938.mjs b/OnlCgformErpSubTable-9b1e1938.mjs
+index 49d60b3ee0e4d57661aad7d8b2b642b70c257c57..693fb80c5f4f7374b83b92dd74c800c760a03b1c 100644
+--- a/OnlCgformErpSubTable-9b1e1938.mjs
++++ b/OnlCgformErpSubTable-9b1e1938.mjs
+@@ -262,7 +262,7 @@ const so = {
+               onClick: xe
+             }, {
+               default: l(() => [
+-                h("新增")
++                h("Thêm mới")
+               ]),
+               _: 1
+             })) : f("", !0),
+diff --git a/OnlCgformInnerTableList-4b5e14ed.mjs b/OnlCgformInnerTableList-4b5e14ed.mjs
+index de5577999b6499349e4a8f899fd7b9856a3d2052..33dda39c4d91e69d40a24d2bbbc8fe79289db3cc 100644
+--- a/OnlCgformInnerTableList-4b5e14ed.mjs
++++ b/OnlCgformInnerTableList-4b5e14ed.mjs
+@@ -263,7 +263,7 @@ const _o = { class: "p-2" }, ho = {
+               onClick: e(ne)
+             }, {
+               default: r(() => [
+-                C("新增")
++                C("Thêm mới")
+               ]),
+               _: 1
+             }, 8, ["onClick"])) : d("", !0),
+diff --git a/OnlCgformTabList-019ad753.mjs b/OnlCgformTabList-019ad753.mjs
+index ac6ade9b0f346742deda7cdc1d8757bce1834c5f..cea1ba0c9686fa1109bb0a3c4d610e8c11808340 100644
+--- a/OnlCgformTabList-019ad753.mjs
++++ b/OnlCgformTabList-019ad753.mjs
+@@ -238,7 +238,7 @@ const lo = { class: "p-2" }, ao = {
+               onClick: e(W)
+             }, {
+               default: i(() => [
+-                f("新增")
++                f("Thêm mới")
+               ]),
+               _: 1
+             }, 8, ["onClick"])) : d("", !0),
+diff --git a/OnlineAutoList-48589d09.mjs b/OnlineAutoList-48589d09.mjs
+index 21ab42eb6260c826e1cb64e7d98682534b560358..7b5e82702a303a00cda299488fb9b8c2c1ea4061 100644
+--- a/OnlineAutoList-48589d09.mjs
++++ b/OnlineAutoList-48589d09.mjs
+@@ -326,7 +326,7 @@ function po(e, C, l, T, g, S) {
+           onClick: e.handleAdd
+         }, {
+           default: i(() => [
+-            y("新增")
++            y("Thêm mới")
+           ]),
+           _: 1
+         }, 8, ["onClick"])) : c("", !0),
+diff --git a/OnlineAutoTreeList-3baa1d00.mjs b/OnlineAutoTreeList-3baa1d00.mjs
+index ccbc19bfed9b0bfb3cf56d3b2c7432b06211aa3b..ac81d662cae2bfa8212c91ab6ada5b74731cfe56 100644
+--- a/OnlineAutoTreeList-3baa1d00.mjs
++++ b/OnlineAutoTreeList-3baa1d00.mjs
+@@ -361,7 +361,7 @@ function bo(e, S, m, i, k, w) {
+           onClick: e.handleAdd
+         }, {
+           default: a(() => [
+-            T("新增")
++            T("Thêm mới")
+           ]),
+           _: 1
+         }, 8, ["onClick"])) : y("", !0),
+diff --git a/PageAttributeTable-25e3b7da.mjs b/PageAttributeTable-25e3b7da.mjs
+index 98beca2165fbfe3e70c99c8b8c38fbb3f8a911be..45cdb3c2d1a495191a3846db57cb5a6e9240d8ed 100644
+--- a/PageAttributeTable-25e3b7da.mjs
++++ b/PageAttributeTable-25e3b7da.mjs
+@@ -32,54 +32,54 @@ import "./constant-fa63bd66.mjs";
+ import "/@/components/jeecg/OnLine/JPopupOnlReport.vue";
+ import "vue-router";
+ const K = [
+-  { title: "文本框", value: "text" },
+-  { title: "密码", value: "password" },
+-  { title: "下拉框", value: "list" },
+-  { title: "单选框", value: "radio" },
+-  { title: "多选框", value: "checkbox" },
+-  { title: "开关", value: "switch" },
+-  { title: "日期(年月日)", value: "date" },
+-  { title: "日期(年月日时分秒)", value: "datetime" },
+-  { title: "时间(HH:mm:ss)", value: "time" },
+-  { title: "文件", value: "file" },
+-  { title: "图片", value: "image" },
+-  { title: "多行文本", value: "textarea" },
+-  { title: "富文本", value: "umeditor" },
++  { title: "Hộp văn bản", value: "text" },
++  { title: "Mật khẩu", value: "password" },
++  { title: "Hộp thả xuống", value: "list" },
++  { title: "Hộp chọn đơn", value: "radio" },
++  { title: "Hộp chọn nhiều", value: "checkbox" },
++  { title: "Công tắc", value: "switch" },
++  { title: "Ngày (năm tháng ngày)", value: "date" },
++  { title: "Ngày (năm tháng ngày giờ phút giây)", value: "datetime" },
++  { title: "Thời gian (HH:mm:ss)", value: "time" },
++  { title: "Tệp", value: "file" },
++  { title: "Hình ảnh", value: "image" },
++  { title: "Văn bản nhiều dòng", value: "textarea" },
++  { title: "Văn bản phong phú", value: "umeditor" },
+   { title: "MarkDown", value: "markdown" },
+-  { title: "用户选择", value: "sel_user" },
+-  { title: "部门选择", value: "sel_depart" },
+-  { title: "关联记录", value: "link_table" },
+-  { title: "他表字段", value: "link_table_field" },
+-  { title: "省市区组件", value: "pca" },
+-  { title: "Popup弹框", value: "popup" },
++  { title: "Chọn người dùng", value: "sel_user" },
++  { title: "Chọn phòng ban", value: "sel_depart" },
++  { title: "Liên kết bản ghi", value: "link_table" },
++  { title: "Trường bảng khác", value: "link_table_field" },
++  { title: "Thành phần tỉnh, thành phố, khu vực", value: "pca" },
++  { title: "Popup", value: "popup" },
+   // update-begin--author:liaozhiyang---date:20240130---for：【QQYUN-7961】popupDict字典
+-  { title: "Popup字典", value: "popup_dict" },
++  { title: "Popup từ điển", value: "popup_dict" },
+   // update-end--author:liaozhiyang---date:20240130---for：【QQYUN-7961】popupDict字典
+-  { title: "下拉多选框", value: "list_multi" },
+-  { title: "下拉搜索框", value: "sel_search" },
+-  { title: "分类字典树", value: "cat_tree" },
+-  { title: "自定义树控件", value: "sel_tree" },
+-  { title: "联动组件", value: "link_down" }
++  { title: "Hộp thả xuống nhiều lựa chọn", value: "list_multi" },
++  { title: "Hộp tìm kiếm thả xuống", value: "sel_search" },
++  { title: "Cây từ điển phân loại", value: "cat_tree" },
++  { title: "Điều khiển cây tùy chỉnh", value: "sel_tree" },
++  { title: "Thành phần liên kết", value: "link_down" }
+ ], ge = [
+-  { title: "文本框", value: "text" },
+-  { title: "单选框", value: "radio" },
+-  { title: "开关", value: "switch" },
+-  { title: "日期(yyyy-MM-dd)", value: "date" },
+-  { title: "日期（yyyy-MM-dd HH:mm:ss）", value: "datetime" },
+-  { title: "时间（HH:mm:ss）", value: "time" },
+-  { title: "文件", value: "file" },
+-  { title: "图片", value: "image" },
+-  { title: "下拉框", value: "list" },
+-  { title: "下拉多选框", value: "list_multi" },
+-  { title: "下拉搜索框", value: "sel_search" },
+-  { title: "popup弹出框", value: "popup" },
++  { title: "Hộp văn bản", value: "text" },
++  { title: "Hộp chọn đơn", value: "radio" },
++  { title: "Công tắc", value: "switch" },
++  { title: "Ngày (yyyy-MM-dd)", value: "date" },
++  { title: "Ngày (yyyy-MM-dd HH:mm:ss)", value: "datetime" },
++  { title: "Thời gian (HH:mm:ss)", value: "time" },
++  { title: "Tệp", value: "file" },
++  { title: "Hình ảnh", value: "image" },
++  { title: "Hộp thả xuống", value: "list" },
++  { title: "Hộp thả xuống nhiều lựa chọn", value: "list_multi" },
++  { title: "Hộp tìm kiếm thả xuống", value: "sel_search" },
++  { title: "Popup", value: "popup" },
+   // update-begin--author:liaozhiyang---date:20240130---for：【QQYUN-7961】popupDict字典
+-  // { title: 'Popup字典', value: 'popup_dict' },
++  // { title: 'Popup từ điển', value: 'popup_dict' },
+   // update-end--author:liaozhiyang---date:20240130---for：【QQYUN-7961】popupDict字典
+-  { title: "部门选择", value: "sel_depart" },
+-  { title: "用户选择", value: "sel_user" },
+-  { title: "省市区组件", value: "pca" },
+-  { title: "多行文本", value: "textarea" }
++  { title: "Chọn phòng ban", value: "sel_depart" },
++  { title: "Chọn người dùng", value: "sel_user" },
++  { title: "Thành phần tỉnh, thành phố, khu vực", value: "pca" },
++  { title: "Văn bản nhiều dòng", value: "textarea" }
+ ], ye = ie({
+   name: "PageAttributeTable",
+   components: {
+@@ -89,10 +89,10 @@ const K = [
+   },
+   setup() {
+     const i = ae([
+-      { title: "字段名称", key: "dbFieldName", width: 100 },
+-      { title: "字段备注", key: "dbFieldTxt", width: 150 },
++      { title: "Tên trường", key: "dbFieldName", width: 100 },
++      { title: "Ghi chú trường", key: "dbFieldTxt", width: 150 },
+       {
+-        title: "表单显示",
++        title: "Hiển thị biểu mẫu",
+         key: "isShowForm",
+         width: 80,
+         type: r.checkbox,
+@@ -101,7 +101,7 @@ const K = [
+         defaultChecked: !0
+       },
+       {
+-        title: "列表显示",
++        title: "Hiển thị danh sách",
+         key: "isShowList",
+         width: 80,
+         type: r.checkbox,
+@@ -110,7 +110,7 @@ const K = [
+         defaultChecked: !0
+       },
+       {
+-        title: "是否排序",
++        title: "Có sắp xếp không",
+         key: "sortFlag",
+         width: 80,
+         type: r.checkbox,
+@@ -128,7 +128,7 @@ const K = [
+         // update-end--author:liaozhiyang---date:20240528---for：【TV360X-291】没勾选同步数据库禁用排序功能
+       },
+       {
+-        title: "是否只读",
++        title: "Chỉ đọc",
+         key: "isReadOnly",
+         width: 80,
+         type: r.checkbox,
+@@ -137,26 +137,26 @@ const K = [
+         defaultChecked: !1
+       },
+       {
+-        title: "控件类型",
++        title: "Loại điều khiển",
+         key: "fieldShowType",
+         width: 170,
+         type: r.select,
+         options: K,
+         defaultValue: "text",
+-        placeholder: "请选择${title}",
+-        validateRules: [{ required: !0, message: "请选择${title}" }, { handler: V }]
++        placeholder: "Vui lòng chọn ${title}",
++        validateRules: [{ required: !0, message: "Vui lòng chọn ${title}" }, { handler: V }]
+       },
+       {
+-        title: "控件长度",
++        title: "Độ dài điều khiển",
+         key: "fieldLength",
+         width: 100,
+-        titleHelp: { message: "此长度只对子表列字段宽度有效！" },
++        titleHelp: { message: "Độ dài này chỉ có hiệu lực đối với độ rộng của trường con!" },
+         type: r.inputNumber,
+         defaultValue: 120,
+-        placeholder: "请输入控件长度"
++        placeholder: "Vui lòng nhập độ dài điều khiển"
+       },
+       {
+-        title: "是否查询",
++        title: "Có truy vấn không",
+         key: "isQuery",
+         width: 80,
+         type: r.checkbox,
+@@ -174,17 +174,17 @@ const K = [
+         // update-end--author:liaozhiyang---date:20240528---for：【TV360X-423】未勾选同步数据库禁用查询
+       },
+       {
+-        title: "查询类型",
++        title: "Loại truy vấn",
+         key: "queryMode",
+         width: 120,
+         type: r.select,
+         options: [
+-          { title: "普通查询", value: "single" },
+-          { title: "模糊查询", value: "like" },
+-          { title: "范围查询", value: "group" }
++          { title: "Truy vấn thông thường", value: "single" },
++          { title: "Truy vấn mờ", value: "like" },
++          { title: "Truy vấn phạm vi", value: "group" }
+         ],
+         defaultValue: "single",
+-        placeholder: "请选择${title}",
++        placeholder: "Vui lòng chọn ${title}",
+         validateRules: [{ handler: U }],
+         props: {
+           isDisabledCell({ row: e, column: t }) {
+@@ -192,7 +192,7 @@ const K = [
+         }
+       },
+       {
+-        title: "控件默认值",
++        title: "Giá trị mặc định của điều khiển",
+         key: "fieldDefaultValue",
+         width: 140,
+         type: r.input,
+@@ -202,21 +202,21 @@ const K = [
+         defaultValue: ""
+       },
+       {
+-        title: "定义转换器",
++        title: "Định nghĩa bộ chuyển đổi",
+         key: "converter",
+         width: 150,
+         type: r.input,
+         defaultValue: ""
+       },
+       {
+-        title: "扩展参数",
++        title: "Tham số mở rộng",
+         key: "fieldExtendJson",
+         width: 120,
+         type: r.textarea,
+         defaultValue: ""
+       },
+       {
+-        title: "更多配置",
++        title: "Cấu hình thêm",
+         minWidth: 100,
+         key: "fieldConfig",
+         type: r.slot,
+@@ -225,7 +225,7 @@ const K = [
+     ]), u = fe(i), { tableRef: s, tables: c } = u;
+     function V({ cellValue: e, row: t }, l) {
+       let { dbTable: a } = c, o = a.value.tableRef.getTableData({ rowIds: [t.id] })[0].dbType;
+-      e === "time" && o !== "string" ? l(!1, "当控件类型为时间时,数据库属性里的字段类型必须是String！") : e === "date" && o !== "Date" && o !== "Datetime" ? l(!1, "当控件类型为日期时，数据库属性里的字段类型必须是Date或Datetime！") : e === "datetime" && o !== "Datetime" ? l(!1, "当控件类型为datetime时，数据库属性里的字段类型必须是Datetime！") : l(!0);
++      e === "time" && o !== "string" ? l(!1, "Khi loại điều khiển là thời gian, loại trường trong thuộc tính cơ sở dữ liệu phải là String!") : e === "date" && o !== "Date" && o !== "Datetime" ? l(!1, "Khi loại điều khiển là ngày, loại trường trong thuộc tính cơ sở dữ liệu phải là Date hoặc Datetime!") : e === "datetime" && o !== "Datetime" ? l(!1, "Khi loại điều khiển là datetime, loại trường trong thuộc tính cơ sở dữ liệu phải là Datetime!") : l(!0);
+     }
+     function C(e) {
+       let t = "text";
+@@ -385,7 +385,7 @@ const K = [
+     function U({ cellValue: e, row: t }, l) {
+       let { dbTable: a } = c;
+       const o = a.value.tableRef.getTableData({ rowIds: [t.id] })[0].dbType;
+-      e === "group" ? ["double", "int", "BigDecimal", "Date", "Datetime"].includes(o) || t.fieldShowType === "time" ? l(!0) : l(!1, "范围查询，只支持数据库属里的字段类型为：Integer、Double、BigDecimal及Date、Datetime 或 控件类型是时间(HH:mm:ss)") : e === "like" ? ["string"].includes(o) && t.fieldShowType === "text" ? l(!0) : l(!1, "模糊查询，只支持控件类型是文本框且数据库属里的字段类型是String") : l(!0);
++      e === "group" ? ["double", "int", "BigDecimal", "Date", "Datetime"].includes(o) || t.fieldShowType === "time" ? l(!0) : l(!1, "Truy vấn phạm vi, chỉ hỗ trợ các loại trường trong thuộc tính cơ sở dữ liệu là: Integer, Double, BigDecimal và Date, Datetime hoặc loại điều khiển là thời gian (HH:mm:ss)") : e === "like" ? ["string"].includes(o) && t.fieldShowType === "text" ? l(!0) : l(!1, "Truy vấn mờ, chỉ hỗ trợ loại điều khiển là hộp văn bản và loại trường trong thuộc tính cơ sở dữ liệu là String") : l(!0);
+     }
+     const X = ({ oldValue: e, row: t }) => {
+       t.dbType != "string" && e == "string" && s.value.getTableData({ rowIds: [t.id] })[0].queryMode == "like" && s.value.setValues([
+@@ -439,7 +439,7 @@ function he(i, u, s, c, V, C) {
+           onClick: (M) => i.openConfig(v)
+         }, {
+           default: H(() => [
+-            ue("更多配置")
++            ue("Cấu hình thêm")
+           ]),
+           _: 2
+         }, 1032, ["onClick"])) : re("", !0)
+diff --git a/QueryTable-f7bfca7f.mjs b/QueryTable-f7bfca7f.mjs
+index 414f1266c164df89b827f1b1ec338e890b94588d..b5adb3378c031bc3b314058d354d151ff78cfced 100644
+--- a/QueryTable-f7bfca7f.mjs
++++ b/QueryTable-f7bfca7f.mjs
+@@ -27,81 +27,73 @@ const I = V({
+   emits: ["query"],
+   setup(e, { emit: t }) {
+     const l = F([
+-      { title: "字段名称", key: "dbFieldName", width: 130 },
+-      { title: "字段备注", key: "dbFieldTxt", width: 130 },
++      { title: "Tên trường", key: "dbFieldName", width: 130 },
++      { title: "Ghi chú trường", key: "dbFieldTxt", width: 130 },
+       {
+-        title: "控件类型",
++        title: "Loại điều khiển",
+         key: "queryShowType",
+         width: 170,
+         type: r.select,
+         options: [
+-          { title: "文本框", value: "text" },
+-          { title: "日期(yyyy-MM-dd)", value: "date" },
+-          { title: "日期（yyyy-MM-dd HH:mm:ss）", value: "datetime" },
+-          { title: "时间（HH:mm:ss）", value: "time" },
+-          // update-begin--author:liaozhiyang---date:20240531---for：【TV360X-415】个性化查询支持年、月、周、季度
+-          // 虚拟的date_year、date_month、date_week、date_quarter其实走的还是date组件，为了查询
+-          { title: "日期-年", value: "date_year" },
+-          { title: "日期-月", value: "date_month" },
+-          { title: "日期-周", value: "date_week" },
+-          { title: "日期-季度", value: "date_quarter" },
+-          // update-end--author:liaozhiyang---date:20240531---for：【TV360X-415】个性化查询支持年、月、周、季度
+-          { title: "下拉框", value: "list" },
+-          { title: "下拉多选框", value: "list_multi" },
+-          { title: "下拉搜索框", value: "sel_search" },
+-          { title: "分类字典树", value: "cat_tree" },
+-          { title: "Popup弹框", value: "popup" },
+-          { title: "部门选择", value: "sel_depart" },
+-          { title: "用户选择", value: "sel_user" },
+-          { title: "省市区组件", value: "pca" },
+-          { title: "自定义树控件", value: "sel_tree" },
+-          // update-begin--author:liaozhiyang---date:20240521---for：【TV360X-8】个性化配置控件类型增加开关组件
+-          { title: "开关", value: "switch" },
+-          // update-end--author:liaozhiyang---date:20240521---for：【TV360X-8】个性化配置控件类型增加开关组件
+-          // update-begin--author:liaozhiyang---date:20240529---for：【TV360X-415】个性化配置控件类型增加popup字典组件
+-          { title: "Popup字典", value: "popup_dict" }
+-          // update-end--author:liaozhiyang---date:20240529---for：【TV360X-415】个性化配置控件类型增加popup字典组件
++          { title: "Hộp văn bản", value: "text" },
++          { title: "Ngày (yyyy-MM-dd)", value: "date" },
++          { title: "Ngày (yyyy-MM-dd HH:mm:ss)", value: "datetime" },
++          { title: "Thời gian (HH:mm:ss)", value: "time" },
++          { title: "Ngày - Năm", value: "date_year" },
++          { title: "Ngày - Tháng", value: "date_month" },
++          { title: "Ngày - Tuần", value: "date_week" },
++          { title: "Ngày - Quý", value: "date_quarter" },
++          { title: "Hộp thả xuống", value: "list" },
++          { title: "Hộp thả xuống nhiều lựa chọn", value: "list_multi" },
++          { title: "Hộp tìm kiếm thả xuống", value: "sel_search" },
++          { title: "Cây từ điển phân loại", value: "cat_tree" },
++          { title: "Popup", value: "popup" },
++          { title: "Chọn phòng ban", value: "sel_depart" },
++          { title: "Chọn người dùng", value: "sel_user" },
++          { title: "Thành phần tỉnh, thành phố, khu vực", value: "pca" },
++          { title: "Điều khiển cây tùy chỉnh", value: "sel_tree" },
++          { title: "Công tắc", value: "switch" },
++          { title: "Popup từ điển", value: "popup_dict" }
+         ],
+         defaultValue: "text",
+-        placeholder: "请选择${title}",
++        placeholder: "Vui lòng chọn ${title}",
+         validateRules: [{ handler: n }]
+       },
+       {
+-        title: "字典Table",
++        title: "Bảng từ điển",
+         key: "queryDictTable",
+         width: 130,
+         type: r.textarea,
+         defaultValue: ""
+       },
+       {
+-        title: "字典Code",
++        title: "Mã từ điển",
+         key: "queryDictField",
+         width: 130,
+         type: r.input,
+         defaultValue: ""
+       },
+       {
+-        title: "字典Text",
++        title: "Văn bản từ điển",
+         key: "queryDictText",
+         width: 130,
+         type: r.input,
+         defaultValue: ""
+       },
+       {
+-        title: "默认值",
++        title: "Giá trị mặc định",
+         key: "queryDefVal",
+         width: 130,
+         type: r.input,
+         defaultValue: ""
+       },
+       {
+-        title: "是否启用",
++        title: "Có kích hoạt không",
+         key: "queryConfigFlag",
+         minWidth: 80,
+         type: r.checkbox,
+         customValue: ["1", "0"],
+         defaultChecked: !1,
+-        // update-begin--author:liaozhiyang---date:20240603---for：【TV360X-816】如果是关联记录或者没勾选数据库字段个性化查询checkbox禁用
+         props: {
+           isDisabledCell({ row: a, column: o }) {
+             let { pageTable: i, dbTable: v, fkTable: g } = m;
+@@ -115,14 +107,13 @@ const I = V({
+             return !!(u != null && u.mainTable && (u != null && u.mainField));
+           }
+         }
+-        // update-end--author:liaozhiyang---date:20240603---for：【TV360X-816】如果是关联记录或者没勾选数据库字段个性化查询checkbox禁用
+       }
+     ]), d = P(l), { tables: m } = d;
+     function y({ row: a, column: o, value: i }) {
+       o.key === "queryConfigFlag" && i === "1" && t("query", a.id);
+     }
+     function n({ cellValue: a, row: o }, i) {
+-      a == null && o.queryConfigFlag == "1" && i(!1, "查询启用状态下，控件类型必选~"), i(!0);
++      a == null && o.queryConfigFlag == "1" && i(!1, "Khi trạng thái truy vấn được kích hoạt, loại điều khiển phải được chọn~"), i(!0);
+     }
+     return h(b({}, d), { columns: l, handleChange: y });
+   }
 diff --git a/auth.data-511e5197.mjs b/auth.data-511e5197.mjs
-index f05ab922f44527247f4afaed7ebaced7d4d96057..aa0d981a4f1215a03370211771780e9342459c7a 100644
+index f05ab922f44527247f4afaed7ebaced7d4d96057..2c3df6ed817f1f6a06d3e4eae03ecc9e4f63ecc4 100644
 --- a/auth.data-511e5197.mjs
 +++ b/auth.data-511e5197.mjs
 @@ -2,88 +2,88 @@ import { computed as p } from "vue";
@@ -234,7 +2215,7 @@ index f05ab922f44527247f4afaed7ebaced7d4d96057..aa0d981a4f1215a03370211771780e93
        },
        defaultValue: 1
 diff --git a/cgform.data-475d4984.mjs b/cgform.data-475d4984.mjs
-index 1d7a89eab5883ab3692a5c3284c0f8f9140c8a72..4a0939eadc207aaf0ca6f165cd757f953239d1a0 100644
+index 1d7a89eab5883ab3692a5c3284c0f8f9140c8a72..658511c87574a21389b72d5a86eec7aef38126f0 100644
 --- a/cgform.data-475d4984.mjs
 +++ b/cgform.data-475d4984.mjs
 @@ -3,37 +3,37 @@ import { filterDictText as n } from "/@/utils/dict/JDictSelectUtil";
@@ -411,12 +2392,48 @@ index 1d7a89eab5883ab3692a5c3284c0f8f9140c8a72..4a0939eadc207aaf0ca6f165cd757f95
  ];
  export {
    m as E,
+diff --git a/enhance.data-a67572e1.mjs b/enhance.data-a67572e1.mjs
+index 4fcb5506ffde764b3b7eb561096a3f66c0ed828d..fb590d261b124e70cb0886af1578573c0ee4687f 100644
+--- a/enhance.data-a67572e1.mjs
++++ b/enhance.data-a67572e1.mjs
+@@ -41,8 +41,8 @@ function i(l) {
+       component: "Select",
+       componentProps: {
+         options: [
+-          { label: "新增", value: "add" },
+-          { label: "编辑", value: "edit" },
++          { label: "Thêm mới", value: "add" },
++          { label: "Chỉnh sửa", value: "edit" },
+           { label: "删除", value: "delete" },
+           { label: "导入", value: "import" },
+           { label: "导出", value: "export" },
+@@ -122,8 +122,8 @@ function p(l) {
+       componentProps: {
+         allowClear: !1,
+         options: [
+-          { label: "新增", value: "add" },
+-          { label: "编辑", value: "edit" },
++          { label: "Thêm mới", value: "add" },
++          { label: "Chỉnh sửa", value: "edit" },
+           { label: "删除", value: "delete" },
+           ...l.value.map((e) => ({ label: e.buttonName, value: e.buttonCode }))
+         ]
 diff --git a/index-30e0e923.mjs b/index-30e0e923.mjs
-index 6af1017b52ac8c3e9b9bc9b6d981fccbc67ae655..498bba39554bcd26e14ca558d58aaf1e4fc0a0d1 100644
+index 6af1017b52ac8c3e9b9bc9b6d981fccbc67ae655..65a84ba21fcd2b03d7deff689b436a7e58022f12 100644
 --- a/index-30e0e923.mjs
 +++ b/index-30e0e923.mjs
-@@ -1194,52 +1194,52 @@ const Se = () => {
-       doneLabel: "完成",
+@@ -1188,58 +1188,58 @@ const Se = () => {
+   const { prefixVar: t } = he(""), e = D(`${t}-online-aiCreateTable`), n = D(`${t}-online-newAddBtn`), o = D(`${t}-online-customBtn`), i = D(`${t}-online-enhanceJsBtn`), r = D(`${t}-online-enhanceSqlBtn`), s = D(`${t}-online-enhanceJavaBtn`), a = D(`${t}-online-exportDbBtn`), c = D(`${t}-online-codeGenerator`), p = `${t}-online-guide`, l = () => {
+     let u = mt();
+     u.setOptions({
+-      nextLabel: "下一步",
+-      prevLabel: "上一步",
+-      //skipLabel: '跳过',
+-      doneLabel: "完成",
++      nextLabel: "Tiếp theo",
++      prevLabel: "Trước",
++      //skipLabel: 'Bỏ qua',
++      doneLabel: "Hoàn thành",
        steps: [
          {
 -          title: "第一步",
@@ -488,6 +2505,15 @@ index 6af1017b52ac8c3e9b9bc9b6d981fccbc67ae655..498bba39554bcd26e14ca558d58aaf1e
          }
        ]
      }), u.start();
+@@ -1354,7 +1354,7 @@ const Se = () => {
+       aiCreateTable: Vt
+     };
+   }
+-}), ke = /* @__PURE__ */ ft("span", null, "删除", -1), je = /* @__PURE__ */ ft("span", null, "批量操作", -1), Ee = {
++}), ke = /* @__PURE__ */ ft("span", null, "Xóa", -1), je = /* @__PURE__ */ ft("span", null, "Hoạt động hàng loạt", -1), Ee = {
+   key: 0,
+   style: { color: "limegreen" }
+ }, Te = {
 @@ -1379,7 +1379,7 @@ function Ne(t, e, n, o, i, r) {
              preIcon: "ant-design:plus"
            }, {
@@ -560,10 +2586,495 @@ index 6af1017b52ac8c3e9b9bc9b6d981fccbc67ae655..498bba39554bcd26e14ca558d58aaf1e
              ]),
              _: 1
            }, 8, ["class", "onClick"]),
+@@ -1491,8 +1491,8 @@ function Ne(t, e, n, o, i, r) {
+           })) : pt("", !0)
+         ]),
+         dbSync: j(({ text: x }) => [
+-          x === "Y" ? (tt(), ut("span", Ee, "已同步")) : pt("", !0),
+-          x === "N" ? (tt(), ut("span", Te, "未同步")) : pt("", !0)
++          x === "Y" ? (tt(), ut("span", Ee, "Đã đồng bộ")) : pt("", !0),
++          x === "N" ? (tt(), ut("span", Te, "Chưa đồng bộ")) : pt("", !0)
+         ]),
+         action: j(({ record: x }) => [
+           y(u, {
+diff --git a/index-f30613d1.mjs b/index-f30613d1.mjs
+index 66df394f7db0eda76fb777a7a6f866ce1524c932..cbb16f7a1dac857f241ae6376c42bd7b329c63d4 100644
+--- a/index-f30613d1.mjs
++++ b/index-f30613d1.mjs
+@@ -86,7 +86,7 @@ const ye = /* @__PURE__ */ O({
+     function B(t) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: P.bind(null, t)
+         }
+       ];
+@@ -94,19 +94,19 @@ const ye = /* @__PURE__ */ O({
+     function v(t) {
+       return [
+         {
+-          label: "功能测试",
++          label: "Kiểm tra chức năng",
+           class: ["low-app-hide"],
+           onClick: () => I(t.id)
+         },
+         {
+-          label: "配置地址",
++          label: "Cấu hình địa chỉ",
+           class: ["low-app-hide"],
+           onClick: () => M(t)
+         },
+         {
+-          label: "删除",
++          label: "Xóa",
+           popConfirm: {
+-            title: "是否确认删除",
++            title: "Có chắc chắn muốn xóa không?",
+             confirm: $.bind(null, t)
+           }
+         }
+@@ -125,17 +125,17 @@ const ye = /* @__PURE__ */ O({
+             e += _.paramName + "=${" + _.paramName + "}&";
+         e.length > 0 && (e = e.substring(0, e.length - 1), l += "?" + e);
+       }).catch(() => {
+-        n.warning("获取参数失败!");
++        n.warning("Lấy tham số thất bại!");
+       }).finally(() => {
+         r({
+           iconType: "info",
+           width: 500,
+-          title: `菜单链接【${t.name}】`,
++          title: `Liên kết menu【${t.name}】`,
+           content: l,
+           closable: !0,
+           maskClosable: !0,
+-          cancelText: "复制SQL",
+-          okText: "复制URL",
++          cancelText: "Sao chép SQL",
++          okText: "Sao chép URL",
+           cancelButtonProps: {
+             class: "copy-this-sql",
+             "data-clipboard-text": d
+@@ -148,9 +148,9 @@ const ye = /* @__PURE__ */ O({
+             return new Promise((o) => {
+               const e = new R(".copy-this-text");
+               e.on("success", () => {
+-                e.destroy(), n.success("复制URL成功"), o();
++                e.destroy(), n.success("Sao chép URL thành công"), o();
+               }), e.on("error", () => {
+-                n.error("该浏览器不支持自动复制"), e.destroy(), o();
++                n.error("Trình duyệt này không hỗ trợ sao chép tự động"), e.destroy(), o();
+               });
+             });
+           },
+@@ -158,9 +158,9 @@ const ye = /* @__PURE__ */ O({
+             return new Promise((o) => {
+               const e = new R(".copy-this-sql");
+               e.on("success", () => {
+-                e.destroy(), n.success("复制插入菜单SQL成功"), o();
++                e.destroy(), n.success("Sao chép SQL chèn menu thành công"), o();
+               }), e.on("error", () => {
+-                n.error("该浏览器不支持自动复制"), e.destroy(), o();
++                n.error("Trình duyệt này không hỗ trợ sao chép tự động"), e.destroy(), o();
+               });
+             });
+           }
+@@ -184,7 +184,7 @@ const ye = /* @__PURE__ */ O({
+               style: { "margin-right": "5px" }
+             }, {
+               default: a(() => [
+-                C("录入")
++                C("Nhập")
+               ]),
+               _: 1
+             }),
+@@ -198,7 +198,7 @@ const ye = /* @__PURE__ */ O({
+                     }, {
+                       default: a(() => [
+                         i(d, { icon: "ant-design:delete-outlined" }),
+-                        C(" 删除 ")
++                        C(" Xóa ")
+                       ]),
+                       _: 1
+                     })
+@@ -209,7 +209,7 @@ const ye = /* @__PURE__ */ O({
+               default: a(() => [
+                 i(l, null, {
+                   default: a(() => [
+-                    C("批量操作 "),
++                    C("Hoạt động hàng loạt "),
+                     i(d, { icon: "mdi:chevron-down" })
+                   ]),
+                   _: 1
+diff --git a/useCgformList-f41d4dc1.mjs b/useCgformList-f41d4dc1.mjs
+index 4b53b2640c7cf118fe8f4e36824d02368115ff1f..03faab9605cc9e54d713084103c82deae035d163 100644
+--- a/useCgformList-f41d4dc1.mjs
++++ b/useCgformList-f41d4dc1.mjs
+@@ -263,7 +263,7 @@ function ft(t) {
+   function we(e) {
+     let n;
+     e.themeTemplate === "erp" ? n = `/online/cgformErpList/${e.id}` : e.themeTemplate === "innerTable" ? n = `/online/cgformInnerTableList/${e.id}` : e.themeTemplate === "tab" ? n = `/online/cgformTabList/${e.id}` : e.isTree == "Y" ? n = `/online/cgformTreeList/${e.id}` : n = `/online/cgformList/${e.id}`, Te({
+-      title: `菜单链接【${e.tableTxt}】`,
++      title: `Liên kết menu【${e.tableTxt}】`,
+       content: n,
+       copyText: n,
+       copyTitle: `${e.tableTxt}`
+@@ -272,14 +272,14 @@ function ft(t) {
+   function Me(e) {
+     const n = k(e.tableName + "_copy");
+     u({
+-      title: "复制表",
++      title: "Sao chép bảng",
+       content: () => y(
+         "div",
+         {
+           style: "margin: 20px 0;"
+         },
+         [
+-          "请输入新表名：",
++          "Vui lòng nhập tên bảng mới：",
+           y($e, {
+             value: n.value,
+             "onUpdate:value": (c) => n.value = c
+@@ -288,16 +288,16 @@ function ft(t) {
+       ),
+       iconType: "info",
+       closable: !0,
+-      okText: "复制",
++      okText: "Sao chép",
+       onOk() {
+-        n.value ? n.value === e.tableName ? i.warning("新表名和旧表名不能一致") : je(e.id, n.value).then(l) : i.warning("请输入新表名");
++        n.value ? n.value === e.tableName ? i.warning("Tên bảng mới và tên bảng cũ không được giống nhau") : je(e.id, n.value).then(l) : i.warning("Vui lòng nhập tên bảng mới");
+       }
+     });
+   }
+   function Ce(e) {
+     return [
+       {
+-        label: "编辑",
++        label: "Chỉnh sửa",
+         onClick: () => ie(e)
+       }
+     ];
+@@ -305,46 +305,46 @@ function ft(t) {
+   function Se(e) {
+     return [
+       {
+-        label: "同步数据库",
++        label: "Đồng bộ cơ sở dữ liệu",
+         onClick: () => ye(e),
+         ifShow: () => o && e.isDbSynch != "Y"
+       },
+       {
+-        // TODO 功能测试
+-        label: "功能测试",
++        // TODO Kiểm tra chức năng
++        label: "Kiểm tra chức năng",
+         class: ["low-app-hide"],
+         onClick: () => ge(e),
+         ifShow: () => o ? e.isDbSynch == "Y" && e.tableType !== 3 : !0
+       },
+       {
+-        label: "配置地址",
++        label: "Cấu hình địa chỉ",
+         class: ["low-app-hide"],
+         onClick: () => we(e),
+         ifShow: () => o ? e.isDbSynch == "Y" && e.tableType !== 3 : !0
+       },
+       {
+-        label: "权限控制",
++        label: "Kiểm soát quyền",
+         onClick: () => ee.openDrawer(!0, { cgformId: e.id, tableType: e.tableType })
+       },
+       {
+-        label: "角色授权",
++        label: "Ủy quyền vai trò",
+         onClick: () => ne.openModal(!0, { cgformId: e.id })
+       },
+       {
+-        label: "视图管理",
++        label: "Quản lý chế độ xem",
+         class: ["low-app-hide"],
+         onClick: () => a.push(`/online/copyform/${e.id}`),
+         ifShow: () => o && e.hascopy == 1
+       },
+       {
+-        label: "生成视图",
++        label: "Tạo chế độ xem",
+         class: ["low-app-hide"],
+         popConfirm: {
+-          title: "确定生成视图吗？",
++          title: "Xác nhận tạo chế độ xem?",
+           placement: "left",
+           confirm: () => {
+             s(!0), Ae(e.id).then(() => {
+-              i.success("已成功生成视图");
++              i.success("Đã tạo chế độ xem thành công");
+             }).finally(() => {
+               s(!1), l();
+             });
+@@ -353,38 +353,38 @@ function ft(t) {
+         ifShow: () => o
+       },
+       {
+-        label: "复制表",
++        label: "Sao chép bảng",
+         onClick: () => Me(e),
+         ifShow: () => o
+       },
+       // update-begin--author:liaozhiyang---date:20240313---for：【QQYUN-8485】online删除提示优化
+       {
+-        label: "移除",
++        label: "Loại bỏ",
+         onClick: () => {
+           B.confirm({
+-            title: "确认移除该表吗？",
++            title: "Xác nhận loại bỏ bảng này?",
+             icon: O($),
+-            content: "只删除online配置表，数据库物理表保留",
++            content: "Chỉ xóa bảng cấu hình online, giữ lại bảng vật lý trong cơ sở dữ liệu",
+             onOk() {
+               return ce(e.id);
+             },
+-            okText: "移除",
+-            cancelText: "取消"
++            okText: "Loại bỏ",
++            cancelText: "Hủy"
+           });
+         }
+       },
+       {
+-        label: "删除",
++        label: "Xóa",
+         onClick: () => {
+           B.confirm({
+-            title: "确认彻底删除该表吗？",
++            title: "Xác nhận xóa hoàn toàn bảng này?",
+             icon: O($),
+-            content: "删除online配置表的同时会删除数据库物理表",
++            content: "Xóa bảng cấu hình online và bảng vật lý trong cơ sở dữ liệu",
+             onOk() {
+               return re(e.id);
+             },
+-            okText: "删除",
+-            cancelText: "取消"
++            okText: "Xóa",
++            cancelText: "Hủy"
+           });
+         },
+         ifShow: () => o
+diff --git a/useExtendComponent-dcae5c78.mjs b/useExtendComponent-dcae5c78.mjs
+index a7c7dc962118efc2ad0e783104159e411c273e79..5d26c0ba465c62c5b655b2c45dce0be62addc0e6 100644
+--- a/useExtendComponent-dcae5c78.mjs
++++ b/useExtendComponent-dcae5c78.mjs
+@@ -2882,7 +2882,7 @@ function fl(n, { emit: e } = {}, t) {
+   let r = {};
+   const d = pe(() => {
+     let V = q.value;
+-    return V || (Ce(f) === !0 ? "详情" : Ce(I) === !0 ? "编辑" : "新增");
++    return V || (Ce(f) === !0 ? "详情" : Ce(I) === !0 ? "Chỉnh sửa" : "Thêm mới");
+   }), [o, { setModalProps: l, closeModal: c }] = Dt((V) => z(this, null, function* () {
+     q.value = "", $.value = !1, n === !0 ? yield C.handleOpenModal(V) : yield x(V), A(), t && t();
+   })), a = P(!1);
+@@ -3955,7 +3955,7 @@ const Ol = xt({
+     function x(j) {
+       return [
+         {
+-          label: "编辑",
++          label: "Chỉnh sửa",
+           onClick: u.bind(null, j)
+         }
+       ];
+diff --git a/useListButton-bfac4ecf.mjs b/useListButton-bfac4ecf.mjs
+index 1199814d427ee0bc3de2940101e6aa0ab75be971..1c55c8d66e278be333ce817428b215b1b2835fde 100644
+--- a/useListButton-bfac4ecf.mjs
++++ b/useListButton-bfac4ecf.mjs
+@@ -103,7 +103,7 @@ const Se = {
+   current: 1,
+   pageSize: 10,
+   pageSizeOptions: ["10", "20", "30"],
+-  showTotal: (a, c) => c[0] + "-" + c[1] + " 共" + a + "条",
++  showTotal: (a, c) => c[0] + "-" + c[1] + " Tổng cộng" + a + " mục",
+   showQuickJumper: !0,
+   showSizeChanger: !0,
+   total: 0
+@@ -210,13 +210,13 @@ function pt(a = {}) {
+       let i = z(), s = `${l.onlineUrl.getData}${o.value}`;
+       l.isTree() === !0 ? s = `${l.onlineUrl.getTreeData}${o.value}` : l.isInnerSubTable === !0 && (s = `${l.onlineUrl.getData}${l.innerSubTableId}`, i = { pageSize: -521 }, l.innerSubTableFk && l.mTableSelectedRcordId && (i[l.innerSubTableFk] = l.mTableSelectedRcordId)), l.isErpSubTable === !0 && (i[l.foreignKeyField] = l.foreignKeyValue, i.tabletype = 3, delete i.hasQuery), T.get({ url: s, params: i }, { isTransformResponse: !1 }).then((u) => {
+         u.success ? (H(u.result), r(!0)) : (u.message === "NO_DB_SYNC" ? Ae({
+-          title: "数据库未同步",
+-          content: "请先同步数据库再查看此页面！",
++          title: "Cơ sở dữ liệu chưa được đồng bộ",
++          content: "Vui lòng đồng bộ cơ sở dữ liệu trước khi xem trang này!",
+           // 点击确定后自动返回上一页
+           onOk: () => ye.back()
+         }) : Q.warning(u.message), n(!1));
+       }).catch(() => {
+-        let u = "请求列表数据异常!";
++        let u = "Yêu cầu dữ liệu danh sách gặp lỗi!";
+         Q.warning(u), n(!1);
+       });
+     });
+@@ -310,7 +310,7 @@ function pt(a = {}) {
+           me(e);
+         }
+       }).catch(() => {
+-        let d = "loadDataByExpandedRows请求列表数据异常!";
++        let d = "loadDataByExpandedRows: Yêu cầu dữ liệu danh sách gặp lỗi!";
+         Q.warning(d);
+       });
+     } else
+@@ -347,7 +347,7 @@ function pt(a = {}) {
+     if (e || (e = {}), !e.row) {
+       let t = l.selectedRows;
+       if (!t || t.length == 0 || t.length > 1) {
+-        Q.warning("请选择一条数据");
++        Q.warning("Vui lòng chọn một dữ liệu");
+         return;
+       }
+       e.row = t[0];
+@@ -430,9 +430,9 @@ function dt(a, c, o = {}) {
+     });
+   }
+   const L = (e) => ({
+-    label: "删除",
++    label: "Xóa",
+     popConfirm: {
+-      title: "是否删除？",
++      title: "Có chắc chắn muốn xóa không?",
+       confirm: k.bind(null, e)
+     }
+   });
+@@ -447,7 +447,7 @@ function dt(a, c, o = {}) {
+     let t = P(e), r = t && (t == "1" || t == "3" || t == "4") || !t;
+     return I(g.update) === !0 && r ? [
+       {
+-        label: "编辑",
++        label: "Chỉnh sửa",
+         onClick: (n) => {
+           o.editClickCallback && o.editClickCallback(e.id, n), j(e);
+         }
+@@ -456,16 +456,16 @@ function dt(a, c, o = {}) {
+   }
+   function H(e) {
+     return {
+-      label: "提交流程",
++      label: "Gửi quy trình",
+       popConfirm: {
+-        title: "确认提交流程吗？",
++        title: "Xác nhận gửi quy trình?",
+         confirm: F.bind(null, e)
+       }
+     };
+   }
+   function te(e) {
+     return {
+-      label: "审批进度",
++      label: "Tiến độ phê duyệt",
+       onClick: re.bind(null, e)
+     };
+   }
+@@ -482,7 +482,7 @@ function dt(a, c, o = {}) {
+   function ae(e, t = {}) {
+     let r = [];
+     if (I(g.detail) === !0 && r.push({
+-      label: "详情",
++      label: "Chi tiết",
+       onClick: le.bind(null, e)
+     }), a.hasBpmStatus === !0 && I(g.bpm) === !0) {
+       let u = P(e);
+@@ -491,7 +491,7 @@ function dt(a, c, o = {}) {
+     if (c.value) {
+       let { reportPrintShow: u, reportPrintUrl: h } = c.value;
+       u && h && r.push({
+-        label: "打印",
++        label: "In",
+         onClick() {
+           let d = h, $ = e.id, U = je();
+           Le(d, $, U);
+@@ -565,7 +565,7 @@ function dt(a, c, o = {}) {
+   function ie() {
+     let e = a.selectedRowKeys;
+     if (e.length <= 0)
+-      return p.warning("请选择一条记录！"), !1;
++      return p.warning("Vui lòng chọn một bản ghi!"), !1;
+     {
+       let t = [];
+       e.forEach(function(n) {
+@@ -574,10 +574,10 @@ function dt(a, c, o = {}) {
+       });
+       let r = t.join(",");
+       Ve.confirm({
+-        title: "确认删除",
+-        content: "是否删除选中数据",
+-        okText: "确认",
+-        cancelText: "取消",
++        title: "Xác nhận xóa",
++        content: "Có chắc chắn muốn xóa dữ liệu đã chọn không?",
++        okText: "Xác nhận",
++        cancelText: "Hủy",
+         onOk: () => _(this, null, function* () {
+           yield M(r), a.clearSelectedRow();
+         })
+@@ -600,7 +600,7 @@ function dt(a, c, o = {}) {
+         },
+         { isTransformResponse: !1 }
+       ).then((s) => {
+-        s.success ? (a.loadData(), p.success("处理完成!")) : p.warning(s.message);
++        s.success ? (a.loadData(), p.success("Xử lý hoàn tất!")) : p.warning(s.message);
+       });
+     }
+   }
+@@ -610,7 +610,7 @@ function dt(a, c, o = {}) {
+   function B(e) {
+     let t = a.selectedRowKeys;
+     if (!t || t.length == 0)
+-      return p.warning("请先选中一条记录"), !1;
++      return p.warning("Vui lòng chọn một bản ghi"), !1;
+     let r = t.join(","), n = {
+       formId: a.ID,
+       buttonCode: e,
+@@ -623,7 +623,7 @@ function dt(a, c, o = {}) {
+       },
+       { isTransformResponse: !1 }
+     ).then((s) => {
+-      s.success ? (a.loadData(), a.clearSelectedRow(), p.success("处理完成!")) : p.warning(s.message);
++      s.success ? (a.loadData(), a.clearSelectedRow(), p.success("Xử lý hoàn tất!")) : p.warning(s.message);
+     });
+   }
+   function oe() {
 diff --git a/useSchemas-a9c75b0f.mjs b/useSchemas-a9c75b0f.mjs
-index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639d28380a8 100644
+index 1ec5813243c132f80c3a7db0721805a53f4af9ef..121cb9a4b9e3e7bcd612a13f8cbccaddb5965736 100644
 --- a/useSchemas-a9c75b0f.mjs
 +++ b/useSchemas-a9c75b0f.mjs
+@@ -8,7 +8,7 @@ v();
+ function F(d, n, t) {
+   const e = c(
+     {
+-      // 一列
++      // Một cột
+       one: {
+         colProps: { xs: 24, sm: 24 },
+         itemProps: {
+@@ -16,7 +16,7 @@ function F(d, n, t) {
+           wrapperCol: { xs: 24, sm: 22 }
+         }
+       },
+-      // 两列
++      // Hai cột
+       tow: {
+         colProps: { xs: 24, sm: 12 },
+         itemProps: {
+@@ -24,7 +24,7 @@ function F(d, n, t) {
+           wrapperCol: { xs: 24, sm: 20 }
+         }
+       },
+-      // 三列
++      // Ba cột
+       three: {
+         colProps: { xs: 24, sm: 8 },
+         itemProps: {
 @@ -38,59 +38,59 @@ function F(d, n, t) {
      { label: "", field: "id", component: "Input", show: !1 },
      { label: "", field: "tableVersion", component: "Input", show: !1 },
@@ -904,7 +3415,7 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
          field: "subTableStr",
          component: "Input",
          componentProps: {
-@@ -380,16 +380,16 @@ function R(d, n) {
+@@ -380,54 +380,54 @@ function R(d, n) {
      "left"
    );
    return { formSchemas: [
@@ -923,9 +3434,11 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
 +            { label: "Mở", value: 1 },
 +            { label: "Đóng", value: 0 }
            ],
-           buttonStyle: "solid"
+-          buttonStyle: "solid"
++          buttonStyle: "solid",
          }
-@@ -398,36 +398,36 @@ function R(d, n) {
+       },
+       "left"
      ),
      t(
        {
@@ -934,8 +3447,9 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
          field: "modalMinWidth",
          component: "InputNumber",
          componentProps: {
-           style: "width: 80%",
+-          style: "width: 80%",
 -          placeholder: "弹窗最小宽度（单位：px）"
++          style: "width: 70%",
 +          placeholder: "Chiều rộng tối thiểu của cửa sổ (đơn vị: px)"
          },
 -        // update-begin--author:liaozhiyang---date:20240520---for：【TV360X-77】弹窗全屏后，输入宽度框禁用
@@ -1022,7 +3536,7 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
            ],
            buttonStyle: "solid",
            onChange: n.onReportPrintShowChange
-@@ -483,7 +483,7 @@ function R(d, n) {
+@@ -483,18 +483,18 @@ function R(d, n) {
      ),
      t(
        {
@@ -1031,7 +3545,8 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
          field: "reportPrintUrl",
          component: "Input",
          componentProps: {
-@@ -491,10 +491,10 @@ function R(d, n) {
+-          style: "width: 80%"
++          style: "width: 70%"
          },
          dynamicDisabled: ({ model: l }) => !l.reportPrintShow,
          dynamicRules: ({ model: l }) => [
@@ -1113,7 +3628,8 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
 +            { label: "Cố định bên phải", value: "right" },
 +            { label: "Cố định bên trái", value: "left" }
            ],
-           style: "width: 80%"
+-          style: "width: 80%"
++          style: "width: 70%"
          },
          defaultValue: "right",
          dynamicDisabled: ({ model: l }) => !l.tableFixedAction,
@@ -1149,8 +3665,9 @@ index 1ec5813243c132f80c3a7db0721805a53f4af9ef..ccf74d675c0f5515cf26b5a70d879639
          field: "formLabelLength",
          component: "InputNumber",
          componentProps: {
-           style: "width: 80%",
+-          style: "width: 80%",
 -          placeholder: "自定义表单Label长度"
++          style: "width: 70%",
 +          placeholder: "Độ dài nhãn biểu mẫu tùy chỉnh"
          },
          dynamicDisabled: ({ model: l }) => !l.formLabelLengthShow,
