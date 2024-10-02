@@ -111,7 +111,7 @@
           let hideLoading = createMessage.loading(`正在保存"${column.title}"`, 0);
           setTimeout(() => {
             hideLoading();
-            createMessage.success(`"${column.title}"保存成功！`);
+            createMessage.success(`"${column.title}"Lưu thành công！`);
             // 局部更新单元格为已保存状态
             $table.reloadRow(row, null, field);
             // 发送更新消息

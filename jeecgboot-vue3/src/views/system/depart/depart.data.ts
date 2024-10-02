@@ -1,90 +1,90 @@
 import { FormSchema } from '/@/components/Form';
 
-// 部门基础表单
+// Biểu mẫu cơ bản của bộ phận
 export function useBasicFormSchema() {
   const basicFormSchema: FormSchema[] = [
     {
       field: 'departName',
-      label: '机构名称',
+      label: 'Tên cơ quan',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入机构/部门名称',
+        placeholder: 'Vui lòng nhập tên cơ quan/bộ phận',
       },
-      rules: [{ required: true, message: '机构名称不能为空' }],
+      rules: [{ required: true, message: 'Tên cơ quan không được để trống' }],
     },
     {
       field: 'parentId',
-      label: '上级部门',
+      label: 'Bộ phận cấp trên',
       component: 'TreeSelect',
       componentProps: {
         treeData: [],
-        placeholder: '无',
+        placeholder: 'Không có',
         dropdownStyle: { maxHeight: '200px', overflow: 'auto' },
       },
     },
     {
       field: 'orgCode',
-      label: '机构编码',
+      label: 'Mã cơ quan',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入机构编码',
+        placeholder: 'Vui lòng nhập mã cơ quan',
       },
     },
     {
       field: 'orgCategory',
-      label: '机构类型',
+      label: 'Loại cơ quan',
       component: 'RadioButtonGroup',
       componentProps: { options: [] },
     },
     {
       field: 'departOrder',
-      label: '排序',
+      label: 'Thứ tự',
       component: 'InputNumber',
       componentProps: {},
     },
     {
       field: 'mobile',
-      label: '电话',
+      label: 'Điện thoại',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入电话',
+        placeholder: 'Vui lòng nhập điện thoại',
       },
     },
     {
       field: 'fax',
-      label: '传真',
+      label: 'Fax',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入传真',
+        placeholder: 'Vui lòng nhập fax',
       },
     },
     {
       field: 'address',
-      label: '地址',
+      label: 'Địa chỉ',
       component: 'Input',
       componentProps: {
-        placeholder: '请输入地址',
+        placeholder: 'Vui lòng nhập địa chỉ',
       },
     },
     {
       field: 'memo',
-      label: '备注',
+      label: 'Ghi chú',
       component: 'InputTextArea',
       componentProps: {
-        placeholder: '请输入备注',
+        placeholder: 'Vui lòng nhập ghi chú',
       },
     },
   ];
   return { basicFormSchema };
 }
 
-// 机构类型选项
+// Tùy chọn loại cơ quan
 export const orgCategoryOptions = {
-  // 一级部门
-  root: [{ value: '1', label: '公司' }],
-  // 子级部门
+  // Bộ phận cấp một
+  root: [{ value: '1', label: 'Công ty' }],
+  // Bộ phận con
   child: [
-    { value: '2', label: '部门' },
-    { value: '3', label: '岗位' },
+    { value: '2', label: 'Bộ phận' },
+    { value: '3', label: 'Vị trí' },
   ],
 };

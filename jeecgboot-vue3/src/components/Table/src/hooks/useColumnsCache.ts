@@ -117,7 +117,7 @@ export function useColumnsCache(opt, setColumns, handleColumnFixed) {
       // 固定列
       fixedColumns: getFixedColumns(),
     });
-    $message.success('保存成功');
+    $message.success('Lưu thành công');
     // 保存之后直接关闭
     opt.popoverVisible.value = false;
   }

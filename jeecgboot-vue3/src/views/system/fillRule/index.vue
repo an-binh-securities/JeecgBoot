@@ -3,21 +3,21 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">Thêm mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
-                <span>删除</span>
+                <Icon icon="ant-design:delete-outlined" />
+                <span>Xóa</span>
               </a-menu-item>
             </a-menu>
           </template>
           <a-button>
-            <span>批量操作</span>
-            <Icon icon="mdi:chevron-down"></Icon>
+            <span>Thao tác hàng loạt</span>
+            <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
       </template>
@@ -45,7 +45,7 @@
   const { prefixCls, tableContext, createMessage, createSuccessModal, onExportXls, onImportXls } = useListPage({
     designScope: 'fill-rule',
     tableProps: {
-      title: '填值规则管理页面',
+      title: 'Trang quản lý quy tắc điền giá trị',
       api: getFillRuleList,
       columns: columns,
       showIndexColumn: true,
@@ -55,7 +55,7 @@
     },
     exportConfig: {
       url: exportUrl,
-      name: '填值规则列表',
+      name: 'Danh sách quy tắc điền giá trị',
     },
     importConfig: {
       url: importUrl,
@@ -104,15 +104,15 @@
   }
 
   /**
-   * 功能测试
+   * Kiểm tra chức năng
    */
   function testRule(record) {
     let params = { ruleCode: record.ruleCode };
     handleTest(params).then((res) => {
       if (res.success) {
         createSuccessModal({
-          title: '填值规则功能测试',
-          content: '生成结果：' + res.result,
+          title: 'Kiểm tra chức năng quy tắc điền giá trị',
+          content: 'Kết quả tạo: ' + res.result,
         });
       } else {
         createMessage.warn(res.message);
@@ -121,23 +121,23 @@
   }
 
   /**
-   * 编辑
+   * Chỉnh sửa
    */
   function getTableAction(record): ActionItem[] {
-    return [{ label: '编辑', onClick: handleEdit.bind(null, record) }];
+    return [{ label: 'Chỉnh sửa', onClick: handleEdit.bind(null, record) }];
   }
 
   /**
-   * 下拉操作栏
+   * Thanh tác vụ thả xuống
    */
   function getDropDownAction(record): ActionItem[] {
     return [
-      { label: '功能测试', onClick: testRule.bind(null, record) },
+      { label: 'Kiểm tra chức năng', onClick: testRule.bind(null, record) },
       {
-        label: '删除',
+        label: 'Xóa',
         color: 'error',
         popConfirm: {
-          title: '确认要删除吗？',
+          title: 'Xác nhận muốn xóa?',
           confirm: handleDelete.bind(null, record),
         },
       },

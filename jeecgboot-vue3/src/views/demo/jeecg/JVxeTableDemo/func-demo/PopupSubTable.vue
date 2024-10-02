@@ -219,23 +219,23 @@
     }
   }
 
-  // 详细信息里点了确认按钮
+  // Nhấn nút xác nhận trong chi tiết
   function handleDetailsConfirm({ row, $table, callback }) {
-    console.log('保存的数据：', row);
-    // 校验当前行
+    console.log('Dữ liệu đã lưu:', row);
+    // Kiểm tra hàng hiện tại
     $table.validate(row).then((errMap) => {
-      // 校验通过
+      // Kiểm tra thành công
       if (!errMap) {
-        // 校验子表，如果需要的话，可以操作下面这个对象：
+        // Kiểm tra bảng con, nếu cần, có thể thao tác đối tượng dưới đây:
         callback(true);
         loading.value = true;
         setTimeout(() => {
           loading.value = false;
-          createMessage.success('保存成功');
+          createMessage.success('Lưu thành công');
         }, 1000);
       } else {
         callback(false);
-        createMessage.warn('校验失败');
+        createMessage.warn('Kiểm tra thất bại');
       }
     });
   }

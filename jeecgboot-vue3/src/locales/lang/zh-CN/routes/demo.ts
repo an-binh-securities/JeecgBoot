@@ -200,6 +200,7 @@ export default {
     editCellTable: 'Ô có thể chỉnh sửa',
     editRowTable: 'Hàng có thể chỉnh sửa',
     authColumn: 'Cột quyền',
+    emptyText: 'Không có dữ liệu',
   },
   jeecg: {
     JAreaLinkage: 'Chọn khu vực',

@@ -148,7 +148,7 @@
             params: tableData,
           })
           .then(() => {
-            createMessage.success(`保存成功！`);
+            createMessage.success(`Lưu thành công！`);
           })
           .finally(() => {
             loading.value = false;
@@ -194,7 +194,7 @@
               params: row,
             })
             .then((res) => {
-              createMessage.success(`"${column.title}"保存成功！`);
+              createMessage.success(`"${column.title}"Lưu thành công！`);
               // 局部更新单元格为已保存状态
               $table.reloadRow(row, null, field);
             })

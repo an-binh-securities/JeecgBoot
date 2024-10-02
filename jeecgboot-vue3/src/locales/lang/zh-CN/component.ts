@@ -69,9 +69,10 @@ export default {
     settingFixedRight: 'Cố định bên phải',
     settingFullScreen: 'Toàn màn hình',
 
-    index: 'Số thứ tự',
+    index: '#',
 
     total: 'Tổng cộng {total} bản ghi',
+    emptyText: 'Không có dữ liệu',
   },
   time: {
     before: 'trước',

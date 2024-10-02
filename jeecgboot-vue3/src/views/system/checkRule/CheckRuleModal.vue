@@ -3,14 +3,14 @@
     <BasicForm @register="registerForm" />
 
     <a-tabs v-model:activeKey="activeKey" animated>
-      <a-tab-pane tab="局部规则" key="1" :forceRender="true">
+      <a-tab-pane tab="Quy tắc cục bộ" key="1" :forceRender="true">
         <JVxeTable ref="vTable1" toolbar rowNumber dragSort rowSelection :maxHeight="580" :dataSource="dataSource1" :columns="columns1">
           <template #toolbarAfter>
-            <a-alert type="info" showIcon message="局部规则按照你输入的位数有序的校验" style="margin-bottom: 8px" />
+            <a-alert type="info" showIcon message="Quy tắc cục bộ kiểm tra theo thứ tự số ký tự bạn nhập" style="margin-bottom: 8px" />
           </template>
         </JVxeTable>
       </a-tab-pane>
-      <a-tab-pane tab="全局规则" key="2" :forceRender="true">
+      <a-tab-pane tab="Quy tắc toàn cục" key="2" :forceRender="true">
         <JVxeTable
           ref="vTable2"
           toolbar
@@ -23,7 +23,12 @@
           :columns="columns2"
         >
           <template #toolbarAfter>
-            <a-alert type="info" showIcon message="全局规则可校验用户输入的所有字符；全局规则的优先级比局部规则的要高。" style="margin-bottom: 8px" />
+            <a-alert
+              type="info"
+              showIcon
+              message="Quy tắc toàn cục có thể kiểm tra tất cả các ký tự người dùng nhập; Quy tắc toàn cục có mức ưu tiên cao hơn quy tắc cục bộ."
+              style="margin-bottom: 8px"
+            />
           </template>
         </JVxeTable>
       </a-tab-pane>
@@ -41,7 +46,7 @@
   import { pick } from 'lodash-es';
 
   //设置标题
-  const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
+  const title = computed(() => (!unref(isUpdate) ? 'Thêm mới' : 'Chỉnh sửa'));
   // 声明Emits
   const emit = defineEmits(['register', 'success']);
   const isUpdate = ref(true);
@@ -153,14 +158,14 @@
       })
       .catch(() => {
         setModalProps({ confirmLoading: false });
-        console.error('验证未通过!');
+        console.error('Xác minh không thành công!');
       });
   }
 
-  // 表单提交请求
+  // Yêu cầu gửi biểu mẫu
   async function saveOrUpdateFormData(formData) {
     try {
-      console.log('表单提交数据', formData);
+      console.log('Dữ liệu gửi biểu mẫu', formData);
       setModalProps({ confirmLoading: true });
       if (isUpdate.value) {
         await updateCheckRule(formData);
@@ -181,67 +186,67 @@
    * @param cellValue
    * @param callback
    */
-  const validatePatternHandler = ({ cellValue }, callback) => {
+  const validatePatternHandler = (rule, value, callback) => {
     try {
-      new RegExp(cellValue);
-      callback(true);
+      new RegExp(value);
+      callback();
     } catch (e) {
-      callback(false, '请输入正确的正则表达式');
+      callback(false, 'Vui lòng nhập biểu thức chính quy hợp lệ');
     }
   };
-
+  
   const columns1 = ref<JVxeColumn[]>([
     {
-      title: '位数',
+      title: 'Số chữ số',
       key: 'digits',
       type: JVxeTypes.inputNumber,
       minWidth: 180,
       validateRules: [
-        { required: true, message: '${title}不能为空' },
-        { pattern: /^[1-9]\d*$/, message: '请输入零以上的正整数' },
+        { required: true, message: '${title} không được để trống' },
+        { pattern: /^[1-9]\d*$/, message: 'Vui lòng nhập số nguyên dương lớn hơn 0' },
       ],
     },
     {
-      title: '规则（正则表达式）',
+      title: 'Quy tắc (Biểu thức chính quy)',
       key: 'pattern',
       minWidth: 320,
       type: JVxeTypes.input,
-      validateRules: [{ required: true, message: '规则不能为空' }, { handler: validatePatternHandler }],
+      validateRules: [{ required: true, message: 'Quy tắc không được để trống' }, { handler: validatePatternHandler }],
     },
     {
-      title: '提示文本',
+      title: 'Văn bản gợi ý',
       key: 'message',
       minWidth: 180,
       type: JVxeTypes.input,
-      validateRules: [{ required: true, message: '${title}不能为空' }],
+      validateRules: [{ required: true, message: '${title} không được để trống' }],
     },
   ]);
-
+  
   const columns2 = ref<JVxeColumn[]>([
     {
-      title: '优先级',
+      title: 'Ưu tiên',
       key: 'priority',
       type: JVxeTypes.select,
       defaultValue: '1',
       options: [
-        { title: '优先运行', value: '1' },
-        { title: '最后运行', value: '0' },
+        { title: 'Ưu tiên chạy', value: '1' },
+        { title: 'Chạy cuối cùng', value: '0' },
       ],
       validateRules: [],
     },
     {
-      title: '规则（正则表达式）',
+      title: 'Quy tắc (Biểu thức chính quy)',
       key: 'pattern',
       width: '40%',
       type: JVxeTypes.input,
-      validateRules: [{ required: true, message: '规则不能为空' }, { handler: validatePatternHandler }],
+      validateRules: [{ required: true, message: 'Quy tắc không được để trống' }, { handler: validatePatternHandler }],
     },
     {
-      title: '提示文本',
+      title: 'Văn bản gợi ý',
       key: 'message',
       width: '20%',
       type: JVxeTypes.input,
-      validateRules: [{ required: true, message: '${title}不能为空' }],
+      validateRules: [{ required: true, message: '${title} không được để trống' }],
     },
   ]);
 </script>

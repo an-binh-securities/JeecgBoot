@@ -9,7 +9,7 @@
             <span>Thêm mới</span>
           </a-button>
           <a-button v-if="showSave" preIcon="ant-design:save-outlined" :disabled="disabled" @click="trigger('save')">
-            <span>保存</span>
+            <span>Lưu</span>
           </a-button>
           <template v-if="deleting || selectedRowIds.length > 0">
             <Popconfirm v-if="showRemove" :title="`Bạn có chắc chắn muốn xóa ${selectedRowIds.length} mục này không?`" :disabled="deleting" @confirm="onRemove">

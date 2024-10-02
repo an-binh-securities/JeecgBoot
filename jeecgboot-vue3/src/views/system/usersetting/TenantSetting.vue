@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <a-empty v-else description="暂无数据" style="position: relative;top: 50px;"/>
+    <a-empty v-else description="Không có dữ liệu" style="position: relative;top: 50px;"/>
   </div>
   <a-modal v-model:open="tenantVisible" width="400px" wrapClassName="edit-tenant-setting">
     <template #title>

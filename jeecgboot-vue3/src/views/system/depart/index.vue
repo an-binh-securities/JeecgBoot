@@ -5,20 +5,20 @@
     </a-col>
     <a-col :xl="12" :lg="24" :md="24" style="margin-bottom: 10px">
       <div style="height: 100%;" :class="[`${prefixCls}`]">
-        <a-tabs v-show="departData != null" defaultActiveKey="base-info">
-          <a-tab-pane tab="基本信息" key="base-info" forceRender style="position: relative">
+          <a-tabs v-show="departData != null" defaultActiveKey="base-info">
+          <a-tab-pane tab="Thông tin cơ bản" key="base-info" forceRender style="position: relative">
             <div style="padding: 20px">
               <DepartFormTab :data="departData" :rootTreeData="rootTreeData" @success="onSuccess" />
             </div>
           </a-tab-pane>
-          <a-tab-pane tab="部门权限" key="role-info">
+          <a-tab-pane tab="Quyền của bộ phận" key="role-info">
             <div style="padding: 0 20px 20px">
               <DepartRuleTab :data="departData" />
             </div>
           </a-tab-pane>
         </a-tabs>
         <div v-show="departData == null" style="padding-top: 40px">
-          <a-empty description="尚未选择部门" />
+          <a-empty description="Chưa chọn bộ phận" />
         </div>
       </div>
     </a-col>

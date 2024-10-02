@@ -21,7 +21,7 @@
         </template>
       </BasicTree>
     </template>
-    <a-empty v-else description="无可配置部门权限" />
+    <a-empty v-else description="Không có quyền bộ phận có thể cấu hình" />
 
     <div class="j-box-bottom-button offset-20" style="margin-top: 30px">
       <div class="j-box-bottom-button-float" :class="[`${prefixCls}`]">
@@ -37,11 +37,11 @@
             </a-menu>
           </template>
           <a-button style="float: left">
-            树操作
+            Thao tác cây
             <Icon icon="ant-design:up-outlined" />
           </a-button>
         </a-dropdown>
-        <a-button type="primary" preIcon="ant-design:save-filled" @click="onSubmit">保存</a-button>
+        <a-button type="primary" preIcon="ant-design:save-filled" @click="onSubmit">Lưu</a-button>
       </div>
     </div>
   </a-spin>

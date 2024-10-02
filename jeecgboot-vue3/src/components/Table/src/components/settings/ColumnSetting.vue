@@ -82,7 +82,7 @@
           <a-button size="small" @click="reset">
             {{ t('common.resetText') }}
           </a-button>
-          <a-button size="small" type="primary" @click="saveSetting"> 保存 </a-button>
+          <a-button size="small" type="primary" @click="saveSetting"> Lưu </a-button>
         </div>
       </template>
       <SettingOutlined />

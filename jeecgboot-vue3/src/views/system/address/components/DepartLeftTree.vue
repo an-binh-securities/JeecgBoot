@@ -15,7 +15,7 @@
           @select="onSelect"
         ></a-tree>
       </template>
-      <a-empty v-else description="暂无数据" />
+      <a-empty v-else description="Không có dữ liệu" />
     </a-spin>
   </a-card>
 </template>

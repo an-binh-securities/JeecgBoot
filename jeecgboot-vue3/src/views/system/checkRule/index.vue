@@ -3,21 +3,21 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">Thêm mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
-                <span>删除</span>
+                <Icon icon="ant-design:delete-outlined" />
+                <span>Xóa</span>
               </a-menu-item>
             </a-menu>
           </template>
           <a-button>
-            <span>批量操作</span>
-            <Icon icon="mdi:chevron-down"></Icon>
+            <span>Thao tác hàng loạt</span>
+            <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
       </template>
@@ -54,12 +54,12 @@
 
   import CheckRuleModal from '/@/views/system/checkRule/CheckRuleModal.vue';
   const [registerModal, { openModal }] = useModal();
-
-  // 列表页面公共参数、方法
+  
+  // Danh sách các tham số và phương thức chung của trang
   const { prefixCls, tableContext, createMessage, onExportXls, onImportXls, createSuccessModal } = useListPage({
     designScope: 'check-rule',
     tableProps: {
-      title: '编码校验规则管理页面',
+      title: 'Trang quản lý quy tắc kiểm tra mã hóa',
       api: getCheckRuleList,
       columns: columns,
       showIndexColumn: true,
@@ -69,7 +69,7 @@
     },
     exportConfig: {
       url: exportUrl,
-      name: '编码校验规则列表',
+      name: 'Danh sách quy tắc kiểm tra mã hóa',
     },
     importConfig: {
       url: importUrl,

@@ -12,7 +12,7 @@
   import { saveFillRule, updateFillRule } from './fill.rule.api';
 
   //设置标题
-  const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
+  const title = computed(() => (!unref(isUpdate) ? 'Thêm mới' : 'Chỉnh sửa'));
 
   // 声明Emits
   const emit = defineEmits(['register', 'success']);

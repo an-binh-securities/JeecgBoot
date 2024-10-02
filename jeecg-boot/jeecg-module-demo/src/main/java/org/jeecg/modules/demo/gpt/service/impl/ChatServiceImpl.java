@@ -72,7 +72,7 @@ public class ChatServiceImpl implements ChatService {
             try {
                 this.openAiStreamClient = SpringContextUtils.getBean(OpenAiStreamClient.class);
             } catch (Exception ignored) {
-                sendErrorMsg("如果您想使用AI助手，请先设置相应配置!");
+                sendErrorMsg("Nếu bạn muốn sử dụng trợ lý AI, vui lòng cấu hình tương ứng trước!");
             }
             //update-end---author:chenrui ---date:20240625  for：[TV360X-1570]给于更友好的提示，提示未配置ai------------
         }
@@ -92,22 +92,22 @@ public class ChatServiceImpl implements ChatService {
         SseEmitter sseEmitter = new SseEmitter(-0L);
         //完成后回调
         sseEmitter.onCompletion(() -> {
-            log.info("[{}]结束连接...................",uid);
+            log.info("[{}]Kết thúc kết nối...................", uid);
             LocalCache.CACHE.remove(uid);
         });
-        //超时回调
+        // Callback for timeout
         sseEmitter.onTimeout(() -> {
-            log.info("[{}]连接超时...................", uid);
+            log.info("[{}]Kết nối hết thời gian...................", uid);
         });
         //异常回调
         sseEmitter.onError(
                 throwable -> {
                     try {
-                        log.info("[{}]连接异常,{}", uid, throwable.toString());
+                        log.info("[{}]Kết nối gặp lỗi,{}", uid, throwable.toString());
                         sseEmitter.send(SseEmitter.event()
                                 .id(uid)
-                                .name("发生异常！")
-                                .data(Message.builder().content("发生异常请重试！").build())
+                                .name("Xảy ra lỗi!")
+                                .data(Message.builder().content("Xảy ra lỗi, vui lòng thử lại!").build())
                                 .reconnectTime(3000));
                         LocalCache.CACHE.put(uid, sseEmitter);
                     } catch (IOException e) {
@@ -121,7 +121,7 @@ public class ChatServiceImpl implements ChatService {
             log.error(e.getMessage(),e);
         }
         LocalCache.CACHE.put(uid, sseEmitter);
-        log.info("[{}]创建sse连接成功！", uid);
+        log.info("[{}]Tạo kết nối SSE thành công！", uid);
         return sseEmitter;
     }
 
@@ -140,14 +140,14 @@ public class ChatServiceImpl implements ChatService {
     public void sendMessage(String topicId, String message) {
         String uid = getUserId();
         if (StrUtil.isBlank(message)) {
-            log.info("参数异常，message为null");
-            throw new BaseException("参数异常，message不能为空~");
+            log.info("Tham số không hợp lệ, message là null");
+            throw new BaseException("Tham số không hợp lệ, message không được để trống~");
         }
         if (StrUtil.isBlank(topicId)) {
             topicId = UUIDGenerator.generate();
         }
-        //update-begin---author:chenrui ---date:20240223  for：[QQYUN-8225]聊天记录保存------------
-        log.info("话题id:{}", topicId);
+        //update-begin---author:chenrui ---date:20240223  for：[QQYUN-8225]Lưu trữ lịch sử trò chuyện------------
+        log.info("ID chủ đề:{}", topicId);
         String cacheKey = CACHE_KEY_PREFIX + uid + "_" + topicId;
         String messageContext = (String) redisTemplate.opsForHash().get(cacheKey, CACHE_KEY_MSG_CONTEXT);
         List<Message> msgHistory = new ArrayList<>();
@@ -160,8 +160,8 @@ public class ChatServiceImpl implements ChatService {
 
         SseEmitter sseEmitter = (SseEmitter) LocalCache.CACHE.get(uid);
         if (sseEmitter == null) {
-            log.info("聊天消息推送失败uid:[{}],没有创建连接，请重试。", uid);
-            throw new JeecgBootException("聊天消息推送失败uid:[{}],没有创建连接，请重试。~");
+            log.info("Thất bại trong việc đẩy tin nhắn trò chuyện uid:[{}], không tạo được kết nối, vui lòng thử lại.", uid);
+            throw new JeecgBootException("Thất bại trong việc đẩy tin nhắn trò chuyện uid:[{}], không tạo được kết nối, vui lòng thử lại.~");
         }
         //update-begin---author:chenrui ---date:20240625  for：[TV360X-1570]给于更友好的提示，提示未配置ai------------
         OpenAiStreamClient client = ensureClient();
@@ -186,7 +186,7 @@ public class ChatServiceImpl implements ChatService {
         String uid = getUserId();
         String cacheKey = CACHE_KEY_PREFIX + CACHE_KEY_MSG_HISTORY + ":" + uid;
         redisTemplate.opsForValue().set(cacheKey, chatHistoryVO.getContent());
-        return Result.OK("保存成功");
+        return Result.OK("Lưu thành công");
     }
 
     @Override

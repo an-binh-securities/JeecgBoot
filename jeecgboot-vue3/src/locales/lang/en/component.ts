@@ -67,6 +67,7 @@ export default {
     settingFullScreen: 'Full Screen',
     index: 'Index',
     total: 'total of {total}',
+    emptyText: 'No data',
   },
   time: {
     before: ' ago',
