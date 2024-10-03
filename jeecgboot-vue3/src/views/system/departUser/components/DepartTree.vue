@@ -5,7 +5,7 @@
         <!--组织机构树-->
         <BasicTree
           v-if="!treeReloading"
-          title="部门列表"
+          title="Danh sách bộ phận"
           toolbar
           search
           showLine
@@ -20,7 +20,7 @@
           @search="onSearch"
         />
       </template>
-      <a-empty v-else description="普通员工无此权限" />
+      <a-empty v-else description="Nhân viên bình thường không có quyền này" />
     </a-spin>
   </div>
 </template>
@@ -115,7 +115,7 @@
           if (Array.isArray(result)) {
             treeData.value = result;
           } else {
-            createMessage.warning('未查询到部门信息');
+            createMessage.warning('Không tìm thấy thông tin bộ phận');
             treeData.value = [];
           }
         })

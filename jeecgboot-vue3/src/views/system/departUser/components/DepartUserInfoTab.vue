@@ -3,20 +3,20 @@
   <BasicTable @register="registerTable" :rowSelection="rowSelection">
     <!--插槽:table标题-->
     <template #tableTitle>
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="selectAddUser" :disabled="!departId">添加已有用户</a-button>
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="createUser" :disabled="!departId">新建用户</a-button>
+      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="selectAddUser" :disabled="!departId">Thêm người dùng hiện có</a-button>
+      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="createUser" :disabled="!departId">Tạo người dùng mới</a-button>
       <template v-if="selectedRowKeys.length > 0">
         <a-dropdown>
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="onUnlinkDepartUserBatch">
                 <icon icon="bx:bx-unlink" />
-                <span>取消关联</span>
+                <span>Hủy liên kết</span>
               </a-menu-item>
             </a-menu>
           </template>
           <a-button>
-            <span>批量操作 </span>
+            <span>Thao tác hàng loạt </span>
             <icon icon="akar-icons:chevron-down" />
           </a-button>
         </a-dropdown>
@@ -70,6 +70,7 @@
       columns: userInfoColumns,
       canResize: false,
       formConfig: {
+        labelWidth: 148,
         schemas: userInfoSearchFormSchema,
         baseColProps: adaptiveColProps,
         labelAlign: 'left',
@@ -126,7 +127,7 @@
   // 创建用户
   function createUser() {
     if (!departId.value) {
-      createMessage.warning('请先选择一个部门');
+      createMessage.warning('Vui lòng chọn một bộ phận trước');
     } else {
       openDrawer(true, {
         isUpdate: false,
@@ -168,7 +169,7 @@
   // 批量取消关联部门和用户之间的关系
   async function unlinkDepartUser(idList, confirm) {
     if (!departId.value) {
-      createMessage.warning('请先选择一个部门');
+      createMessage.warning('Vui lòng chọn một bộ phận trước');
     } else {
       setLoading(true);
       let userIds = unref(idList).join(',');
@@ -212,24 +213,24 @@
   }
 
   /**
-   * 操作栏
+   * Thanh công cụ
    */
   function getTableAction(record): ActionItem[] {
-    return [{ label: '编辑', onClick: editUserInfo.bind(null, record) }];
+    return [{ label: 'Chỉnh sửa', onClick: editUserInfo.bind(null, record) }];
   }
 
   /**
-   * 下拉操作栏
+   * Thanh công cụ thả xuống
    */
   function getDropDownAction(record): ActionItem[] {
     return [
-      { label: '部门角色', onClick: showDepartRole.bind(null, record) },
-      { label: '用户详情', onClick: showUserDetail.bind(null, record) },
+      { label: 'Vai trò bộ phận', onClick: showDepartRole.bind(null, record) },
+      { label: 'Chi tiết người dùng', onClick: showUserDetail.bind(null, record) },
       {
-        label: '取消关联',
+        label: 'Hủy liên kết',
         color: 'error',
         popConfirm: {
-          title: '确认取消关联吗？',
+          title: 'Xác nhận hủy liên kết?',
           confirm: unlinkDepartUser.bind(null, [record.id], false),
         },
       },

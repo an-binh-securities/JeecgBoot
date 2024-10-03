@@ -1,8 +1,8 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="registerDrawer" title="字典列表" width="800px">
+  <BasicDrawer v-bind="$attrs" @register="registerDrawer" title="Danh sách từ điển" width="800px">
     <BasicTable @register="registerTable" :rowClassName="getRowClassName">
       <template #tableTitle>
-        <a-button type="primary" @click="handleCreate"> 新增</a-button>
+        <a-button type="primary" @click="handleCreate"> Thêm mới</a-button>
       </template>
       <template v-slot:bodyCell="{column, record, index}">
         <template v-if="column.dataIndex ==='action'">
@@ -75,7 +75,7 @@
     immediate: false,
     actionColumn: {
       width: 100,
-      title: '操作',
+      title: 'Hoạt động',
       dataIndex: 'action',
       //slots: { customRender: 'action' },
       fixed: undefined,
@@ -83,7 +83,7 @@
   });
 
   /**
-   * 新增
+   * Thêm mới
    */
   function handleCreate() {
     openModal(true, {
@@ -109,18 +109,18 @@
   }
 
   /**
-   * 操作栏
+   * Thanh công cụ
    */
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không',
           confirm: handleDelete.bind(null, record),
         },
       },

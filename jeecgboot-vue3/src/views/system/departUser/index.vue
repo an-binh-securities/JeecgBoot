@@ -8,13 +8,13 @@
     <a-col :xl="18" :lg="16" :md="14" :sm="24" style="flex: 1">
       <a-card :bordered="false" style="height: 100%">
         <a-tabs defaultActiveKey="user-info">
-          <a-tab-pane tab="基本信息" key="base-info" forceRender>
+          <a-tab-pane tab="Thông tin cơ bản" key="base-info" forceRender>
             <DepartBaseInfoTab :data="departData" />
           </a-tab-pane>
-          <a-tab-pane tab="用户信息" key="user-info">
+          <a-tab-pane tab="Thông tin người dùng" key="user-info">
             <DepartUserInfoTab :data="departData" />
           </a-tab-pane>
-          <a-tab-pane tab="部门角色" key="role-info">
+          <a-tab-pane tab="Vai trò bộ phận" key="role-info">
             <DepartRoleInfoTab :data="departData" />
           </a-tab-pane>
         </a-tabs>

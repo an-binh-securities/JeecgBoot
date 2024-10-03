@@ -139,24 +139,24 @@ function handleSuccess({isUpdate, values}) {
 function getTableAction(record) {
   return [
     {
-      label: '编辑',
+      label: 'Chỉnh sửa',
       onClick: handleEdit.bind(null, record),
     }
   ]
 }
 
 /**
- * 下拉操作栏
+ * Thanh công cụ thả xuống
  */
 function getDropDownAction(record) {
   return [
     {
-      label: '详情',
+      label: 'Chi tiết',
       onClick: handleDetail.bind(null, record),
     }, {
-      label: '删除',
+      label: 'Xóa',
       popConfirm: {
-        title: '是否确认删除',
+        title: 'Bạn có chắc chắn muốn xóa không',
         confirm: handleDelete.bind(null, record),
       }
     }

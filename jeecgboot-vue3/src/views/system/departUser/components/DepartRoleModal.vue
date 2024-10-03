@@ -24,10 +24,11 @@
   const isUpdate = ref<boolean>(true);
   // 当前的弹窗数据
   const model = ref<object>({});
-  const title = computed(() => (isUpdate.value ? '编辑' : '新增'));
+  const title = computed(() => (isUpdate.value ? 'Chỉnh sửa' : 'Thêm mới'));
 
   //注册表单
   const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
+    labelWidth: 165,
     schemas: departRoleModalFormSchema,
     showActionButtonGroup: false,
   });

@@ -14,7 +14,7 @@
   import { getFileAccessHttpUrl } from '/@/utils/common/compUtils';
   import { uploadFile } from '@/api/common/api';
 
-  type Lang = 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' | undefined;
+  type Lang = 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' | 'vi_VN' | undefined;
 
   export default defineComponent({
     inheritAttrs: false,
@@ -60,7 +60,7 @@
         }
       );
 
-      const getCurrentLang = computed((): 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' => {
+      const getCurrentLang = computed((): 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' | 'vi_VN' => {
         let lang: Lang;
         switch (unref(getLocale)) {
           case 'en':
@@ -71,6 +71,9 @@
             break;
           case 'ko':
             lang = 'ko_KR';
+            break;
+          case 'ko':
+            lang = 'vi_VN';
             break;
           default:
             lang = 'zh_CN';

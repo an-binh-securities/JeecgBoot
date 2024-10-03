@@ -54,6 +54,100 @@
   const [rolePermissionDrawer, { openDrawer: openRolePermissionDrawer }] = useDrawer();
   const [registerDesc, { openDrawer: openRoleDesc }] = useDrawer();
 
+  // Các tham số và phương thức chung của trang danh sách
+  const { prefixCls, tableContext, onImportXls, onExportXls } = useListPage({
+    designScope: 'role-template',
+    tableProps: {
+      title: 'Danh sách vai trò hệ thống',
+      api: list,
+      columns: columns,
+      formConfig: {
+        // update-begin--author:liaozhiyang---date:20230803---for：【QQYUN-5873】Khu vực tìm kiếm nhãn mặc định căn trái
+        labelWidth: 65,
+        rowProps: { gutter: 24 },
+        // update-end--author:liaozhiyang---date:20230803---for：【QQYUN-5873】Khu vực tìm kiếm nhãn mặc định căn trái
+        schemas: searchFormSchema,
+      },
+      actionColumn: {
+        width: 120,
+      },
+      rowSelection: null,
+      // Tùy chỉnh sắp xếp mặc định
+      defSort: {
+        column: 'id',
+        order: 'desc',
+      },
+    },
+    exportConfig: {
+      name: 'Danh sách vai trò',
+      url: getExportUrl,
+    },
+    importConfig: {
+      url: getImportUrl,
+    },
+  });
+  const [registerTable, { reload }, { rowSelection, selectedRowKeys }] = tableContext;
+
+  /**
+   * 新增
+   */
+  function handleCreate() {
+    showFooter.value = true;
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+  /**
+   * 编辑
+   */
+  function handleEdit(record: Recordable) {
+    showFooter.value = true;
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+  /**
+   * 详情
+   */
+  function handleDetail(record) {
+    showFooter.value = false;
+    openRoleDesc(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+  /**
+   * 删除事件
+   */
+  async function handleDelete(record) {
+    await deleteRole({ id: record.id }, reload);
+  }
+  /**
+   * 批量删除事件
+   */
+  async function batchHandleDelete() {
+    await batchDeleteRole({ ids: selectedRowKeys.value }, reload);
+  }
+  /**
+   * 角色授权弹窗
+   */
+  function handlePerssion(record) {
+    openRolePermissionDrawer(true, { roleId: record.id });
+  }
+  /**
+   * 首页配置弹窗
+   */
+  function handleIndexConfig(roleCode) {
+    openIndexModal(true, { roleCode });
+  }
+  /**
+   * 角色用户
+   */
+  function handleUser(record) {
+    //onSelectChange(selectedRowKeys)
+    openRoleUserDrawer(true, record);
+  }
   /**
    * Thanh công cụ
    */
@@ -67,31 +161,12 @@
         label: 'Ủy quyền',
         onClick: handlePerssion.bind(null, record),
       },
-      {
-        label: 'Chỉnh sửa',
-        onClick: handleEdit.bind(null, record),
-      },
-      {
-        label: 'Chi tiết',
-        onClick: handleDetail.bind(null, record),
-      },
-      {
-        label: 'Xóa',
-        popConfirm: {
-          title: 'Bạn có chắc chắn muốn xóa không',
-          confirm: handleDelete.bind(null, record),
-        },
-      },
-      {
-        label: 'Cấu hình trang chủ',
-        onClick: handleIndexConfig.bind(null, record.roleCode),
-      },
     ];
   }
 
   /**
-  * Thanh công cụ thả xuống
-  */
+   * Thanh công cụ thả xuống
+   */
   function getDropDownAction(record) {
     return [
       {

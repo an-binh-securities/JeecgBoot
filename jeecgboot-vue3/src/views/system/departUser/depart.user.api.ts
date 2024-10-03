@@ -62,7 +62,7 @@ export const linkDepartUserBatch = (departId: string, userIdList: string[]) =>
   defHttp.post({ url: DepartUserApi.link, params: { depId: departId, userIdList } });
 
 /**
- * 批量取消部门和用户的关联关系
+ * Hủy liên kết hàng loạt giữa bộ phận và người dùng
  */
 export const unlinkDepartUserBatch = (params, confirm = false) => {
   return new Promise((resolve, reject) => {
@@ -72,8 +72,8 @@ export const unlinkDepartUserBatch = (params, confirm = false) => {
     if (confirm) {
       createConfirm({
         iconType: 'warning',
-        title: '取消关联',
-        content: '确定要取消关联吗？',
+        title: 'Hủy liên kết',
+        content: 'Bạn có chắc chắn muốn hủy liên kết không?',
         onOk: () => doDelete(),
         onCancel: () => reject(),
       });
@@ -110,8 +110,8 @@ export const deleteBatchDepartRole = (params, confirm = false) => {
     if (confirm) {
       createConfirm({
         iconType: 'warning',
-        title: '删除',
-        content: '确定要删除吗？',
+        title: 'Xóa',
+        content: 'Bạn có chắc chắn muốn xóa không?',
         onOk: () => doDelete(),
         onCancel: () => reject(),
       });

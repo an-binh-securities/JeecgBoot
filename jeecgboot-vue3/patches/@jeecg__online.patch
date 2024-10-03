@@ -349,7 +349,7 @@ index 8ab03be38e9da0ee37853df89e7cb0cd1491c36e..e8a6e0c16886c80193c4f0e0cdc7bbb3
                            default: b(() => [
                              u(B, { icon: "bx:help-circle" })
 diff --git a/CgreportModal-edefa8e3.mjs b/CgreportModal-edefa8e3.mjs
-index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8c674f6b9 100644
+index f470123d09691361b92119d3a407ca60979f855d..44127ed18c28ccd7c0d2c1e0ff965544e5497772 100644
 --- a/CgreportModal-edefa8e3.mjs
 +++ b/CgreportModal-edefa8e3.mjs
 @@ -40,10 +40,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
@@ -460,12 +460,13 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      field: "name",
      component: "Input",
      colProps: {
-@@ -151,10 +151,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -151,10 +151,11 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
        xl: 8,
        xxl: 8
      },
 -    dynamicRules: () => [{ required: !0, message: "请输入报表名字!" }]
-+    dynamicRules: () => [{ required: !0, message: "Vui lòng nhập tên báo cáo!" }]
++    dynamicRules: () => [{ required: !0, message: "Vui lòng nhập tên báo cáo!" }],
++    labelWidth: 120,
    },
    {
 -    label: "动态数据源",
@@ -473,7 +474,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      field: "dbSource",
      colProps: {
        sm: 24,
-@@ -165,7 +165,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -165,10 +166,11 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
        xxl: 8
      },
      component: "ApiSelect",
@@ -481,8 +482,13 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
 +    rules: [{ required: Re.sysSafeMode, message: "Vui lòng chọn nguồn dữ liệu!" }],
      componentProps: {
        api: $e
-     }
-@@ -185,10 +185,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+-    }
++    },
++    labelWidth: 170,
+   },
+   /*    {
+         label: ' ',
+@@ -185,10 +187,10 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
          },
      },*/
    {
@@ -495,7 +501,13 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      // update-begin--author:liaozhiyang---date:20240509---for：【QQYUN-9230】报表图表弹窗样式调整
      // itemProps: {
      //   labelCol: { xs: 24, sm: 4, md: 2, lg: 2, xl: 3, xxl: 2 },
-@@ -229,69 +229,69 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -225,73 +227,74 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+       labelCol: { xs: 1, sm: 1 },
+       wrapperCol: { xs: 23, sm: 23 },
+       colon: !1
+-    }
++    },
++    labelWidth: 12
    }
  ], Me = [
    {
@@ -589,7 +601,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      key: "isShow",
      minWidth: "80px",
      align: "center",
-@@ -300,50 +300,50 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -300,50 +303,50 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
      defaultChecked: !0
    },
    {
@@ -653,7 +665,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      key: "isSearch",
      type: i.checkbox,
      customValue: ["1", "0"],
-@@ -352,7 +352,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -352,7 +355,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
      defaultChecked: !1
    },
    {
@@ -662,7 +674,25 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      align: "center",
      key: "isTotal",
      type: i.checkbox,
-@@ -389,7 +389,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -360,7 +363,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+     minWidth: "80px",
+     defaultChecked: !1
+   }
+-], T = (t) => (be("data-v-f79bfba3"), t = t(), _e(), t), Fe = { style: { flex: "1", "text-align": "left" } }, Oe = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), We = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), ze = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Ae = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Je = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Ue = /* @__PURE__ */ T(() => /* @__PURE__ */ C("span", { style: { color: "red" } }, "注：参数只支持动态报表，popup暂不支持", -1)), Ke = /* @__PURE__ */ fe({
++], T = (t) => (be("data-v-f79bfba3"), t = t(), _e(), t), Fe = { style: { flex: "1", "text-align": "left" } }, Oe = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), We = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), ze = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Ae = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Je = /* @__PURE__ */ T(() => /* @__PURE__ */ C("br", null, null, -1)), Ue = /* @__PURE__ */ T(() => /* @__PURE__ */ C("span", { style: { color: "red" } }, "Lưu ý: Tham số chỉ hỗ trợ báo cáo động, popup hiện không được hỗ trợ", -1)), Ke = /* @__PURE__ */ fe({
+   __name: "CgreportModal",
+   emits: ["register", "success"],
+   setup(t, { emit: o }) {
+@@ -377,7 +380,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+       schemas: De,
+       showActionButtonGroup: !1,
+       // update-begin--author:liaozhiyang---date:20240509---for：【QQYUN-9230】报表图表弹窗样式调整
+-      labelWidth: 100,
++      labelWidth: 105,
+       wrapperCol: null
+       // update-end--author:liaozhiyang---date:20240509---for：【QQYUN-9230】报表图表弹窗样式调整
+     }), [X, { setModalProps: L, closeModal: Y }] = ye((e) => R(this, null, function* () {
+@@ -389,7 +392,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
        V,
        h,
        f
@@ -671,7 +701,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
      function re() {
        return R(this, null, function* () {
          yield E(), h.value = "onlCgreportItem", k.dataSource = [], I.dataSource = [];
-@@ -421,7 +421,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -421,7 +424,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
          let { cgrSql: r, dbSource: a } = e, s = "sql=" + encodeURIComponent(r);
          a && (s += "&dbKey=" + a), qe(s).then((u) => {
            if (u) {
@@ -680,7 +710,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
              let { fields: n, params: p } = u, g = n.filter((q) => q.fieldName != "__row_number__"), N = d.value.getTableData(), $ = z(N, g || [], "fieldName");
              $ = $.sort((q, M) => q.orderNum - M.orderNum), I.dataSource = $;
              let se = c.value.getTableData(), D = z(se, p || [], "paramName");
-@@ -472,20 +472,20 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -472,20 +475,20 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
              analyseButton: _(() => [
                C("div", Fe, [
                  y(s, {
@@ -707,7 +737,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
                      Je,
                      Ue
                    ]),
-@@ -500,7 +500,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -500,7 +503,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
                    onClick: ie
                  }, {
                    default: _(() => [
@@ -716,7 +746,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
                    ]),
                    _: 1
                  })
-@@ -520,7 +520,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -520,7 +523,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
            }, {
              default: _(() => [
                (F(), O(g, {
@@ -725,7 +755,7 @@ index f470123d09691361b92119d3a407ca60979f855d..7176633dd53c566d7587a6f9dd1d38f8
                  key: f.value[0],
                  forceRender: !0
                }, {
-@@ -543,7 +543,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
+@@ -543,7 +546,7 @@ const { createConfirm: Pe } = j(), Te = "/online/cgreport/param/listByHeadId", V
                  _: 1
                })),
                (F(), O(g, {
@@ -1140,7 +1170,7 @@ index d6d05ce4a5a03e8797e78ee5fe8d0415f5ded4fa..792aa4fec0f408439e12ad6a7c3fde08
      return {
        tableRef: A,
 diff --git a/DbToOnlineModal-5dcb67c3.mjs b/DbToOnlineModal-5dcb67c3.mjs
-index c4064ee58f2b95d60e1cb8c875a57d1fef43183b..9e6534667b79fa496e5f40f895da2eb649aef72b 100644
+index c4064ee58f2b95d60e1cb8c875a57d1fef43183b..0afa1f5926aff831ecd326c1160d973b71b1c6f1 100644
 --- a/DbToOnlineModal-5dcb67c3.mjs
 +++ b/DbToOnlineModal-5dcb67c3.mjs
 @@ -13,9 +13,9 @@ const x = D({
@@ -1148,7 +1178,7 @@ index c4064ee58f2b95d60e1cb8c875a57d1fef43183b..9e6534667b79fa496e5f40f895da2eb6
    emits: ["success", "register"],
    setup(o, { emit: h }) {
 -    const { createMessage: f } = O(), t = i("暂无数据"), u = i(!1), s = i(!1), n = i([]), a = i([]), { prefixCls: c } = V("online-db-import-form-modal"), p = c, C = document.documentElement.clientHeight, b = C - 180, M = b > 690 ? 690 : b, [L, { setPagination: y, getForm: B }, { rowSelection: F, selectedRowKeys: r }] = q({
-+    const { createMessage: f } = O(), t = i("Không có dữ liệu"), u = i(!1), s = i(!1), n = i([]), a = i([]), { prefixCls: c } = V("online-db-import-form-modal"), p = c, C = document.documentElement.clientHeight, b = C - 180, M = b > 690 ? 690 : b, [L, { setPagination: y, getForm: B }, { rowSelection: F, selectedRowKeys: r }] = q({
++    const { createMessage: f } = O(), t = i("Không có dữ liệu"), u = i(!1), s = i(!1), n = i([]), a = i([]), { prefixCls: c } = V("online-db-import-form-modal"), p = c, C = document.documentElement.clientHeight, b = C - 180, M = b > 710 ? 710 : b, [L, { setPagination: y, getForm: B }, { rowSelection: F, selectedRowKeys: r }] = q({
        bordered: !0,
 -      columns: [{ title: "表名", align: "left", dataIndex: "id" }],
 +      columns: [{ title: "Tên bảng", align: "left", dataIndex: "id" }],

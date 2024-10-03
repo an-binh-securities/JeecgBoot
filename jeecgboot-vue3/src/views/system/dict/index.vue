@@ -3,23 +3,23 @@
   <BasicTable @register="registerTable" :rowSelection="rowSelection">
     <!--插槽:table标题-->
     <template #tableTitle>
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
-      <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-      <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
-      <a-button type="primary" @click="handlerRefreshCache" preIcon="ant-design:sync-outlined"> 刷新缓存</a-button>
-      <a-button type="primary" @click="openRecycleModal(true)" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
-
+      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> Thêm mới</a-button>
+      <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>
+      <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
+      <a-button type="primary" @click="handlerRefreshCache" preIcon="ant-design:sync-outlined"> Làm mới bộ nhớ đệm</a-button>
+      <a-button type="primary" @click="openRecycleModal(true)" preIcon="ant-design:hdd-outlined"> Thùng rác</a-button>
+    
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" @click="batchHandleDelete">
               <Icon icon="ant-design:delete-outlined"></Icon>
-              删除
+              Xóa
             </a-menu-item>
           </a-menu>
         </template>
-        <a-button
-          >批量操作
+        <a-button>
+          Thao tác hàng loạt
           <Icon icon="ant-design:down-outlined"></Icon>
         </a-button>
       </a-dropdown>
@@ -67,19 +67,19 @@
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     designScope: 'dict-template',
     tableProps: {
-      title: '数据字典',
+      title: 'Danh sách từ điển dữ liệu',
       api: list,
       columns: columns,
       formConfig: {
         schemas: searchFormSchema,
       },
       actionColumn: {
-        width: 240,
+        width: 300,
       },
     },
     //update-begin---author:wangshuai ---date:20220616  for：[issues/I5AMDD]导入/导出功能，操作后提示没有传递 export.url/import.url 参数------------
     exportConfig: {
-      name: '数据字典列表',
+      name: 'Danh sách từ điển dữ liệu',
       url: getExportUrl,
     },
     importConfig: {
@@ -157,9 +157,9 @@
       const userStore = useUserStore();
       userStore.setAllDictItems(res.result);
       // update-end--author:liaozhiyang---date:20230908---for：【QQYUN-6417】生产环境字典慢的问题
-      createMessage.success('刷新缓存完成！');
+      createMessage.success('Làm mới bộ nhớ đệm hoàn thành!');
     } else {
-      createMessage.error('刷新缓存失败！');
+      createMessage.error('Làm mới bộ nhớ đệm thất bại!');
     }
   }
   /**
@@ -176,17 +176,17 @@
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '字典配置',
+        label: 'Cấu hình từ điển',
         onClick: handleItem.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '确定删除吗?',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },

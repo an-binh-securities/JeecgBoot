@@ -36,6 +36,7 @@
     schemas: itemFormSchema,
     showActionButtonGroup: false,
     mergeDynamicData: props,
+    labelWidth: 150,
     labelCol: {
       xs: { span: 24 },
       sm: { span: 4 },
@@ -60,7 +61,7 @@
   });
 
   //设置标题
-  const getTitle = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
+  const getTitle = computed(() => (!unref(isUpdate) ? 'Thêm mới' : 'Chỉnh sửa'));
 
   //表单提交事件
   async function handleSubmit() {

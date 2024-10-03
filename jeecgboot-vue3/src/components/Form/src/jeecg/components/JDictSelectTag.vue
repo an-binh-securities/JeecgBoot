@@ -25,7 +25,7 @@
 
   <template v-else-if="compType === CompTypeEnum.Select">
     <!-- 显示加载效果 -->
-    <a-input v-if="loadingEcho" readOnly placeholder="加载中…">
+    <a-input v-if="loadingEcho" readOnly placeholder="Đang tải…">
       <template #prefix>
         <LoadingOutlined />
       </template>
@@ -40,7 +40,7 @@
       :style="style"
       @change="handleChange"
     >
-      <a-select-option v-if="showChooseOption" :value="null">请选择…</a-select-option>
+      <a-select-option v-if="showChooseOption" :value="null">Vui lòng chọn…</a-select-option>
       <template v-for="item in dictOptions" :key="`${item.value}`">
         <a-select-option :value="item.value">
           <span

@@ -1,5 +1,5 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="字典回收站" :showOkBtn="false" width="1000px" destroyOnClose>
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Thùng rác từ điển" :showOkBtn="false" width="1000px" destroyOnClose>
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
       <template #tableTitle>
@@ -8,16 +8,16 @@
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                批量删除
+                Xóa hàng loạt
               </a-menu-item>
               <a-menu-item key="2" @click="batchHandleRevert">
                 <Icon icon="ant-design:redo-outlined"></Icon>
-                批量取回
+                Khôi phục hàng loạt
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Hoạt động hàng loạt
             <Icon icon="ant-design:down-outlined"></Icon>
           </a-button>
         </a-dropdown>
@@ -56,8 +56,8 @@
     tableSetting: { fullScreen: true },
     canResize: false,
     actionColumn: {
-      width: 100,
-      title: '操作',
+      width: 150,
+      title: 'Hoạt động',
       dataIndex: 'action',
       slots: { customRender: 'action' },
       fixed: undefined,
@@ -120,19 +120,19 @@
   function getTableAction(record) {
     return [
       {
-        label: '取回',
+        label: 'Khôi phục',
         icon: 'ant-design:redo-outlined',
         popConfirm: {
-          title: '是否确认取回',
+          title: 'Bạn có chắc chắn muốn khôi phục không?',
           confirm: handleRevert.bind(null, record),
         },
       },
       {
-        label: '彻底删除',
+        label: 'Xóa hoàn toàn',
         icon: 'ant-design:scissor-outlined',
         color: 'error',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },

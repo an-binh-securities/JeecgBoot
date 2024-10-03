@@ -2,8 +2,8 @@
   <!--引用表格-->
   <BasicTable @register="registerTable" :rowSelection="rowSelection">
     <!--插槽:table标题-->
-    <template #tableTitle>
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="addDepartRole" :disabled="!departId">添加部门角色</a-button>
+      <template #tableTitle>
+      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="addDepartRole" :disabled="!departId">Thêm vai trò bộ phận</a-button>
       <template v-if="selectedRowKeys.length > 0">
         <a-divider type="vertical" />
         <a-dropdown>
@@ -11,12 +11,12 @@
             <a-menu>
               <a-menu-item key="1" @click="onDeleteDepartRoleBatch">
                 <icon icon="ant-design:delete-outlined" />
-                <span>删除</span>
+                <span>Xóa</span>
               </a-menu-item>
             </a-menu>
           </template>
           <a-button>
-            <span>批量操作 </span>
+            <span>Thao tác hàng loạt </span>
             <icon icon="akar-icons:chevron-down" />
           </a-button>
         </a-dropdown>
@@ -70,7 +70,7 @@
       columns: departRoleColumns,
       canResize: false,
       formConfig: {
-        labelWidth: 100,
+        labelWidth: 130,
         schemas: departRoleSearchFormSchema,
         baseColProps: adaptiveColProps,
         labelAlign: 'left',
@@ -149,7 +149,7 @@
   // 批量删除部门角色
   async function deleteDepartRole(idList, confirm) {
     if (!departId.value) {
-      createMessage.warning('请先选择一个部门');
+      createMessage.warning('Vui lòng chọn một bộ phận trước');
     } else {
       setLoading(true);
       let ids = unref(idList).join(',');
@@ -181,20 +181,20 @@
    * 操作栏
    */
   function getTableAction(record): ActionItem[] {
-    return [{ label: '编辑', onClick: editDepartRole.bind(null, record) }];
+    return [{ label: 'Chỉnh sửa', onClick: editDepartRole.bind(null, record) }];
   }
-
+  
   /**
-   * 下拉操作栏
+   * Thanh công cụ thả xuống
    */
   function getDropDownAction(record): ActionItem[] {
     return [
-      { label: '授权', onClick: permissionDepartRole.bind(null, record) },
+      { label: 'Ủy quyền', onClick: permissionDepartRole.bind(null, record) },
       {
-        label: '删除',
+        label: 'Xóa',
         color: 'error',
         popConfirm: {
-          title: '确认要删除吗？',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: deleteDepartRole.bind(null, [record.id], false),
         },
       },

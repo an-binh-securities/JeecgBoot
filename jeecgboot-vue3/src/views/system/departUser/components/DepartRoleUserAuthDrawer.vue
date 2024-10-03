@@ -1,5 +1,5 @@
 <template>
-  <BasicDrawer title="部门角色分配" :width="365" @close="onClose" @register="registerDrawer">
+  <BasicDrawer title="Phân công vai trò bộ phận" :width="365" @close="onClose" @register="registerDrawer">
     <a-spin :spinning="loading">
       <template v-if="desformList.length > 0">
         <a-checkbox-group v-model:value="designNameValue">
@@ -11,11 +11,11 @@
         </a-checkbox-group>
         <div style="width: 100%; margin-top: 15px">
           <a-button type="primary" :loading="loading" :size="'small'" preIcon="ant-design:save-filled" @click="onSubmit">
-            <span>点击保存</span>
+            <span>Nhấn để lưu</span>
           </a-button>
         </div>
       </template>
-      <a-empty v-else description="无配置信息" />
+      <a-empty v-else description="Không có thông tin cấu hình" />
     </a-spin>
   </BasicDrawer>
 </template>

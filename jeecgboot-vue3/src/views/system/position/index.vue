@@ -2,20 +2,20 @@
   <div>
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleAdd">新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleAdd">Thêm mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Thao tác hàng loạt
             <Icon icon="ant-design:down-outlined"></Icon>
           </a-button>
         </a-dropdown>
@@ -39,11 +39,11 @@
   const { createMessage } = useMessage();
   const [registerModal, { openModal }] = useModal();
 
-  // 列表页面公共参数、方法
+  // 列表页面公共参数、 phương pháp
   const { prefixCls, onExportXls, onImportXls, tableContext } = useListPage({
     designScope: 'position-template',
     tableProps: {
-      title: '职务列表',
+      title: 'Danh sách chức vụ',
       api: getPositionList,
       columns: columns,
       formConfig: {
@@ -55,7 +55,7 @@
       showIndexColumn: true,
     },
     exportConfig: {
-      name: '职务列表',
+      name: 'Danh sách chức vụ',
       url: getExportUrl,
     },
     importConfig: {
@@ -72,13 +72,13 @@
   function getActions(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không',
           confirm: handleDelete.bind(null, record),
         },
       },

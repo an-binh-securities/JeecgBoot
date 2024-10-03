@@ -15,6 +15,7 @@
   const rowId = ref('');
   //表单配置
   const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+    labelWidth: 110,
     schemas: formSchema,
     showActionButtonGroup: false,
   });
@@ -33,7 +34,7 @@
     }
   });
   //设置标题
-  const getTitle = computed(() => (!unref(isUpdate) ? '新增字典' : '编辑字典'));
+  const getTitle = computed(() => (!unref(isUpdate) ? 'Thêm mới từ điển' : 'Chỉnh sửa từ điển'));
   //表单提交事件
   async function handleSubmit() {
     try {
