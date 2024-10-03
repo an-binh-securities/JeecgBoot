@@ -1,21 +1,21 @@
 <template>
-  <BasicDrawer @register="registerBaseDrawer" title="角色用户" width="800" destroyOnClose>
+  <BasicDrawer @register="registerBaseDrawer" title="Người dùng vai trò" width="800" destroyOnClose>
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-        <a-button type="primary" @click="handleCreate" v-if="!disableUserEdit"> 新增用户</a-button>
-        <a-button type="primary" @click="handleSelect"> 已有用户</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="!disableUserEdit"> Thêm người dùng</a-button>
+        <a-button type="primary" @click="handleSelect"> Người dùng hiện có</a-button>
 
         <a-dropdown v-if="checkedKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="bx:bx-unlink"></Icon>
-                取消关联
+                Hủy liên kết
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Thao tác hàng loạt
             <Icon icon="ant-design:down-outlined"></Icon>
           </a-button>
         </a-dropdown>
@@ -24,9 +24,9 @@
         <TableAction :actions="getTableAction(record)" />
       </template>
     </BasicTable>
-    <!--用户操作抽屉-->
+    <!--Người dùng thao tác ngăn kéo-->
     <UserDrawer @register="registerDrawer" @success="handleSuccess" />
-    <!--用户选择弹窗-->
+    <!--Người dùng chọn cửa sổ bật lên-->
     <UseSelectModal @register="registerModal" @select="selectOk" />
   </BasicDrawer>
 </template>
@@ -80,7 +80,7 @@
     rowKey: 'id',
     actionColumn: {
       width: 180,
-      title: '操作',
+      title: 'Thao tác',
       dataIndex: 'action',
       slots: { customRender: 'action' },
       fixed: undefined,
@@ -176,14 +176,14 @@
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
         ifShow: () => !props.disableUserEdit,
       },
       {
-        label: '取消关联',
+        label: 'Hủy liên kết',
         popConfirm: {
-          title: '是否确认取消关联',
+          title: 'Bạn có chắc chắn muốn hủy liên kết không?',
           confirm: handleDelete.bind(null, record),
         },
       },

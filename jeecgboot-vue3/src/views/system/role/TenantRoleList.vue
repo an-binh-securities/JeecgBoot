@@ -1,22 +1,22 @@
 <template>
   <BasicTable @register="registerTable">
     <template #tableTitle>
-      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
+      <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> Thêm mới</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" @click="batchHandleDelete">
               <Icon icon="ant-design:delete-outlined"></Icon>
-              删除
+              Xóa
             </a-menu-item>
           </a-menu>
         </template>
         <a-button
-          >批量操作
+          >Thao tác hàng loạt
           <Icon icon="mdi:chevron-down"></Icon>
         </a-button>
       </a-dropdown>
-      <div style="margin-left: 10px;margin-top: 5px">当前登录租户: <span class="tenant-name">{{loginTenantName}}</span> </div>
+      <div style="margin-left: 10px;margin-top: 5px">Thuê bao đăng nhập hiện tại: <span class="tenant-name">{{loginTenantName}}</span> </div>
     </template>
     <template #action="{ record }">
       <TableAction :actions="getTableAction(record)" :dropDownActions="getDropDownAction(record)" />
@@ -49,11 +49,11 @@
   const [registerModal, { openModal }] = useModal();
   const [registerDesc, { openDrawer: openRoleDesc }] = useDrawer();
   
-  // 列表页面公共参数、方法
+  // Danh sách các tham số và phương thức chung của trang
   const { prefixCls, tableContext, onImportXls, onExportXls } = useListPage({
     designScope: 'role-template',
     tableProps: {
-      title: '租户角色列表',
+      title: 'Danh sách vai trò thuê bao',
       api: listByTenant,
       columns: columns,
       formConfig: {
@@ -63,14 +63,14 @@
         width: 120,
       },
       rowSelection: null,
-      //自定义默认排序
+      // Tùy chỉnh sắp xếp mặc định
       defSort: {
         column: 'id',
         order: 'desc',
       },
     },
     exportConfig: {
-      name: '角色列表',
+      name: 'Danh sách vai trò',
       url: getExportUrl,
     },
     importConfig: {
@@ -133,46 +133,46 @@
   function getTableAction(record) {
     return [
       {
-        label: '用户',
+        label: 'Người dùng',
         onClick: handleUser.bind(null, record),
       },
     ];
   }
-
+  
   /**
-   * 下拉操作栏
+   * Thanh công cụ thả xuống
    */
   function getDropDownAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '详情',
+        label: 'Chi tiết',
         onClick: handleDetail.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không',
           confirm: handleDelete.bind(null, record),
         },
       },
     ];
   }
-
+  
   const loginTenantName = ref<string>('');
   
   getTenantName();
   
-  async function getTenantName(){
+  async function getTenantName() {
     loginTenantName.value = await getLoginTenantName();
   }
-
-  onMounted(()=>{
-    tenantSaasMessage('租户角色')
-  })
+  
+  onMounted(() => {
+    tenantSaasMessage('Vai trò thuê bao');
+  });
 </script>
 
 <style scoped lang="less">

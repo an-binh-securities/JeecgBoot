@@ -1,21 +1,23 @@
 <template>
   <BasicDrawer v-bind="$attrs" @register="registerDrawer" title="数据规则配置" width="450px" destroyOnClose>
     <a-tabs defaultActiveKey="1">
-      <a-tab-pane tab="数据规则" key="1">
+      <a-tab-pane tab="Quy tắc dữ liệu" key="1">
         <a-checkbox-group v-model:value="dataRuleChecked" v-if="dataRuleList.length > 0">
           <a-row>
             <a-col :span="24" v-for="(item, index) in dataRuleList" :key="'dr' + index">
               <a-checkbox :value="item.id">{{ item.ruleName }}</a-checkbox>
             </a-col>
-
+    
             <a-col :span="24">
               <div style="width: 100%; margin-top: 15px">
-                <a-button @click="saveDataRuleForRole" type="primary" size="small"> <Icon icon="ant-design:save-outlined"></Icon>点击保存</a-button>
+                <a-button @click="saveDataRuleForRole" type="primary" size="small">
+                  <Icon icon="ant-design:save-outlined"></Icon>Nhấn để lưu
+                </a-button>
               </div>
             </a-col>
           </a-row>
         </a-checkbox-group>
-        <div v-else><h3>无配置信息!</h3></div>
+        <div v-else><h3>Không có thông tin cấu hình!</h3></div>
       </a-tab-pane>
     </a-tabs>
   </BasicDrawer>
@@ -69,7 +71,7 @@
    */
   async function saveDataRuleForRole() {
     if (!unref(dataRuleChecked) || unref(dataRuleChecked).length == 0) {
-      createMessage.warning('请注意，现未勾选任何数据权限!');
+      createMessage.warning('Xin lưu ý, hiện tại không có quyền dữ liệu nào được chọn!');
     }
     let params = {
       permissionId: unref(functionId),

@@ -1,5 +1,5 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="首页配置" @ok="handleSubmit" width="40%">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Cấu hình trang chủ" @ok="handleSubmit" width="40%">
     <BasicForm @register="registerForm" />
   </BasicModal>
 </template>

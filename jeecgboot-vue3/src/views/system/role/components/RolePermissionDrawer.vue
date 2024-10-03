@@ -1,36 +1,36 @@
 <template>
   <BasicDrawer v-bind="$attrs" @register="registerDrawer" width="650px" destroyOnClose showFooter>
-    <template #title>
-      角色权限配置
-      <a-dropdown>
-        <Icon icon="ant-design:more-outlined" class="more-icon" />
-        <template #overlay>
-          <a-menu @click="treeMenuClick">
-            <a-menu-item key="checkAll">选择全部</a-menu-item>
-            <a-menu-item key="cancelCheck">取消选择</a-menu-item>
-            <div class="line"></div>
-            <a-menu-item key="openAll">展开全部</a-menu-item>
-            <a-menu-item key="closeAll">折叠全部</a-menu-item>
-            <div class="line"></div>
-            <a-menu-item key="relation">层级关联</a-menu-item>
-            <a-menu-item key="standAlone">层级独立</a-menu-item>
-          </a-menu>
-        </template>
-      </a-dropdown>
-    </template>
-    <BasicTree
-      ref="treeRef"
-      checkable
-      :treeData="treeData"
-      :checkedKeys="checkedKeys"
-      :expandedKeys="expandedKeys"
-      :selectedKeys="selectedKeys"
-      :clickRowToExpand="false"
-      :checkStrictly="true"
-      title="所拥有的的权限"
-      @check="onCheck"
-      @select="onTreeNodeSelect"
-    >
+      <template #title>
+        Cấu hình quyền vai trò
+        <a-dropdown>
+          <Icon icon="ant-design:more-outlined" class="more-icon" />
+          <template #overlay>
+            <a-menu @click="treeMenuClick">
+              <a-menu-item key="checkAll">Chọn tất cả</a-menu-item>
+              <a-menu-item key="cancelCheck">Hủy chọn</a-menu-item>
+              <div class="line"></div>
+              <a-menu-item key="openAll">Mở rộng tất cả</a-menu-item>
+              <a-menu-item key="closeAll">Thu gọn tất cả</a-menu-item>
+              <div class="line"></div>
+              <a-menu-item key="relation">Liên kết cấp</a-menu-item>
+              <a-menu-item key="standAlone">Độc lập cấp</a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
+      </template>
+      <BasicTree
+        ref="treeRef"
+        checkable
+        :treeData="treeData"
+        :checkedKeys="checkedKeys"
+        :expandedKeys="expandedKeys"
+        :selectedKeys="selectedKeys"
+        :clickRowToExpand="false"
+        :checkStrictly="true"
+        title="Các quyền hiện có"
+        @check="onCheck"
+        @select="onTreeNodeSelect"
+      >
       <template #title="{ slotTitle, ruleFlag }">
         {{ slotTitle }}
         <Icon v-if="ruleFlag" icon="ant-design:align-left-outlined" style="margin-left: 5px; color: red"></Icon>
@@ -38,10 +38,10 @@
     </BasicTree>
     <!--右下角按钮-->
     <template #footer>
-      <!-- <PopConfirmButton title="确定放弃编辑？" @confirm="closeDrawer" okText="确定" cancelText="取消"></PopConfirmButton> -->
-      <a-button @click="closeDrawer">取消</a-button>
-      <a-button @click="handleSubmit(false)" type="primary" :loading="loading" ghost style="margin-right: 0.8rem">仅保存</a-button>
-      <a-button @click="handleSubmit(true)" type="primary" :loading="loading">保存并关闭</a-button>
+      <!-- <PopConfirmButton title="Xác nhận bỏ chỉnh sửa?" @confirm="closeDrawer" okText="Xác nhận" cancelText="Hủy bỏ"></PopConfirmButton> -->
+      <a-button @click="closeDrawer">Hủy bỏ</a-button>
+      <a-button @click="handleSubmit(false)" type="primary" :loading="loading" ghost style="margin-right: 0.8rem">Chỉ lưu</a-button>
+      <a-button @click="handleSubmit(true)" type="primary" :loading="loading">Lưu và đóng</a-button>
     </template>
     <RoleDataRuleDrawer @register="registerDrawer1" />
   </BasicDrawer>
@@ -219,7 +219,7 @@
     if(loading.value===false){
       await doSave(params)
     }else{
-      console.log('请等待上次执行完毕!');
+      console.log('Vui lòng chờ cho đến khi lần thực hiện trước hoàn tất!');
     }
     if(exit){
       // 如果关闭
