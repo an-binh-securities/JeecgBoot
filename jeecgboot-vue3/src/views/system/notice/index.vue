@@ -2,15 +2,15 @@
   <div>
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">新建</a-button>
-<!--        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>-->
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd">Tạo mới</a-button>
+<!--        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>-->
 <!--        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>-->
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
             </a-menu>
           </template>
@@ -49,7 +49,7 @@
   const { prefixCls, onExportXls, onImportXls, tableContext, doRequest } = useListPage({
     designScope: 'notice-template',
     tableProps: {
-      title: '消息通知',
+      title: 'Thông báo tin nhắn',
       api: getList,
       columns: columns,
       formConfig: {
@@ -57,7 +57,7 @@
       },
     },
     exportConfig: {
-      name: '消息通知列表',
+      name: 'Danh sách thông báo tin nhắn',
       url: getExportUrl,
     },
     importConfig: {
@@ -127,40 +127,40 @@
   function getActions(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
         ifShow: record.sendStatus == 0 || record.sendStatus == '2',
       },
     ];
   }
   /**
-   * 下拉操作栏
-   */
+    * Thanh tác vụ thả xuống
+    */
   function getDropDownAction(record) {
     return [
       {
-        label: '删除',
+        label: 'Xóa',
         ifShow: record.sendStatus != 1,
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },
       {
-        label: '发布',
+        label: 'Phát hành',
         ifShow: record.sendStatus == 0,
         onClick: handleRelease.bind(null, record.id),
       },
       {
-        label: '撤销',
+        label: 'Hủy bỏ',
         ifShow: record.sendStatus == 1,
         popConfirm: {
-          title: '确定要撤销吗？',
+          title: 'Bạn có chắc chắn muốn hủy bỏ không?',
           confirm: handleReovke.bind(null, record.id),
         },
       },
       {
-        label: '查看',
+        label: 'Xem',
         onClick: handleDetail.bind(null, record),
       },
     ];

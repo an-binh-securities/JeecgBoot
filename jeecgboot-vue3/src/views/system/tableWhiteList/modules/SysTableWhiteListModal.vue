@@ -23,7 +23,7 @@ const emit = defineEmits(['register', 'success']);
 const isUpdate = ref(true);
 //表单配置
 const [registerForm, { resetFields, setFieldsValue, validate, setProps }] = useForm({
-  labelWidth: 120,
+  labelWidth: 160,
   wrapperCol: null,
   schemas: formSchema,
   showActionButtonGroup: false,
@@ -47,7 +47,7 @@ const [registerModal, {setModalProps, closeModal}] = useModalInner(async (data) 
   setProps({ disabled: !data?.showFooter })
 });
 //设置标题
-const title = computed(() => (!unref(isUpdate) ? '新增' : '编辑'));
+const title = computed(() => (!unref(isUpdate) ? 'Thêm mới' : 'Chỉnh sửa'));
 
 //表单提交事件
 async function handleSubmit(v) {

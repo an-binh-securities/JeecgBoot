@@ -4,12 +4,12 @@ import { render } from '/@/utils/common/renderUtils';
 
 export const columns: BasicColumn[] = [
   {
-    title: '标题',
+    title: 'Tiêu đề',
     width: 150,
     dataIndex: 'titile',
   },
   {
-    title: '消息类型',
+    title: 'Loại tin nhắn',
     dataIndex: 'msgCategory',
     width: 100,
     customRender: ({ text }) => {
@@ -17,12 +17,12 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '发布人',
+    title: 'Người gửi',
     width: 100,
     dataIndex: 'sender',
   },
   {
-    title: '优先级',
+    title: 'Mức độ ưu tiên',
     dataIndex: 'priority',
     width: 70,
     customRender: ({ text }) => {
@@ -31,7 +31,7 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '通告对象',
+    title: 'Đối tượng thông báo',
     dataIndex: 'msgType',
     width: 100,
     customRender: ({ text }) => {
@@ -39,7 +39,7 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '发布状态',
+    title: 'Trạng thái phát hành',
     dataIndex: 'sendStatus',
     width: 70,
     customRender: ({ text }) => {
@@ -48,12 +48,12 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: '发布时间',
+    title: 'Thời gian phát hành',
     width: 100,
     dataIndex: 'sendTime',
   },
   {
-    title: '撤销时间',
+    title: 'Thời gian hủy bỏ',
     width: 100,
     dataIndex: 'cancelTime',
   },
@@ -62,7 +62,7 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'titile',
-    label: '标题',
+    label: 'Tiêu đề',
     component: 'JInput',
     colProps: { span: 8 },
   },
@@ -77,23 +77,23 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'msgCategory',
-    label: '消息类型',
+    label: 'Loại tin nhắn',
     required: true,
     component: 'JDictSelectTag',
     defaultValue: '1',
     componentProps: {
       type: 'radio',
       dictCode: 'msg_category',
-      placeholder: '请选择类型',
+      placeholder: 'Vui lòng chọn loại',
     },
   },
   {
     field: 'titile',
-    label: '标题',
+    label: 'Tiêu đề',
     component: 'Input',
     required: true,
     componentProps: {
-      placeholder: '请输入标题',
+      placeholder: 'Vui lòng nhập tiêu đề',
     },
     // update-begin--author:liaozhiyang---date:20240701---for：【TV360X-1632】标题过长保存报错，长度校验
     dynamicRules() {
@@ -102,7 +102,7 @@ export const formSchema: FormSchema[] = [
           validator: (_, value) => {
             return new Promise<void>((resolve, reject) => {
               if (value.length > 100) {
-                reject('最长100个字符');
+                reject('Dài nhất 100 ký tự');
               }
               resolve();
             });
@@ -114,36 +114,36 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'msgAbstract',
-    label: '摘要',
+    label: 'Tóm tắt',
     component: 'InputTextArea',
     required: true,
   },
   // {
   //   field: 'endTime',
-  //   label: '截至日期',
+  //   label: 'Ngày kết thúc',
   //   component: 'DatePicker',
   //   componentProps: {
   //     showTime: true,
   //     valueFormat: 'YYYY-MM-DD HH:mm:ss',
-  //     placeholder: '请选择截至日期',
+  //     placeholder: 'Vui lòng chọn ngày kết thúc',
   //   },
   //   dynamicRules: ({ model }) => rules.endTime(model.startTime, true),
   // },
   {
     field: 'msgType',
-    label: '接收用户',
+    label: 'Người nhận',
     defaultValue: 'ALL',
     component: 'JDictSelectTag',
     required: true,
     componentProps: {
       type: 'radio',
       dictCode: 'msg_type',
-      placeholder: '请选择发布范围',
+      placeholder: 'Vui lòng chọn phạm vi phát hành',
     },
   },
   {
     field: 'userIds',
-    label: '指定用户',
+    label: 'Người dùng chỉ định',
     component: 'JSelectUser',
     required: true,
     componentProps: {
@@ -156,18 +156,18 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'priority',
-    label: '优先级',
+    label: 'Mức độ ưu tiên',
     defaultValue: 'H',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'priority',
       type: 'radio',
-      placeholder: '请选择优先级',
+      placeholder: 'Vui lòng chọn mức độ ưu tiên',
     },
   },
   {
     field: 'msgContent',
-    label: '内容',
+    label: 'Nội dung',
     component: 'Input',
     render: render.renderTinymce,
   },

@@ -10,20 +10,20 @@
     >
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> 新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button type="primary" preIcon="ant-design:plus-outlined" @click="handleCreate"> Tạo mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
             </a-menu>
           </template>
-          <a-button
-            >批量操作
+          <a-button>
+            Hành động hàng loạt
             <Icon icon="ant-design:down-outlined"></Icon>
           </a-button>
         </a-dropdown>
@@ -58,7 +58,7 @@
   const { prefixCls, onExportXls, onImportXls, tableContext } = useListPage({
     designScope: 'category-template',
     tableProps: {
-      title: '分类字典',
+      title: 'Từ điển phân loại',
       api: list,
       columns: columns,
       actionColumn: {
@@ -70,7 +70,7 @@
       isTreeTable: true,
     },
     exportConfig: {
-      name: '分类字典列表',
+      name: 'Danh sách từ điển phân loại',
       url: getExportUrl,
     },
     importConfig: {
@@ -272,23 +272,23 @@
     updateTableDataRecord(key, record);
   }
   /**
-   * 操作栏
-   */
+    * Thanh tác vụ
+    */
   function getTableAction(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '确定删除吗?',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },
       {
-        label: '添加下级',
+        label: 'Thêm cấp dưới',
         onClick: handleAddSub.bind(null, { pid: record.id }),
       },
     ];

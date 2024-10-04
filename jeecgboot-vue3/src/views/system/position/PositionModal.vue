@@ -34,7 +34,7 @@
     }
   });
   //设置标题
-  const getTitle = computed(() => (!unref(isUpdate) ? '新增职务' : '编辑职务'));
+  const getTitle = computed(() => (!unref(isUpdate) ? 'Thêm chức vụ' : 'Chỉnh sửa chức vụ'));
   //表单提交事件
   async function handleSubmit() {
     try {

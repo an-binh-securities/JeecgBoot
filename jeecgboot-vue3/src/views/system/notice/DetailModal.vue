@@ -1,5 +1,5 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="查看详情" :showCancelBtn="false" :showOkBtn="false" :maxHeight="500">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Xem chi tiết" :showCancelBtn="false" :showOkBtn="false" :maxHeight="500">
     <iframe :src="frameSrc" class="detail-iframe" />
   </BasicModal>
 </template>

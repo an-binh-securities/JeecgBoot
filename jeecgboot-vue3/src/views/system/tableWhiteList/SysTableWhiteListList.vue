@@ -5,25 +5,25 @@
       <!--插槽:table标题-->
       <template #tableTitle>
         <a-button type="primary" @click="handleAdd" preIcon="ant-design:plus-outlined">
-          新增
+          Thêm mới
         </a-button>
-<!--        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls">-->
-<!--          导出-->
-<!--        </a-button>-->
-<!--        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">-->
-<!--          导入-->
-<!--        </j-upload-button>-->
+        <!-- <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> -->
+        <!-- Xuất -->
+        <!-- </a-button> -->
+        <!-- <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls"> -->
+        <!-- Nhập -->
+        <!-- </j-upload-button> -->
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
             </a-menu>
           </template>
           <a-button>
-            批量操作
+            Thao tác hàng loạt
             <Icon icon="mdi:chevron-down"></Icon>
           </a-button>
         </a-dropdown>
@@ -60,7 +60,7 @@ const {prefixCls, tableContext, onExportXls, onImportXls} = useListPage({
     columns,
     canResize: false,
     formConfig: {
-      labelWidth: 120,
+      labelWidth: 160,
       schemas: searchFormSchema,
       autoSubmitOnEnter: true,
       showAdvancedButton: true,

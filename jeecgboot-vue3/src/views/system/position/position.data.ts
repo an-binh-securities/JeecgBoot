@@ -3,19 +3,18 @@ import { rules } from '/@/utils/helper/validator';
 
 export const columns: BasicColumn[] = [
   // {
-  //   title: '职务编码',
-  //   dataIndex: 'code',
-  //   width: 200,
-  //   align: 'left',
+  //   title: 'Tên chức vụ',
+  //   dataIndex: 'name',
+  //   align: 'left'
   // },
   {
-    title: '职务名称',
-    dataIndex: 'name',
-    align: 'left'
-    // width: 200,
+    title: 'Mã chức vụ',
+    dataIndex: 'code',
+    width: 200,
+    align: 'left',
   },
   // {
-  //   title: '职务等级',
+  //   title: 'Cấp bậc chức vụ',
   //   dataIndex: 'postRank_dictText',
   //   width: 100,
   // },
@@ -24,7 +23,7 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'name',
-    label: '职务名称',
+    label: 'Tên chức vụ',
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -32,7 +31,7 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
-    label: '主键',
+    label: 'Khóa chính',
     field: 'id',
     component: 'Input',
     show: false,
@@ -52,7 +51,7 @@ export const formSchema: FormSchema[] = [
   // },
   {
     field: 'name',
-    label: '职务名称',
+    label: 'Tên chức vụ',
     component: 'Input',
     required: true,
   },
