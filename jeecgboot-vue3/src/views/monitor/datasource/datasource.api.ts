@@ -65,15 +65,15 @@ export const testConnection = (params) => {
 };
 
 /**
- * 批量删除数据源
+ * Xóa hàng loạt nguồn dữ liệu
  * @param params
  */
 export const batchDeleteDataSource = (params, handleSuccess) => {
   Modal.confirm({
-    title: '确认删除',
-    content: '是否删除选中数据',
-    okText: '确认',
-    cancelText: '取消',
+    title: 'Xác nhận xóa',
+    content: 'Bạn có muốn xóa dữ liệu đã chọn không?',
+    okText: 'Xác nhận',
+    cancelText: 'Hủy',
     onOk: () => {
       return defHttp.delete({ url: Api.deleteBatch, data: params }, { joinParamsToUrl: true }).then(() => {
         handleSuccess();

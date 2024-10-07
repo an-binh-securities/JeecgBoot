@@ -158,7 +158,7 @@ export interface GlobConfig {
   urlPrefix?: string;
   // Project abbreviation
   shortName: string;
-  // 短标题
+  // Short title
   shortTitle: string;
 }
 export interface GlobEnvConfig {
@@ -171,11 +171,11 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL_PREFIX?: string;
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string;
-  //是否开启单点登录
+  // Whether to enable single sign-on
   VITE_GLOB_APP_OPEN_SSO: string;
-  //是否开启微应用模式
+  // Whether to enable micro-frontend mode
   VITE_GLOB_APP_OPEN_QIANKUN: string;
-  //单点服务端地址
+  // Single sign-on server address
   VITE_GLOB_APP_CAS_BASE_URL: string;
   VITE_GLOB_DOMAIN_URL: string;
   // Upload url

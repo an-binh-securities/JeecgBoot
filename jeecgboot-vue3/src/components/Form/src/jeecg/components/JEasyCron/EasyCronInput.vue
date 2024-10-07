@@ -4,7 +4,7 @@
       <template #addonAfter>
         <a class="open-btn" :disabled="disabled ? 'disabled' : null" @click="showConfigModal">
           <Icon icon="ant-design:setting-outlined" />
-          <span>选择</span>
+          <span> Chọn</span>
         </a>
       </template>
     </a-input>

@@ -2,20 +2,20 @@
   <div>
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px">新增</a-button>
-        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px">Thêm mới</a-button>
+        <a-button type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> Xuất</a-button>
+        <j-upload-button type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">Nhập</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
                 <Icon icon="ant-design:delete-outlined"></Icon>
-                删除
+                Xóa
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
-            >批量操作
+            >Thao tác hàng loạt
             <Icon icon="mdi:chevron-down"></Icon>
           </a-button>
         </a-dropdown>
@@ -43,7 +43,7 @@
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     designScope: 'quartz-template',
     tableProps: {
-      title: '任务列表',
+      title: 'Danh sách nhiệm vụ',
       api: getQuartzList,
       columns: columns,
       actionColumn: {
@@ -56,7 +56,7 @@
       },
     },
     exportConfig: {
-      name: '定时任务列表',
+      name: 'Danh sách nhiệm vụ định kỳ',
       url: getExportUrl,
     },
     importConfig: {
@@ -73,9 +73,9 @@
   function getActions(record) {
     return [
       {
-        label: '启动',
+        label: 'Khởi động',
         popConfirm: {
-          title: '是否启动选中任务?',
+          title: 'Bạn có muốn khởi động nhiệm vụ đã chọn không?',
           confirm: handlerResume.bind(null, record),
         },
         ifShow: (_action) => {
@@ -83,9 +83,9 @@
         },
       },
       {
-        label: '停止',
+        label: 'Dừng',
         popConfirm: {
-          title: '是否暂停选中任务?',
+          title: 'Bạn có muốn tạm dừng nhiệm vụ đã chọn không?',
           confirm: handlerPause.bind(null, record),
         },
         ifShow: (_action) => {
@@ -96,25 +96,25 @@
   }
 
   /**
-   * 下拉操作栏
-   */
+    * Thanh tác vụ thả xuống
+    */
   function getDropDownAction(record) {
     return [
       {
-        label: '立即执行',
+        label: 'Thực hiện ngay',
         popConfirm: {
-          title: '是否立即执行任务?',
+          title: 'Bạn có muốn thực hiện nhiệm vụ ngay lập tức không?',
           confirm: handlerExecute.bind(null, record),
         },
       },
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },

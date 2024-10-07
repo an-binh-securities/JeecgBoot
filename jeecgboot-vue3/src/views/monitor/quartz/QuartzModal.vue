@@ -19,7 +19,7 @@
     schemas: formSchema,
     showActionButtonGroup: false,
     // update-begin--author:liaozhiyang---date:20231017---for：【issues/790】弹窗内文本框不居中问题
-    labelWidth: 100,
+    labelWidth: 150,
     // update-end--author:liaozhiyang---date:20231017---for：【issues/790】弹窗内文本框不居中问题
   });
   //表单赋值
@@ -43,7 +43,7 @@
     }
   });
   //设置标题
-  const title = computed(() => (!unref(isUpdate) ? '新增任务' : '编辑任务'));
+  const title = computed(() => (!unref(isUpdate) ? 'Thêm nhiệm vụ mới' : 'Chỉnh sửa nhiệm vụ'));
   //表单提交事件
   async function handleSubmit(v) {
     try {
