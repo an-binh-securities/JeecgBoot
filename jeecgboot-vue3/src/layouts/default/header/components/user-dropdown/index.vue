@@ -241,10 +241,10 @@
 
     &-dropdown-overlay {
       // update-begin--author:liaozhiyang---date:20231226---for：【QQYUN-7512】顶部账号划过首次弹出时位置会变更一下
-      width: 160px;
+      width: 200px;
       // update-end--author:liaozhiyang---date:20231226---for：【QQYUN-7512】顶部账号划过首次弹出时位置会变更一下
       .ant-dropdown-menu-item {
-        min-width: 160px;
+        min-width: 200px;
       }
     }
   }
