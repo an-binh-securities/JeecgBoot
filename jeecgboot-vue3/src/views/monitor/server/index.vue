@@ -2,23 +2,23 @@
   <div class="p-4">
     <a-card :bordered="false" style="height: 100%">
       <a-tabs v-model:activeKey="activeKey" @change="tabChange">
-        <a-tab-pane key="1" tab="服务器信息"></a-tab-pane>
-        <a-tab-pane key="2" tab="JVM信息" force-render></a-tab-pane>
-        <a-tab-pane key="3" tab="Tomcat信息"></a-tab-pane>
-        <a-tab-pane key="4" tab="磁盘监控">
+        <a-tab-pane key="1" tab="Thông tin máy chủ"></a-tab-pane>
+        <a-tab-pane key="2" tab="Thông tin JVM" force-render></a-tab-pane>
+        <a-tab-pane key="3" tab="Thông tin Tomcat"></a-tab-pane>
+        <a-tab-pane key="4" tab="Giám sát đĩa">
           <DiskInfo v-if="activeKey == 4" style="height: 100%"></DiskInfo>
         </a-tab-pane>
-        <a-tab-pane key="5" tab="内存信息" />
+        <a-tab-pane key="5" tab="Thông tin bộ nhớ" />
       </a-tabs>
-      <!--  update-begin---author:wangshuai ---date: 20230829 for：性能监控切换到磁盘监控再切回来报错列为空，不能用if判断------------>
+      <!--  update-begin---author:wangshuai ---date: 20230829 for：Chuyển đổi giám sát hiệu suất sang giám sát đĩa rồi quay lại báo lỗi cột trống, không thể sử dụng if để kiểm tra------------>
       <BasicTable @register="registerTable" :searchInfo="searchInfo" :dataSource="dataSource" v-show="activeKey != 4">
-      <!--  update-end---author:wangshuai ---date: 20230829 for：性能监控切换到磁盘监控再切回来报错列为空，不能用if判断------------>
+      <!--  update-end---author:wangshuai ---date: 20230829 for：Chuyển đổi giám sát hiệu suất sang giám sát đĩa rồi quay lại báo lỗi cột trống, không thể sử dụng if để kiểm tra------------>
         <template #tableTitle>
-          <div slot="message"
-            >上次更新时间：{{ lastUpdateTime }}
+          <div slot="message">
+            Lần cập nhật cuối: {{ lastUpdateTime }}
             <a-divider type="vertical" />
-            <a @click="handleUpdate">立即更新</a></div
-          >
+            <a @click="handleUpdate">Cập nhật ngay</a>
+          </div>
         </template>
         <template #param="{ record, text }">
           <a-tag :color="textInfo[record.param].color">{{ text }}</a-tag>
@@ -26,7 +26,9 @@
         <template #text="{ record }">
           {{ textInfo[record.param].text }}
         </template>
-        <template #value="{ record, text }"> {{ text }} {{ textInfo[record.param].unit }} </template>
+        <template #value="{ record, text }">
+          {{ text }} {{ textInfo[record.param].unit }}
+        </template>
       </BasicTable>
     </a-card>
   </div>
@@ -68,7 +70,7 @@
 
   //加载信息
   function getInfoList(infoType) {
-    lastUpdateTime.value = dayjs().format('YYYY年MM月DD日 HH时mm分ss秒');
+    lastUpdateTime.value = dayjs().format('YYYY/MM/DD HH:mm:ss');
     getServerInfo(infoType).then((res) => {
       textInfo.value = getTextInfo(infoType);
       moreInfo.value = getMoreInfo(infoType);

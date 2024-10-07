@@ -2,52 +2,52 @@ import { FormSchema } from '/@/components/Table';
 import { render } from "/@/utils/common/renderUtils";
 import { getToken } from '/@/utils/auth';
 
-//列表
+// Danh sách
 export const columns = [
   {
-    title:'用户账号',
-    align:"center",
+    title: 'Tài khoản người dùng',
+    align: "center",
     dataIndex: 'username',
-    customRender: ( {text,record} ) => {
+    customRender: ({ text, record }) => {
       let token = getToken();
-      if(record.token === token) {
-        return text + '（我）'
+      if (record.token === token) {
+        return text + '（tôi）'
       }
       return text
     },
-  },{
-    title:'用户姓名',
-    align:"center",
+  }, {
+    title: 'Tên người dùng',
+    align: "center",
     dataIndex: 'realname'
-  },{
-    title: '头像',
+  }, {
+    title: 'Ảnh đại diện',
     align: "center",
     width: 120,
     dataIndex: 'avatar',
     customRender: render.renderAvatar,
-  },{
-    title:'生日',
-    align:"center",
+  }, {
+    title: 'Sinh nhật',
+    align: "center",
     dataIndex: 'birthday'
-  },{
-    title: '性别',
+  }, {
+    title: 'Giới tính',
     align: "center",
     dataIndex: 'sex',
-    customRender: ({text}) => {
+    customRender: ({ text }) => {
       return render.renderDict(text, 'sex');
     }
-  },{
-    title:'手机号',
-    align:"center",
+  }, {
+    title: 'Số điện thoại',
+    align: "center",
     dataIndex: 'phone'
   }
 ];
 
-//查询区域
+// Khu vực tìm kiếm
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'username',
-    label: '用户账号',
+    label: 'Tài khoản người dùng',
     component: 'Input',
     colProps: { span: 6 },
   }

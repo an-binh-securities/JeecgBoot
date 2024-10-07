@@ -3,16 +3,16 @@
     <BasicTable @register="registerTable" :dataSource="dataSource" @change="handlerTableChange">
       <template #tableTitle>
         <div slot="message">
-          共追踪到 {{ dataSource.length }} 条近期HTTP请求记录
+          Đã theo dõi {{ dataSource.length }} bản ghi yêu cầu HTTP gần đây
           <a-divider type="vertical" />
-          <a @click="loadDate">立即刷新</a>
+          <a @click="loadDate">Làm mới ngay</a>
         </div>
       </template>
       <template #toolbar>
         <a-radio-group class="http-status-choose" size="small" v-model:value="query" @change="loadDate">
-          <a-radio-button value="all">全部</a-radio-button>
-          <a-radio-button value="success">成功</a-radio-button>
-          <a-radio-button value="error">错误</a-radio-button>
+          <a-radio-button value="all">Tất cả</a-radio-button>
+          <a-radio-button value="success">Thành công</a-radio-button>
+          <a-radio-button value="error">Lỗi</a-radio-button>
         </a-radio-group>
       </template>
     </BasicTable>
@@ -67,6 +67,6 @@
 </script>
 <style scoped>
   :deep(.jeecg-basic-table-header__toolbar) {
-    width: 150px;
+    width: 220px;
   }
 </style>

@@ -34,7 +34,7 @@
   const { createMessage } = useMessage();
   const key = reactive({
     title: {
-      text: 'Redis Key 实时数量（个）',
+      text: 'Số lượng Redis Key theo thời gian thực (cái)',
     },
     xAxis: {
       type: 'category',
@@ -61,7 +61,7 @@
   });
   const memory = reactive({
     title: {
-      text: 'Redis 内存实时占用情况（KB）',
+      text: 'Tình trạng sử dụng bộ nhớ Redis theo thời gian thực (KB)',
     },
     xAxis: {
       type: 'category',
