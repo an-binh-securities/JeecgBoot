@@ -15,6 +15,7 @@
   const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
     schemas: formPasswordSchema,
     showActionButtonGroup: false,
+    labelWidth: 170,
   });
   // Gán giá trị biểu mẫu
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {

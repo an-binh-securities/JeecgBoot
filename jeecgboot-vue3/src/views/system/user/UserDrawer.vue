@@ -142,13 +142,13 @@
   });
   //获取标题
   const getTitle = computed(() => {
-    // update-begin--author:liaozhiyang---date:20240306---for：【QQYUN-8389】系统用户详情抽屉title更改
+    // update-begin--author:liaozhiyang---date:20240306---for：【QQYUN-8389】Thay đổi tiêu đề ngăn kéo chi tiết người dùng hệ thống
     if (!unref(isUpdate)) {
-      return '新增用户';
+      return 'Thêm người dùng';
     } else {
-      return unref(showFooter) ? '编辑用户' : '用户详情';
+      return unref(showFooter) ? 'Chỉnh sửa người dùng' : 'Chi tiết người dùng';
     }
-    // update-end--author:liaozhiyang---date:20240306---for：【QQYUN-8389】系统用户详情抽屉title更改
+    // update-end--author:liaozhiyang---date:20240306---for：【QQYUN-8389】Thay đổi tiêu đề ngăn kéo chi tiết người dùng hệ thống
   });
   const { adaptiveWidth } = useDrawerAdaptiveWidth();
 
