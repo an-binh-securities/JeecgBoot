@@ -2,19 +2,19 @@
   <div class="p-4">
     <BasicTable @register="registerTable" :indexColumnProps="indexColumnProps">
       <template #tableTitle>
-        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px">新增</a-button>
-        <a-button type="primary" @click="openRecycleModal(true)" preIcon="ant-design:hdd-outlined"> 回收站</a-button>
+        <a-button preIcon="ant-design:plus-outlined" type="primary" @click="handleAdd" style="margin-right: 5px">Thêm mới</a-button>
+        <a-button type="primary" @click="openRecycleModal(true)" preIcon="ant-design:hdd-outlined"> Thùng rác</a-button>
       </template>
       <template #status="{ record, text }">
-        <a-tag color="pink" v-if="text == 0">禁用</a-tag>
-        <a-tag color="#87d068" v-if="text == 1">正常</a-tag>
+        <a-tag color="pink" v-if="text == 0">Vô hiệu hóa</a-tag>
+        <a-tag color="#87d068" v-if="text == 1">Bình thường</a-tag>
       </template>
       <template #action="{ record }">
         <TableAction :actions="getActions(record)" />
       </template>
     </BasicTable>
     <RouteModal @register="registerDrawer" @success="reload" />
-    <!--回收站弹窗-->
+    <!--Cửa sổ bật lên thùng rác-->
     <RouteRecycleBinModal @register="registerRecycleModal" @success="reload" />
   </div>
 </template>
@@ -39,7 +39,7 @@
   const { prefixCls, tableContext } = useListPage({
     designScope: 'router-template',
     tableProps: {
-      title: '路由列表',
+      title: 'Danh sách tuyến đường',
       api: getRouteList,
       useSearchForm: false,
       columns: columns,
@@ -56,26 +56,26 @@
   };
 
   /**
-   * 操作列定义
+   * Định nghĩa cột hành động
    * @param record
    */
   function getActions(record) {
     return [
       {
-        label: '编辑',
+        label: 'Chỉnh sửa',
         onClick: handleEdit.bind(null, record),
       },
       {
-        label: '复制',
+        label: 'Sao chép',
         popConfirm: {
-          title: '是否确认复制',
+          title: 'Bạn có chắc chắn muốn sao chép không?',
           confirm: handleCopy.bind(null, record),
         },
       },
       {
-        label: '删除',
+        label: 'Xóa',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },
@@ -112,7 +112,7 @@
    */
   async function handleCopy(record) {
     await copyRoute({ id: record.id }, reload);
-    createMessage.success('复制成功');
+    createMessage.success('Sao chép thành công');
   }
 
   /**

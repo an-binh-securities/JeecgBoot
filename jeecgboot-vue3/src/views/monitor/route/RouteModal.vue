@@ -1,22 +1,22 @@
 <template>
   <BasicDrawer v-bind="$attrs" @register="registerDrawer" :title="getTitle" width="30%" @ok="handleSubmit" destroyOnClose showFooter>
     <a-form ref="formRef" :label-col="labelCol" :wrapper-col="wrapperCol" :model="router" :rules="validatorRules">
-      <a-form-item label="路由ID" name="routerId">
-        <a-input v-model:value="router.routerId" placeholder="路由唯一ID" />
+      <a-form-item label="ID tuyến đường" name="routerId">
+        <a-input v-model:value="router.routerId" placeholder="ID duy nhất của tuyến đường" />
       </a-form-item>
-      <a-form-item label="路由名称" name="name">
-        <a-input v-model:value="router.name" placeholder="路由名称" />
+      <a-form-item label="Tên tuyến đường" name="name">
+        <a-input v-model:value="router.name" placeholder="Tên tuyến đường" />
       </a-form-item>
-      <a-form-item label="路由URI" name="uri">
-        <a-input v-model:value="router.uri" placeholder="路由URL" />
+      <a-form-item label="URI tuyến đường" name="uri">
+        <a-input v-model:value="router.uri" placeholder="URL tuyến đường" />
       </a-form-item>
-      <a-form-item label="路由状态" name="status">
+      <a-form-item label="Trạng thái tuyến đường" name="status">
         <a-switch default-checked :checked-value="1" :un-checked-value="0" v-model:checked="router.status" />
       </a-form-item>
 
-      <a-form-item name="predicates" label="路由条件">
+      <a-form-item name="predicates" label="Điều kiện tuyến đường">
         <div v-for="(item, index) in router.predicates">
-          <!--当name在noKeyRouter时不需要指定key-->
+          <!--Khi name nằm trong noKeyRouter thì không cần chỉ định key-->
           <template v-if="noKeyRouter.includes(item.name)">
             <a-divider
               >{{ item.name }}
@@ -59,11 +59,11 @@
               />
               <a-tag v-else style="background: #fff; borderstyle: dashed; margin-bottom: 2px" @click="showInput(item, index)">
                 <PlusOutlined size="22" />
-                新建{{ item.name }}
+                Tạo mới {{ item.name }}
               </a-tag>
             </div>
           </template>
-          <!--当name不在noKeyRouter时需要指定key-->
+          <!--Khi name không nằm trong noKeyRouter thì cần chỉ định key-->
           <template v-if="!noKeyRouter.includes(item.name)">
             <a-divider
               >{{ item.name }}
@@ -73,15 +73,15 @@
               <template v-for="(value, key) in item.args">
                 <a-row>
                   <a-col :span="5" style="margin-top: 8px">
-                    <span v-if="key == 'header'">Header名称</span>
-                    <span v-if="key == 'regexp'">参数值</span>
-                    <span v-if="key == 'param'">参数名</span>
-                    <span v-if="key == 'name'">参数名</span>
+                    <span v-if="key == 'header'">Tên Header</span>
+                    <span v-if="key == 'regexp'">Giá trị tham số</span>
+                    <span v-if="key == 'param'">Tên tham số</span>
+                    <span v-if="key == 'name'">Tên tham số</span>
                   </a-col>
                   <a-col :span="18">
                     <a-input
                       :defaultValue="value"
-                      placeholder="参数值"
+                      placeholder="Giá trị tham số"
                       style="width: 70%; margin-right: 8px; margin-top: 3px"
                       @change="(e) => valueChange(e, item.args, key)"
                     />
@@ -99,13 +99,13 @@
               </a-menu>
             </template>
             <a-button type="dashed" style="margin-left: 8px; width: 100%">
-              添加路由条件
+              Thêm điều kiện tuyến đường
               <DownOutlined :size="22" />
             </a-button>
           </a-dropdown>
         </p>
       </a-form-item>
-      <a-form-item name="predicates" label="过滤器">
+      <a-form-item name="predicates" label="Bộ lọc">
         <div v-for="(item, index) in router.filters">
           <a-divider
             >{{ item.name }}
@@ -114,15 +114,15 @@
           <div v-for="(tag, index) in item.args" :key="tag.key">
             <!-- update-begin---author:wangshuai ---date: 20230829 for：vue3.0后自定义表单重复组件要用a-form-item-rest,否则会警告提醒------------  -->
             <a-form-item-rest>
-              <a-input v-model:value="tag.key" placeholder="参数键" style="width: 45%; margin-right: 8px" />
-              <a-input v-model:value="tag.value" placeholder="参数值" style="width: 40%; margin-right: 8px; margin-top: 3px" />
+              <a-input v-model:value="tag.key" placeholder="Khóa tham số" style="width: 45%; margin-right: 8px" />
+              <a-input v-model:value="tag.value" placeholder="Giá trị tham số" style="width: 40%; margin-right: 8px; margin-top: 3px" />
             </a-form-item-rest>
             <!-- update-end---author:wangshuai ---date: 20230829 for：vue3.0后自定义表单重复组件要用a-form-item-rest,否则会警告提醒------------  -->
             <CloseOutlined :size="22" @click="removeFilterParams(item, index)" />
           </div>
           <a-button type="dashed" style="margin-left: 28%; width: 37%; margin-top: 5px" size="small" @click="addFilterParams(item)">
             <DownOutlined :size="22" />
-            添加参数
+            Thêm tham số
           </a-button>
         </div>
         <p class="btn" style="padding-top: 10px">
@@ -133,7 +133,7 @@
               </a-menu>
             </template>
             <a-button type="dashed" style="margin-left: 8px; width: 100%">
-              添加过滤器
+              Thêm bộ lọc
               <DownOutlined />
             </a-button>
           </a-dropdown>
@@ -154,7 +154,7 @@
   const emit = defineEmits(['register', 'success']);
   const labelCol = reactive({
     xs: { span: 24 },
-    sm: { span: 5 },
+    sm: { span: 6 },
   });
   const wrapperCol = reactive({
     xs: { span: 24 },
@@ -171,12 +171,12 @@
   const currentNameIndex = ref(0);
   const currentTagIndex = ref(-1);
   const validatorRules = {
-    routerId: [{ required: true, message: 'routerId不能为空', trigger: 'blur' }],
-    name: [{ required: true, message: '路由名称不能为空', trigger: 'blur' }],
-    uri: [{ required: true, message: 'uri不能为空', trigger: 'blur' }],
+    routerId: [{ required: true, message: 'ID tuyến đường không được để trống', trigger: 'blur' }],
+    name: [{ required: true, message: 'Tên tuyến đường không được để trống', trigger: 'blur' }],
+    uri: [{ required: true, message: 'URI không được để trống', trigger: 'blur' }],
   };
   const noKeyRouter = ['Path', 'Host', 'Method', 'After', 'Before', 'Between', 'RemoteAddr'];
-  const filterArray = [/*{ key: 0, name: '熔断器' },*/ { key: 1, name: '限流过滤器' }];
+  const filterArray = [/*{ key: 0, name: '熔断器' },*/ { key: 1, name: 'Bộ lọc giới hạn' }];
   const tagArray = ref([
     {
       name: 'Path',
@@ -242,7 +242,7 @@
   /**
    * 标题
    */
-  const getTitle = computed(() => (!unref(isUpdate) ? '新增路由' : '编辑路由'));
+  const getTitle = computed(() => (!unref(isUpdate) ? 'Thêm tuyến đường' : 'Chỉnh sửa tuyến đường'));
 
   //删除路由条件配置项
   function removeTag(item, removedTag) {

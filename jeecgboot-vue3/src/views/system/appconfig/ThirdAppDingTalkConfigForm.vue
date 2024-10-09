@@ -1,14 +1,14 @@
 <template>
   <div class="base-collapse">
-    <div class="header"> 钉钉集成 </div>
+    <div class="header"> Tích hợp DingTalk </div>
     <a-collapse expand-icon-position="right" :bordered="false">
       <a-collapse-panel key="1">
         <template #header>
-          <div style="font-size: 16px"> 1.获取对接信息</div>
+          <div style="font-size: 16px"> 1. Lấy thông tin kết nối</div>
         </template>
-        <div class="base-desc">从钉钉开放平台获取对接信息，即可开始集成以及同步通讯录</div>
+        <div class="base-desc">Lấy thông tin kết nối từ nền tảng mở DingTalk để bắt đầu tích hợp và đồng bộ danh bạ</div>
         <div style="margin-top: 5px">
-          <a href='https://help.qiaoqiaoyun.com/expand/dingding.html' target='_blank'>如何获取对接信息?</a>
+          <a href='https://help.qiaoqiaoyun.com/expand/dingding.html' target='_blank'>Làm thế nào để lấy thông tin kết nối?</a>
         </div>
       </a-collapse-panel>
     </a-collapse>
@@ -17,12 +17,12 @@
         <a-collapse-panel key="2">
           <template #header>
             <div style="width: 100%; justify-content: space-between; display: flex">
-              <div style="font-size: 16px"> 2.对接信息录入</div>
+              <div style="font-size: 16px"> 2. Nhập thông tin kết nối</div>
             </div>
           </template>
-          <div class="base-desc">完成步骤1后，填入Agentld、 AppKey、AppSecret后 可对接应用与同步通讯录</div>
+          <div class="base-desc">Sau khi hoàn thành bước 1, điền AgentId, AppKey, AppSecret để kết nối ứng dụng và đồng bộ danh bạ</div>
           <div class="flex-flow">
-            <div class="base-title">Agentld</div>
+            <div class="base-title">AgentId</div>
             <div class="base-message">
               <a-input-password v-model:value="appConfigData.agentId" readonly />
             </div>
@@ -40,25 +40,25 @@
             </div>
           </div>
           <div style="margin-top: 20px; width: 100%; text-align: right">
-            <a-button @click="dingEditClick">编辑</a-button>
+            <a-button @click="dingEditClick">Chỉnh sửa</a-button>
           </div>
         </a-collapse-panel>
       </a-collapse>
       <div class="sync-padding">
-        <div style="font-size: 16px; width: 100%"> 3.数据同步</div>
+        <div style="font-size: 16px; width: 100%"> 3. Đồng bộ dữ liệu</div>
         <div style="margin-top: 20px" class="base-desc">
-          从钉钉同步到本地
+          Đồng bộ từ DingTalk về máy chủ
           <ul style='list-style-type: disc;margin-left: 20px;'>
-            <li>同步部门到本地</li>
+            <li>Đồng bộ phòng ban về máy chủ</li>
             <li>
-              同步部门下的用户到本地
-              <a-tooltip title='同步用户与部门文档'>
+              Đồng bộ người dùng trong phòng ban về máy chủ
+              <a-tooltip title='Tài liệu đồng bộ người dùng và phòng ban'>
                 <a-icon @click='handleIconClick' type="question-circle" class="sync-text"/>
               </a-tooltip>
             </li>
           </ul>
           <div style="float: right">
-            <a-button :loading="btnLoading" @click="syncDingTalk">{{ !btnLoading ? '同步' : '同步中' }}</a-button>
+            <a-button :loading="btnLoading" @click="syncDingTalk">{{ !btnLoading ? 'Đồng bộ' : 'Đang đồng bộ' }}</a-button>
           </div>
         </div>
       </div>

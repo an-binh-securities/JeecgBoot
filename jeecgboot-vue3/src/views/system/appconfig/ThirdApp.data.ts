@@ -39,18 +39,18 @@ export const thirdAppFormSchema: FormSchema[] = [
     component: 'Input',
     ifShow: false,
   },{
-    label: '启用',
+    label: 'Kích hoạt',
     field: 'status',
     component: 'Switch',
     componentProps:{
-      checkedChildren:'关闭',
+      checkedChildren:'Tắt',
       checkedValue:1,
-      unCheckedChildren:'开启',
+      unCheckedChildren:'Bật',
       unCheckedValue: 0
     },
     defaultValue: 1
   },{
-    label: '租户id',
+    label: 'Mã thuê bao',
     field: 'tenantId',
     component: 'Input',
     show: false,

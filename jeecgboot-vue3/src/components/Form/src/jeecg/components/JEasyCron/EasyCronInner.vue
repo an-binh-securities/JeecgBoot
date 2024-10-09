@@ -81,7 +81,7 @@
             <a-col :span="16">
               <a-input v-model:value="inputValues.cron" @blur="onInputCronBlur">
                 <template #addonBefore>
-                  <a-tooltip title="Biểu thức Cron">式</a-tooltip>
+                  <a-tooltip title="Biểu thức Cron">Biểu thức</a-tooltip>
                 </template>
               </a-input>
             </a-col>

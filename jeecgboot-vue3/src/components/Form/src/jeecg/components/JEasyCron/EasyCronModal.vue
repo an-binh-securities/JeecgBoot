@@ -1,5 +1,5 @@
 <template>
-  <BasicModal @register="registerModal" title="Cron表达式" width="800px" @ok="onOk">
+  <BasicModal @register="registerModal" title="Biểu thức Cron" width="800px" @ok="onOk">
     <EasyCron v-bind="attrs" />
   </BasicModal>
 </template>

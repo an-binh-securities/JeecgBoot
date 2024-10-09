@@ -2,8 +2,8 @@
   <div class="ding-ding-container" :class="[`${prefixCls}`]">
     <div class="ding-header">
       <ul class="ding-menu-tab">
-        <li :class="activeKey === 'ding' ? 'active' : ''" @click="dingLiClick('ding')"><a>钉钉集成</a></li>
-        <li :class="activeKey === 'wechat' ? 'active' : ''" @click="dingLiClick('wechat')"><a>企业微信集成</a></li>
+        <li :class="activeKey === 'ding' ? 'active' : ''" @click="dingLiClick('ding')"><a>Tích hợp DingTalk</a></li>
+        <li :class="activeKey === 'wechat' ? 'active' : ''" @click="dingLiClick('wechat')"><a>Tích hợp WeChat doanh nghiệp</a></li>
       </ul>
     </div>
     <div v-show="activeKey === 'ding'" class="base-collapse">

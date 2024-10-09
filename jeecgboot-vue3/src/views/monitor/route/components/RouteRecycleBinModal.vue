@@ -1,11 +1,11 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="路由回收站" :showOkBtn="false" width="1000px" destroyOnClose>
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Thùng rác tuyến đường" :showOkBtn="false" width="1000px" destroyOnClose>
     <BasicTable @register="registerTable">
       <template #status="{ record, text }">
-        <a-tag color="pink" v-if="text == 0">禁用</a-tag>
-        <a-tag color="#87d068" v-if="text == 1">正常</a-tag>
+        <a-tag color="pink" v-if="text == 0">Vô hiệu hóa</a-tag>
+        <a-tag color="#87d068" v-if="text == 1">Bình thường</a-tag>
       </template>
-      <!--操作栏-->
+      <!--Cột hành động-->
       <template #action="{ record }">
         <TableAction :actions="getTableAction(record)" />
       </template>
@@ -38,7 +38,7 @@
     canResize: false,
     actionColumn: {
       width: 150,
-      title: '操作',
+      title: 'Hành động',
       dataIndex: 'action',
       slots: { customRender: 'action' },
       fixed: 'right',
@@ -63,19 +63,19 @@
   function getTableAction(record) {
     return [
       {
-        label: '取回',
+        label: 'Khôi phục',
         icon: 'ant-design:redo-outlined',
         popConfirm: {
-          title: '是否确认取回',
+          title: 'Bạn có chắc chắn muốn khôi phục không?',
           confirm: handleRevert.bind(null, record),
         },
       },
       {
-        label: '彻底删除',
+        label: 'Xóa vĩnh viễn',
         icon: 'ant-design:scissor-outlined',
         color: 'error',
         popConfirm: {
-          title: '是否确认删除',
+          title: 'Bạn có chắc chắn muốn xóa không?',
           confirm: handleDelete.bind(null, record),
         },
       },
