@@ -1,33 +1,22 @@
 <template>
   <div :class="[`${prefixCls}`]">
-    <div class="my-account">第三方APP</div>
-<!--    <div class="account-row-item">-->
-<!--      <div class="account-label gray-75">企业微信绑定</div>-->
-<!--      <span>-->
-<!--        <icon-font :style="!bindEnterpriseData.sysUserId ? { color: '#9e9e9e' } : { color: '#0082EF' }" class="item-icon" type="icon-qiyeweixin3" />-->
-<!--        <span class="gray-75" style="margin-left: 12px">企业微信</span>-->
-<!--        <span class="gray-75" style="margin-left: 8px" v-if="bindEnterpriseData.realname">{{ '已绑定：' + bindEnterpriseData.realname }}</span>-->
-<!--        <span class="blue-e5 pointer" style="margin-left: 24px" @click="wechatEnterpriseBind">{{-->
-<!--          !bindEnterpriseData.sysUserId ? '绑定' : '解绑'-->
-<!--        }}</span>-->
-<!--      </span>-->
-<!--    </div>-->
+    <div class="my-account">Ứng dụng bên thứ ba</div>
     <div class="account-row-item">
-      <div class="account-label gray-75">钉钉绑定</div>
+      <div class="account-label gray-75">Liên kết DingTalk</div>
       <span>
         <DingtalkCircleFilled :style="!bindDingData.sysUserId ? { color: '#9e9e9e' } : { color: '#007FFF' }" class="item-icon" />
-        <span class="gray-75" style="margin-left: 12px">钉钉</span>
-        <span class="gray-75" style="margin-left: 8px" v-if="bindDingData.realname">{{ '已绑定：' + bindDingData.realname }}</span>
-        <span class="blue-e5 pointer" style="margin-left: 24px" @click="dingDingBind">{{ !bindDingData.sysUserId ? '绑定' : '解绑' }}</span>
+        <span class="gray-75" style="margin-left: 12px">DingTalk</span>
+        <span class="gray-75" style="margin-left: 8px" v-if="bindDingData.realname">{{ 'Đã liên kết: ' + bindDingData.realname }}</span>
+        <span class="blue-e5 pointer" style="margin-left: 24px" @click="dingDingBind">{{ !bindDingData.sysUserId ? 'Liên kết' : 'Hủy liên kết' }}</span>
       </span>
     </div>
     <div class="account-row-item">
-      <div class="account-label gray-75">账号绑定</div>
+      <div class="account-label gray-75">Liên kết tài khoản</div>
       <span>
         <WechatFilled :style="!bindWechatData.sysUserId ? { color: '#9e9e9e' } : { color: '#1ec563' }" class="item-icon" />
-        <span class="gray-75" style="margin-left: 12px">微信</span>
-        <span class="gray-75" style="margin-left: 8px" v-if="bindWechatData.realname">{{ '已绑定：' + bindWechatData.realname }}</span>
-        <span class="blue-e5 pointer" style="margin-left: 24px" @click="wechatBind">{{ !bindWechatData.sysUserId ? '绑定' : '解绑' }}</span>
+        <span class="gray-75" style="margin-left: 12px">WeChat</span>
+        <span class="gray-75" style="margin-left: 8px" v-if="bindWechatData.realname">{{ 'Đã liên kết: ' + bindWechatData.realname }}</span>
+        <span class="blue-e5 pointer" style="margin-left: 24px" @click="wechatBind">{{ !bindWechatData.sysUserId ? 'Liên kết' : 'Hủy liên kết' }}</span>
       </span>
     </div>
   </div>
@@ -91,26 +80,26 @@
    * 企业微信绑定解绑事件
    */
   function wechatEnterpriseBind() {
-    console.log('企业微信绑定解绑事件');
+    console.log('Sự kiện liên kết/hủy liên kết WeChat doanh nghiệp');
     let data = unref(bindEnterpriseData);
     if (!data.sysUserId) {
       onThirdLogin('wechat_enterprise');
-    }else{
-      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, '企业微信');
+    } else {
+      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, 'WeChat doanh nghiệp');
     }
   }
 
   /**
-   * 钉钉绑定解绑事件
+   * Sự kiện liên kết/hủy liên kết DingTalk
    */
   function dingDingBind() {
     let data = unref(bindDingData);
     if (!data.sysUserId) {
       onThirdLogin('dingtalk');
     } else {
-      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, '钉钉');
+      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, 'DingTalk');
     }
-    console.log('钉钉绑定解绑事件');
+    console.log('Sự kiện liên kết/hủy liên kết DingTalk');
   }
 
   /**
@@ -121,7 +110,7 @@
     if (!data.sysUserId) {
       onThirdLogin('wechat_open');
     }else{
-      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, '微信');
+      deleteAccount({ sysUserId: data.sysUserId, id: data.id }, 'WeChat');
     }
   }
 
@@ -150,15 +139,15 @@
       let token = event.data;
       if (typeof token === 'string') {
         //如果是字符串类型 说明是token信息
-        if (token === '登录失败') {
+        if (token === 'Đăng nhập thất bại') {
           cmsFailed();
-        } else if (token.includes('绑定手机号')) {
+        } else if (token.includes('Liên kết số điện thoại')) {
           let strings = token.split(',');
           thirdUserUuid.value = strings[1];
           await bindThirdAccount();
-        }else{
-          if(token){
-            createMessage.warning('该敲敲云账号已被其它第三方账号绑定,请解绑或绑定其它敲敲云账号');
+        } else {
+          if (token) {
+            createMessage.warning('Tài khoản QiaoQiaoYun này đã được liên kết với tài khoản bên thứ ba khác, vui lòng hủy liên kết hoặc liên kết với tài khoản QiaoQiaoYun khác');
           }
         }
       } else {
@@ -198,7 +187,7 @@
    * 失败提示信息
    */
   function cmsFailed() {
-    createMessage.warning('第三方账号绑定异常');
+    createMessage.warning('Liên kết tài khoản bên thứ ba không thành công');
     return;
   }
 
@@ -223,10 +212,10 @@
    */
   async function deleteAccount(params, text) {
     Modal.confirm({
-      title: '解绑' + text,
-      content: '确定要解绑吗',
-      okText: '确认',
-      cancelText: '取消',
+      title: 'Hủy liên kết ' + text,
+      content: 'Bạn có chắc chắn muốn hủy liên kết không?',
+      okText: 'Xác nhận',
+      cancelText: 'Hủy',
       onOk: async () => {
         await deleteThirdAccount(params).then((res) =>{
           if(res.success){

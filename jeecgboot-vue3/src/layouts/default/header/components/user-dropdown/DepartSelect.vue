@@ -98,21 +98,21 @@
    * 弹窗打开前处理
    */
   async function show() {
-    //加载部门
+    // Tải danh sách phòng ban
     await loadDepartList();
-    //加载租户
+    // Tải danh sách thuê bao
     await loadTenantList();
-    //标题配置
+    // Cấu hình tiêu đề
     if (unref(isMultiTenant) && unref(isMultiDepart)) {
-      currTitle.value = '切换租户和部门';
+      currTitle.value = 'Chuyển đổi thuê bao và phòng ban';
     } else if (unref(isMultiTenant)) {
       currTitle.value =
-        unref(currentTenantName) && unref(currentTenantName).length > 0 ? `租户切换（当前租户 :${unref(currentTenantName)}）` : props.title;
+        unref(currentTenantName) && unref(currentTenantName).length > 0 ? `Chuyển đổi thuê bao (Thuê bao hiện tại: ${unref(currentTenantName)})` : props.title;
     } else if (unref(isMultiDepart)) {
       currTitle.value =
-        unref(currentDepartName) && unref(currentDepartName).length > 0 ? `部门切换（当前部门 :${unref(currentDepartName)}）` : props.title;
+        unref(currentDepartName) && unref(currentDepartName).length > 0 ? `Chuyển đổi phòng ban (Phòng ban hiện tại: ${unref(currentDepartName)})` : props.title;
     }
-    //model显隐
+    // Hiển thị hoặc ẩn modal
     if (unref(isMultiTenant) || unref(isMultiDepart)) {
       visible.value = true;
     }
@@ -164,13 +164,13 @@
         if (unref(isMultiTenant)) {
           userStore.setTenant(unref(tenantSelected));
         }
-        createMessage.success('切换成功');
-        
-        //切换租户后要刷新首页
-        window.location.reload();
-      })
-      .catch((e) => {
-        console.log('登录选择出现问题', e);
+          createMessage.success('Chuyển đổi thành công');
+          
+          // Chuyển đổi thuê bao xong cần làm mới trang chủ
+          window.location.reload();
+        })
+        .catch((e) => {
+          console.log('Có vấn đề khi chọn đăng nhập', e);
       })
       .finally(() => {
         if (unref(isMultiTenant)) {
@@ -209,8 +209,8 @@
    */
   function requestFailed(err) {
     notification.error({
-      message: '登录失败',
-      description: ((err.response || {}).data || {}).message || err.message || '请求出现错误，请稍后再试',
+      message: 'Đăng nhập thất bại',
+      description: ((err.response || {}).data || {}).message || err.message || 'Có lỗi xảy ra, vui lòng thử lại sau',
       duration: 4,
     });
   }

@@ -89,33 +89,33 @@ export const baseSetschemas: FormSchema[] = [
 export const secureSettingList: ListItem[] = [
   {
     key: '1',
-    title: '账户密码',
-    description: '当前密码强度：：强',
-    extra: '修改',
+    title: 'Mật khẩu tài khoản',
+    description: 'Độ mạnh mật khẩu hiện tại: Mạnh',
+    extra: 'Chỉnh sửa',
   },
   {
     key: '2',
-    title: '密保手机',
-    description: '已绑定手机：：138****8293',
-    extra: '修改',
+    title: 'Số điện thoại bảo mật',
+    description: 'Đã liên kết số điện thoại: 138****8293',
+    extra: 'Chỉnh sửa',
   },
   {
     key: '3',
-    title: '密保问题',
-    description: '未设置密保问题，密保问题可有效保护账户安全',
-    extra: '修改',
+    title: 'Câu hỏi bảo mật',
+    description: 'Chưa thiết lập câu hỏi bảo mật, câu hỏi bảo mật có thể bảo vệ tài khoản hiệu quả',
+    extra: 'Chỉnh sửa',
   },
   {
     key: '4',
-    title: '备用邮箱',
-    description: '已绑定邮箱：：ant***sign.com',
-    extra: '修改',
+    title: 'Email dự phòng',
+    description: 'Đã liên kết email: ant***sign.com',
+    extra: 'Chỉnh sửa',
   },
   {
     key: '5',
-    title: 'MFA 设备',
-    description: '未绑定 MFA 设备，绑定后，可以进行二次确认',
-    extra: '修改',
+    title: 'Thiết bị MFA',
+    description: 'Chưa liên kết thiết bị MFA, sau khi liên kết, có thể thực hiện xác nhận hai bước',
+    extra: 'Chỉnh sửa',
   },
 ];
 

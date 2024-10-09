@@ -26,7 +26,7 @@ const emit = defineEmits(['register','success']);
 const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
   await resetFields();
   setModalProps({ confirmLoading: false });
-  title.value = '编辑个人资料';
+  title.value = 'Chỉnh sửa thông tin cá nhân';
   if(data.record.post){
     data.record.post = data.record.post.split(",")
   }
@@ -35,7 +35,7 @@ const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data
   }
   userDetail.value = data.record;
   //update-begin---author:wangshuai ---date:20230130  for：[QQYUN-3976]个人信息 编辑时，刚注册没有设置生日 生日显示有问题------------
-  if(data.record.birthday === '未填写'){
+  if(data.record.birthday === 'Chưa điền'){
     data.record.birthday = undefined;
   }
   //update-end---author:wangshuai ---date:20230130  for：[QQYUN-3976]个人信息 编辑时，刚注册没有设置生日 生日显示有问题------------

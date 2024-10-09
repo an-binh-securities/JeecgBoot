@@ -1,8 +1,8 @@
 <template>
   <div class="tenant-padding" :class="[`${prefixCls}`]">
     <div class="my-tenant">
-      <span style="flex: 1">我的组织</span>
-      <span class="invited" @click="invitedClick">我的受邀信息<span class="approved-count" v-if="invitedCount>0">{{invitedCount}}</span></span>
+      <span style="flex: 1">Tổ chức của tôi</span>
+      <span class="invited" @click="invitedClick">Thông tin được mời của tôi<span class="approved-count" v-if="invitedCount>0">{{invitedCount}}</span></span>
     </div>
     <div class="tenant-list" v-if="dataSource.length>0">
       <div v-for="item in dataSource" class="tenant-list-item" @click="drownClick(item)">
@@ -12,7 +12,7 @@
             <div class="vip-message">
               <div class="item-house" @click.stop="copyClick(item.houseNumber)">
                 <span>
-                  组织门牌号：{{ item.houseNumber }}
+                  Mã tổ chức: {{ item.houseNumber }}
                   <Icon icon="ant-design:copy-outlined" style="font-size: 13px; margin-left: 2px" />
                 </span>
               </div>
@@ -20,12 +20,12 @@
           </div>
           <div class="item-right">
             <span v-if="item.userTenantStatus === '3'">
-              <span class="pointer examine">待审核</span>
-              <span class="pointer cancel-apply" @click.stop="cancelApplyClick(item.tenantUserId)">取消申请</span>
+              <span class="pointer examine">Đang chờ duyệt</span>
+              <span class="pointer cancel-apply" @click.stop="cancelApplyClick(item.tenantUserId)">Hủy đơn</span>
             </span>
             <span v-else-if="item.userTenantStatus === '5'">
-              <span class="pointer examine" @click="joinOrRefuseClick(item.tenantUserId,'1')">加入</span>
-              <span class="pointer cancel-apply" @click.stop="joinOrRefuseClick(item.tenantUserId,'4')">拒绝</span>
+              <span class="pointer examine" @click="joinOrRefuseClick(item.tenantUserId,'1')">Tham gia</span>
+              <span class="pointer cancel-apply" @click.stop="joinOrRefuseClick(item.tenantUserId,'4')">Từ chối</span>
             </span>
             <div v-else style="width: 75px"></div>
             <span style="margin-left: 24px">
@@ -36,24 +36,24 @@
         </div>
         <div class="item-content" v-show="item.show">
           <div class="content-box">
-            <div class="content-name"> 组织名片 </div>
+            <div class="content-name"> Danh thiếp tổ chức </div>
             <div class="content-desc">
               <div class="flex-flow">
-                <div class="content-des-text">姓名</div>
+                <div class="content-des-text">Họ tên</div>
                 <div style="font-size: 13px;color: #000000">
                   {{ userDetail.realname }}
                 </div>
               </div>
               <div class="flex-flow">
-                <div class="content-des-text">部门</div>
+                <div class="content-des-text">Phòng ban</div>
                 <div style="font-size: 13px">
-                  {{ userDetail.orgCodeTxt ? userDetail.orgCodeTxt : '未填写' }}
+                  {{ userDetail.orgCodeTxt ? userDetail.orgCodeTxt : 'Chưa điền' }}
                 </div>
               </div>
               <div class="flex-flow">
-                <div class="content-des-text">职业</div>
+                <div class="content-des-text">Chức vụ</div>
                 <div style="font-size: 13px">
-                  {{ userDetail.postText ? userDetail.postText : '未填写' }}
+                  {{ userDetail.postText ? userDetail.postText : 'Chưa điền' }}
                 </div>
               </div>
             </div>
@@ -65,11 +65,11 @@
               class="font-color333 flex-center margin-right40 font-size13 pointer"
             >
               <Icon icon="ant-design:edit-outlined" class="footer-icon" />
-              <span>查看租户名片</span>
+              <span>Xem danh thiếp</span>
             </span>
             <span v-else class="font-color9e flex-center margin-right40 font-size13">
               <Icon icon="ant-design:edit-outlined" class="footer-icon" />
-              <span>查看租户名片</span>
+              <span>Xem danh thiếp</span>
             </span>
             <span
               v-if="item.userTenantStatus !== '3'"
@@ -77,11 +77,11 @@
               class="font-color333 flex-center margin-right40 font-size13 pointer"
             >
               <Icon icon="ant-design:export-outlined" class="footer-icon" />
-              <span>退出租户</span>
+              <span>Rời khỏi tổ chức</span>
             </span>
             <span v-else class="font-color9e flex-center margin-right40 font-size13">
               <Icon icon="ant-design:export-outlined" class="footer-icon" />
-              <span>退出租户</span>
+              <span>Rời khỏi tổ chức</span>
             </span>
           </div>
         </div>
@@ -91,36 +91,36 @@
   </div>
   <a-modal v-model:open="tenantVisible" width="400px" wrapClassName="edit-tenant-setting">
     <template #title>
-      <div style="font-size: 17px; font-weight: 700">查看名片</div>
-      <div style="color: #9e9e9e; margin-top: 10px; font-size: 13px"> 名片是您在该组织下的个人信息，只在本组织中展示。 </div>
+      <div style="font-size: 17px; font-weight: 700">Xem danh thiếp</div>
+      <div style="color: #9e9e9e; margin-top: 10px; font-size: 13px"> Danh thiếp là thông tin cá nhân của bạn trong tổ chức này, chỉ hiển thị trong tổ chức này. </div>
     </template>
     <div style="margin-top: 24px; font-size: 13px; padding: 0 24px">
-      <div class="font-color75">姓名</div>
+      <div class="font-color75">Họ tên</div>
       <div class="margin-top6 margin-bottom-16">{{ userDetail.realname }}</div>
-      <div>部门</div>
-      <div class="margin-top6 margin-bottom-16">{{ userDetail.orgCodeTxt ? userDetail.orgCodeTxt : '未填写' }}</div>
-      <div>职位</div>
-      <div class="margin-top6 margin-bottom-16">{{ userDetail.postText ? userDetail.postText : '未填写' }}</div>
-      <div>工作地点</div>
-      <div class="margin-top6 margin-bottom-16">{{ userData.workPlace ? userData.workPlace : '未填写' }}</div>
-      <div>工号</div>
-      <div class="margin-top6 margin-bottom-16">{{ userDetail.workNo ? userDetail.workNo : '未填写' }}</div>
+      <div>Phòng ban</div>
+      <div class="margin-top6 margin-bottom-16">{{ userDetail.orgCodeTxt ? userDetail.orgCodeTxt : 'Chưa điền' }}</div>
+      <div>Chức vụ</div>
+      <div class="margin-top6 margin-bottom-16">{{ userDetail.postText ? userDetail.postText : 'Chưa điền' }}</div>
+      <div>Nơi làm việc</div>
+      <div class="margin-top6 margin-bottom-16">{{ userData.workPlace ? userData.workPlace : 'Chưa điền' }}</div>
+      <div>Mã nhân viên</div>
+      <div class="margin-top6 margin-bottom-16">{{ userDetail.workNo ? userDetail.workNo : 'Chưa điền' }}</div>
     </div>
   </a-modal>
 
-  <!-- 退出租户 -->
+  <!-- Rời khỏi tổ chức -->
   <a-modal v-model:open="cancelVisible" width="800" destroy-on-close>
     <template #title>
       <div class="cancellation">
         <Icon icon="ant-design:warning-outlined" style="font-size: 20px;color: red"/>
-        退出租户 {{myTenantInfo.name}}
+        Rời khỏi tổ chức {{myTenantInfo.name}}
       </div>
     </template>
     <a-form :model="formCancelState" ref="cancelTenantRef">
       <a-form-item name="tenantName">
         <a-row :span="24" style="padding: 20px 20px 0;font-size: 13px">
           <a-col :span="24">
-            请输入租户名称
+            Vui lòng nhập tên tổ chức
           </a-col>
           <a-col :span="24" style="margin-top: 10px">
             <a-input v-model:value="formCancelState.tenantName" @change="tenantNameChange"/>
@@ -130,7 +130,7 @@
       <a-form-item name="loginPassword">
         <a-row :span="24" style="padding: 0 20px;font-size: 13px">
           <a-col :span="24">
-            请输入您的登录密码
+            Vui lòng nhập mật khẩu đăng nhập của bạn
           </a-col>
           <a-col :span="24" style="margin-top: 10px">
             <a-input-password v-model:value="formCancelState.loginPassword" />
@@ -139,13 +139,13 @@
       </a-form-item>
     </a-form>
     <template #footer>
-      <a-button type="primary" @click="handleOutClick" :disabled="outBtnDisabled">确定</a-button>
-      <a-button @click="handleCancelOutClick">取消</a-button>
+      <a-button type="primary" @click="handleOutClick" :disabled="outBtnDisabled">Xác nhận</a-button>
+      <a-button @click="handleCancelOutClick">Hủy</a-button>
     </template>
   </a-modal>
 
   <a-modal
-    title="变更拥有者"
+    title="Thay đổi chủ sở hữu"
     v-model:open="owenVisible"
     width="800"
     destroy-on-close
@@ -154,7 +154,7 @@
       <div style="padding: 20px">
         <a-row :span="24">
           <div class="change-owen">
-            只有变更拥有着之后,才能退出
+            Chỉ sau khi thay đổi chủ sở hữu, bạn mới có thể rời khỏi
           </div>
         </a-row>
         <a-row :span="24" style="margin-top: 10px">
@@ -163,14 +163,14 @@
       </div>
   </a-modal>
   
-  <!-- begin 我的受邀信息 -->
-  <a-modal title="我的受邀信息" v-model:open="invitedVisible" :footer="null">
+  <!-- begin Thông tin được mời của tôi -->
+  <a-modal title="Thông tin được mời của tôi" v-model:open="invitedVisible" :footer="null">
       <a-row :span="24" class="invited-row">
         <a-col :span="16">
-          组织
+          Tổ chức
         </a-col>
         <a-col :span="8">
-          操作
+          Thao tác
         </a-col>
       </a-row>
     <a-row :span="24" class="invited-row-list" v-for="item in invitedList">
@@ -178,13 +178,13 @@
         {{item.name}}
       </a-col>
       <a-col :span="8">
-        <span class="common" @click="joinOrRefuseClick(item.tenantUserId,'1')">加入</span>
-        <span class="common refuse" @click="joinOrRefuseClick(item.tenantUserId,'4')">拒绝</span>
+        <span class="common" @click="joinOrRefuseClick(item.tenantUserId,'1')">Tham gia</span>
+        <span class="common refuse" @click="joinOrRefuseClick(item.tenantUserId,'4')">Từ chối</span>
       </a-col>
     </a-row>
     <div style="height: 20px"></div>
   </a-modal>
-  <!-- end 我的受邀信息 -->
+  <!-- end Thông tin được mời của tôi -->
 </template>
 
 <script lang="ts" name="tenant-setting" setup>
@@ -281,7 +281,7 @@ const userDetail = ref({
     document.execCommand('copy');
     // 删除input元素
     document.body.removeChild(el);
-    createMessage.success('复制成功');
+    createMessage.success('Sao chép thành công');
   };
 
   /**
@@ -290,20 +290,20 @@ const userDetail = ref({
    */
   function cancelApplyClick(id) {
     Modal.confirm({
-      title: '取消申请',
-      content: '是否取消申请',
-      okText: '确认',
-      cancelText: '取消',
+      title: 'Hủy đơn',
+      content: 'Bạn có chắc chắn muốn hủy đơn không?',
+      okText: 'Xác nhận',
+      cancelText: 'Hủy',
       onOk: () => {
         cancelApplyTenant({ tenantId: id }).then((res) => {
           if (res.success) {
-            createMessage.success('取消申请成功');
+            createMessage.success('Hủy đơn thành công');
             initDataSource();
-          }else{
+          } else {
             createMessage.warning(res.message);
           }
-        }).catch((e)=>{
-           createMessage.warning(e.message);
+        }).catch((e) => {
+          createMessage.warning(e.message);
         });
       },
     });
@@ -331,7 +331,7 @@ const userDetail = ref({
     if (arr && arr.length > 0) {
       return arr[0].label;
     }
-    return '未填写';
+    return 'Chưa điền';
   };
 
   /**
@@ -402,18 +402,18 @@ const userDetail = ref({
           cancelVisible.value = false;
           let fullPath = router.currentRoute.value.fullPath;
           Modal.confirm({
-            title: '您是该组织的拥有者',
-            content: '该组织下没有其他成员，需要您前往注销',
-            okText: '前往注销',
+            title: 'Bạn là chủ sở hữu của tổ chức này',
+            content: 'Tổ chức này không có thành viên nào khác, bạn cần đi đến trang hủy bỏ',
+            okText: 'Đi đến hủy bỏ',
             okType: 'danger',
-            cancelText: '取消',
+            cancelText: 'Hủy',
             onOk: () => {
-              if(fullPath === '/system/usersetting'){
+              if (fullPath === '/system/usersetting') {
                 return;
               }
-              router.push('/myapps/settings/organization/organMessage/'+unref(myTenantInfo).tenantUserId)
-            }
-          })
+              router.push('/myapps/settings/organization/organMessage/' + unref(myTenantInfo).tenantUserId);
+            },
+          });
         //update-end---author:wangshuai ---date:20230426  for：【QQYUN-5270】名下租户全部退出后，再次登录，提示租户全部冻结。拥有者提示前往注销------------
         } else {
           createMessage.warning(res.message);
@@ -437,7 +437,7 @@ const userDetail = ref({
    */
   function changeOwen() {
     if(!unref(tenantOwen)){
-      createMessage.warning("请选择变更拥有者");
+      createMessage.warning("Vui lòng chọn chủ sở hữu mới");
       return;
     }
     changeOwenUserTenant({ userId:unref(tenantOwen), tenantId:unref(myTenantInfo).tenantUserId }).then((res) =>{

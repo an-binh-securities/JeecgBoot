@@ -4,37 +4,37 @@
           :rules="updateValidatorRules">
     <div v-if="current === 0">
       <a-form-item name="phoneText">
-        <span class="black font-size-13">原手机号</span>
+        <span class="black font-size-13">Số điện thoại cũ</span>
         <div class="phone-padding">
           <span>{{ updateFormState.phoneText }}</span>
         </div>
       </a-form-item>
       <a-form-item name="smscode">
-        <span class="black font-size-13">验证码</span>
-        <CountdownInput class="phone-padding" size="large" v-model:value="updateFormState.smscode" placeholder="输入6位验证码"
+        <span class="black font-size-13">Mã xác minh</span>
+        <CountdownInput class="phone-padding" size="large" v-model:value="updateFormState.smscode" placeholder="Nhập mã xác minh 6 chữ số"
                         :sendCodeApi="()=>updateSendCodeApi('verifyOriginalPhone')"/>
       </a-form-item>
       <a-form-item>
         <a-button size="large" type="primary" block @click="nextStepClick">
-          下一步
+          Bước tiếp theo
         </a-button>
       </a-form-item>
     </div>
     <div v-else-if="current === 1">
       <a-form-item name="newPhone">
-        <span class="black font-size-13">新手机号</span>
+        <span class="black font-size-13">Số điện thoại mới</span>
         <div class="phone-padding">
-          <a-input v-model:value="updateFormState.newPhone" placeholder="请输入新手机号"/>
+          <a-input v-model:value="updateFormState.newPhone" placeholder="Vui lòng nhập số điện thoại mới"/>
         </div>
       </a-form-item>
       <a-form-item name="smscode">
-        <span class="black font-size-13">验证码</span>
-        <CountdownInput class="phone-padding" size="large" v-model:value="updateFormState.smscode" placeholder="输入6位验证码"
+        <span class="black font-size-13">Mã xác minh</span>
+        <CountdownInput class="phone-padding" size="large" v-model:value="updateFormState.smscode" placeholder="Nhập mã xác minh 6 chữ số"
                         :sendCodeApi="()=>updateSendCodeApi('updatePhone')"/>
       </a-form-item>
       <a-form-item>
         <a-button size="large" type="primary" block @click="finishedClick">
-          完成
+          Hoàn thành
         </a-button>
       </a-form-item>
     </div>
@@ -42,14 +42,14 @@
 
   <a-form v-else-if="type==='bindPhone'" class="antd-modal-form" ref="formRef" :model="formState" :rules="validatorRules">
     <a-form-item  name="phone">
-      <a-input size="large" v-model:value="formState.phone" placeholder="请输入手机号" />
+      <a-input size="large" v-model:value="formState.phone" placeholder="Vui lòng nhập số điện thoại" />
     </a-form-item>
     <a-form-item name="smscode">
-      <CountdownInput size="large" v-model:value="formState.smscode" placeholder="输入6位验证码" :sendCodeApi="sendCodeApi" />
+      <CountdownInput size="large" v-model:value="formState.smscode" placeholder="Nhập mã xác minh 6 chữ số" :sendCodeApi="sendCodeApi" />
     </a-form-item>
     <a-form-item>
       <a-button size="large" type="primary" block @click="updatePhone">
-        确认
+        Xác nhận
       </a-button>
     </a-form-item>
   </a-form>
@@ -93,15 +93,15 @@ const formRef = ref();
 const userData = ref<any>({})
 
 const validatorRules: Record<string, Rule[]> = {
-  phone: [{...rules.duplicateCheckRule("sys_user",'phone',formState,{ label:'手机号' })[0]},{ pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误' }],
-  smscode: [{ required: true,message:'请输入验证码' }],
+  phone: [{...rules.duplicateCheckRule("sys_user",'phone',formState,{ label:'手机号' })[0]},{ pattern: /^1[3456789]\d{9}$/, message: 'Định dạng số điện thoại không đúng' }],
+  smscode: [{ required: true,message:'Vui lòng nhập mã xác minh' }],
 };
 
 //修改手机号验证规则
 const updateValidatorRules: Record<string, Rule[]> = {
-  newPhone: [{...rules.duplicateCheckRule("sys_user",'phone',formState,{ label:'手机号' })[0]},{ pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误' }],
-  smscode: [{ required: true,message:'请输入验证码' }],
-  newSmsCode: [{ required: true,message:'请输入验证码' }],
+  newPhone: [{...rules.duplicateCheckRule("sys_user",'phone',formState,{ label:'手机号' })[0]},{ pattern: /^1[3456789]\d{9}$/, message: 'Định dạng số điện thoại không đúng' }],
+  smscode: [{ required: true,message:'Vui lòng nhập mã xác minh' }],
+  newSmsCode: [{ required: true,message:'Vui lòng nhập mã xác minh' }],
 };
 const useForm = Form.useForm;
 const title = ref<string>('');
@@ -114,11 +114,11 @@ const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data
     updateFormState.phone = "";
     updateFormState.smscode = "";
     current.value = 0;
-    title.value = '修改手机号';
+    title.value = 'Đổi số điện thoại';
     type.value = "updatePhone";
     Object.assign(updateFormState, data.record);
   }else{
-    title.value = '绑定手机号';
+    title.value = 'Liên kết số điện thoại';
     type.value = "bindPhone"
     //赋值
     data.record.smscode = '';
@@ -159,14 +159,14 @@ function updateSendCodeApi(type) {
       } else {
         //update-begin---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
         if(res.code != ExceptionEnum.PHONE_SMS_FAIL_CODE){
-          createMessage.error(res.message || '未知问题');
+          createMessage.error(res.message || 'Lỗi không xác định');
           reject();
         }
         reject(res);
         //update-end---author:wangshuai---date:2024-04-18---for:【QQYUN-9005】同一个IP，1分钟超过5次短信，则提示需要验证码---
       }
     }).catch((res)=>{
-      createMessage.error(res.message || '未知问题');
+      createMessage.error(res.message || 'Lỗi không xác định');
       reject();
     });
   });
@@ -179,7 +179,7 @@ async function updatePhone() {
   await formRef.value.validateFields();
   updateMobile(formState).then((res) =>{
     if(res.success){
-      createMessage.success(type.value === "updatePhone"?"修改手机号成功":"绑定手机号成功")
+      createMessage.success(type.value === "updatePhone"?"Đổi số điện thoại thành công":"Liên kết số điện thoại thành công")
       emit("success")
       closeModal();
     }else{

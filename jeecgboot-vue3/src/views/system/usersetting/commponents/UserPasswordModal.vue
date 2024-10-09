@@ -1,21 +1,21 @@
 <template>
-  <BasicModal v-bind="$attrs"  @register="registerModal" title="修改密码" @ok="handleSubmit" destroyOnClose :width="400">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="Đổi mật khẩu" @ok="handleSubmit" destroyOnClose :width="400">
     <a-form class="antd-modal-form" ref="formRef" :model="formState" :rules="validatorRules">
       <a-form-item name="phone">
-        <div class="black font-size-13">验证手机号</div>
+        <div class="black font-size-13">Xác minh số điện thoại</div>
         <div class="pass-padding">
-          <a-input placeholder="请输入手机号" v-model:value="formState.phone"/>
+          <a-input placeholder="Vui lòng nhập số điện thoại" v-model:value="formState.phone" />
         </div>
       </a-form-item>
       <a-form-item name="smscode">
-        <CountdownInput v-model:value="formState.smscode" placeholder="请输入6位验证码" :sendCodeApi="sendCodeApi" />
+        <CountdownInput v-model:value="formState.smscode" placeholder="Vui lòng nhập mã xác minh 6 chữ số" :sendCodeApi="sendCodeApi" />
       </a-form-item>
       <a-form-item name="password">
-        <span class="black font-size-13">新密码</span>
+        <span class="black font-size-13">Mật khẩu mới</span>
         <div class="pass-padding">
-          <a-input-password v-model:value="formState.password" placeholder="新密码" autocomplete="new-password"/>
+          <a-input-password v-model:value="formState.password" placeholder="Mật khẩu mới" autocomplete="new-password" />
         </div>
-        <span class="gray-9e font-size-13">8-20位，需包含字母和数字</span>
+        <span class="gray-9e font-size-13">8-20 ký tự, bao gồm chữ cái và số</span>
       </a-form-item>
     </a-form>
   </BasicModal>
@@ -52,9 +52,9 @@
   });
   const userStore = useUserStore();
   const validatorRules: Record<string, Rule[]> = {
-    password: [{ required: true, validator:checkPassword},{ pattern:/^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/,message:'8-20位，需包含字母和数字'}],
-    phone: [{ required: true, message: '请输入手机号' }],
-    smscode: [{ required: true, message: '请输入6位验证码' }],
+    password: [{ required: true, validator: checkPassword }, { pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,20})$/, message: '8-20 ký tự, bao gồm chữ cái và số' }],
+    phone: [{ required: true, message: 'Vui lòng nhập số điện thoại' }],
+    smscode: [{ required: true, message: 'Vui lòng nhập mã xác minh 6 chữ số' }],
   };
 
   //表单提交事件
@@ -67,7 +67,7 @@
       await updateUserPassword(values).then((res) =>{
         if(res.success){
           createMessage.info({
-            content:'密码修改成功，请重新登录！3s后自动退出登录',
+            content: 'Đổi mật khẩu thành công, vui lòng đăng nhập lại! Tự động đăng xuất sau 3 giây',
             duration: 3
           })
           //3s后返回登录页面
@@ -90,7 +90,7 @@
    */
   function checkPassword(_rule: Rule, value: string) {
     if(value === ''){
-      return Promise.reject('请输入新密码');
+      return Promise.reject('Vui lòng nhập mật khẩu mới');
     }
     return Promise.resolve();
   }
@@ -105,11 +105,11 @@
         if (res.success) {
           resolve(true);
         } else {
-          createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
+          createErrorModal({ title: 'Lỗi', content: res.message || 'Lỗi không xác định' });
           reject();
         }
       }).catch((res)=>{
-        createErrorModal({ title: '错误提示', content: res.message || '未知问题' });
+        createErrorModal({ title: 'Lỗi', content: res.message || 'Lỗi không xác định' });
         reject();
       });
     });

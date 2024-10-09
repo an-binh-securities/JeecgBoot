@@ -13,7 +13,7 @@
         <div class="account-right">
           <div v-if="!isEdit">
             <span class="font-size-17 account-name">{{ userInfo.realname }}</span>
-            <a-tooltip content="编辑姓名">
+            <a-tooltip content="Chỉnh sửa tên">
               <Icon class="pointer font-size-17 gray-bd account-icon" icon="ant-design:edit-outlined"
                     @click="editHandleClick" />
             </a-tooltip>
@@ -22,42 +22,42 @@
             <a-input ref="accountNameEdit" :maxlength="100" v-model:value="userInfo.realname" @blur="editRealName" />
           </div>
           <div class="use-day">
-            使用：<span>{{userInfo.createTimeText}}</span>
+            Sử dụng: <span>{{userInfo.createTimeText}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="account-data">
-      <!-- 详细资料 -->
+      <!-- Thông tin chi tiết -->
       <div class="account-detail">
-        <div class="font-size-15 font-bold font-color-gray" style="margin-bottom: 16px">详细资料</div>
+        <div class="font-size-15 font-bold font-color-gray" style="margin-bottom: 16px">Thông tin chi tiết</div>
         <div class="margin-bottom-10 font-size-13">
-          <span class="gray-75 item-label">生日</span>
+          <span class="gray-75 item-label">Sinh nhật</span>
           <span class="gray-3">{{ userInfo.birthday }}</span>
         </div>
         <div class="margin-bottom-10 font-size-13">
-          <span class="gray-75 item-label">性别</span>
+          <span class="gray-75 item-label">Giới tính</span>
           <span class="gray-3">{{ userInfo.sexText }}</span>
         </div>
         <div class="margin-bottom-10 nowarp font-size-13">
-          <span class="gray-75 item-label">职位</span>
-          <span class="gray-3">{{ userInfo.postText ? userInfo.postText : "未填写" }}</span>
+          <span class="gray-75 item-label">Chức vụ</span>
+          <span class="gray-3">{{ userInfo.postText ? userInfo.postText : "Chưa điền" }}</span>
         </div>
         <div class="font-size-13">
           <span class="item-label"></span>
-          <span class="item-label pointer" style="color:#1e88e5" @click="openEditModal">编辑</span>
+          <span class="item-label pointer" style="color:#1e88e5" @click="openEditModal">Chỉnh sửa</span>
         </div>
       </div>
-      <!-- 联系信息 -->
+      <!-- Thông tin liên hệ -->
       <div class="account-info">
-        <div class="font-size-15 font-bold font-color-gray" style="margin-bottom: 16px">联系信息</div>
+        <div class="font-size-15 font-bold font-color-gray" style="margin-bottom: 16px">Thông tin liên hệ</div>
         <div class="margin-bottom-10 font-size-13">
-          <span class="gray-75 item-label">邮箱</span>
-          <span class="gray-3">{{ userInfo.email ? userInfo.email : "未填写" }}</span>
+          <span class="gray-75 item-label">Email</span>
+          <span class="gray-3">{{ userInfo.email ? userInfo.email : "Chưa điền" }}</span>
         </div>
         <div class="margin-bottom-10 font-size-13">
-          <span class="gray-75 item-label">手机</span>
-          <span class="gray-3">{{ userInfo.phone ? userInfo.phone : "未填写" }}</span>
+          <span class="gray-75 item-label">Số điện thoại</span>
+          <span class="gray-3">{{ userInfo.phone ? userInfo.phone : "Chưa điền" }}</span>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@ import { useModal } from '/@/components/Modal';
 import { cloneDeep } from 'lodash-es';
 import { useDesign } from '/@/hooks/web/useDesign';
 //TODO 当字典租户隔离时，数据会查不到，默认一个
-const sexOption = getDictItemsByCode("sex") || [{text:'男',value:'1'},{text:'女',value:'2'}];
+const sexOption = getDictItemsByCode("sex") || [{text:'Nam',value:'1'},{text:'Nữ',value:'2'}];
 const { createMessage } = useMessage();
 const userStore = useUserStore();
   const { prefixCls } = useDesign('j-base-setting-container');
@@ -140,7 +140,7 @@ function editRealName() {
     updateUserInfo({ realname: userInfo.value.realname, id: userInfo.value.id });
     userStore.setUserInfo(userInfo.value);
   } else {
-    createMessage.warn("请输入姓名");
+    createMessage.warn("Vui lòng nhập họ tên");
   }
   isEdit.value = false;
 }
@@ -152,7 +152,7 @@ function getBirthDay(val) {
   if (val) {
     return dayjs(val).format("YYYY-MM-DD");
   } else {
-    return "未填写";
+    return "Chưa điền";
   }
 }
 
@@ -162,7 +162,7 @@ function getBirthDay(val) {
  */
 function getSex(val) {
   let findOption = sexOption.find(item => parseInt(item.value) === val);
-  let sex = "未填写";
+  let sex = "Chưa điền";
   if (findOption) {
     sex = findOption.text;
   }
