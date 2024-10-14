@@ -50,13 +50,13 @@
   };
 
   const WEEK_MAP_CN = {
-    '1': '周日',
-    '2': '周一',
-    '3': '周二',
-    '4': '周三',
-    '5': '周四',
-    '6': '周五',
-    '7': '周六',
+    '1': 'Chủ nhật',
+    '2': 'Thứ hai',
+    '3': 'Thứ ba',
+    '4': 'Thứ tư',
+    '5': 'Thứ năm',
+    '6': 'Thứ sáu',
+    '7': 'Thứ bảy',
   };
 
   export default defineComponent({
